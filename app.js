@@ -16,6 +16,9 @@ app.engine('hbs', engine({extname:'hbs',defaultLayout:'layout',layoutsDir: __dir
 app.set('views', './views');
 app.set('view engine', 'hbs');
 
+var port = 8000;
+app.set('port', port);
+
 // app.get('/login',(req,res)=>{
   
 // })
@@ -51,7 +54,7 @@ app.use(function(err, req, res, next) {
 });
 
 // module.exports = app;
-const port = 8000
+
 app.listen(port,()=>{console.log(`port running at ${port}`)})
 
 
