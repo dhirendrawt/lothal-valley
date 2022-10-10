@@ -16,12 +16,10 @@ app.engine('hbs', engine({extname:'hbs',defaultLayout:'layout',layoutsDir: __dir
 app.set('views', './views');
 app.set('view engine', 'hbs');
 
-var port = 8000;
-app.set('port', port);
+// var port = 8000;
+// app.set('port', port);
 
-// app.get('/login',(req,res)=>{
-  
-// })
+const port = process.env.PORT || 80
 
 
 
