@@ -4,13 +4,17 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const { engine }=require('express-handlebars')
+var session = require('express-session') 
+var mongoose = require('./mongoose')
 
 var indexRouter = require('./routes/index');
 var dashboardRouter = require('./routes/dashboard');
 var loginRouter = require('./routes/login')
 var usersRouter = require('./routes/users');
 
-var app = express();
+var app = express()
+
+
 
 app.engine('hbs', engine({extname:'hbs',defaultLayout:'layout',layoutsDir: __dirname+'/views/layouts/'}));
 app.set('views', './views');
@@ -28,6 +32,17 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({
+  name : 'user_login',  
+  secret : 'jdkbc87632823hbdcjsdc',
+  resave : false,
+  saveUninitialized : true,
+  cookie : {
+    maxAge : 7200000 ,
+    sameSite : true ,
+    secure : false
+  }
+}))
 
 app.use('/', indexRouter);
 app.use('/dashboard', dashboardRouter);
@@ -55,5 +70,4 @@ app.use(function(err, req, res, next) {
 // module.exports = app;
 
 app.listen(port,()=>{console.log(`port running at ${port}`)})
-
 
