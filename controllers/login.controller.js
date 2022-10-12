@@ -9,7 +9,6 @@ module.exports = {
         res.render('forgetPwd',{title:'Forgot Password'});
     },
     'authentication':(req,res) =>{
-        console.log('auth function working')
         const user_email=req.body.user_email
         const user_password=req.body.user_password
         console.log(user_email)
