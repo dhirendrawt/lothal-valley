@@ -3,9 +3,12 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-const { engine }=require('express-handlebars')
+const { create  }=require('express-handlebars')
 var session = require('express-session') 
-var mongoose = require('./mongoose')
+
+var flash = require('connect-flash');
+
+var mongoose = require('./mongoose');
 
 var indexRouter = require('./routes/index');
 var dashboardRouter = require('./routes/dashboard');
@@ -14,9 +17,18 @@ var usersRouter = require('./routes/users');
 
 var app = express()
 
-
-
-app.engine('hbs', engine({extname:'hbs',defaultLayout:'layout',layoutsDir: __dirname+'/views/layouts/'}));
+const hbs = create({
+  extname:'hbs',
+  defaultLayout:'layout',
+  layoutsDir: __dirname+'/views/layouts/',
+  helpers: {
+      ifErrorCheck: (a, b, option) => { 
+        return (a.param == b) ? option.fn(a) : option.inverse(a); 
+      },
+      loud: (obj) => {return JSON.stringify(obj)}
+  }
+});
+app.engine('hbs', hbs.engine);
 app.set('views', './views');
 app.set('view engine', 'hbs');
 
@@ -33,7 +45,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
-  name : 'user_login',  
+  name : 'user_login', 
   secret : 'jdkbc87632823hbdcjsdc',
   resave : false,
   saveUninitialized : true,
@@ -43,6 +55,7 @@ app.use(session({
     secure : false
   }
 }))
+app.use(flash());
 
 app.use('/', indexRouter);
 app.use('/dashboard', dashboardRouter);
