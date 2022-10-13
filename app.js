@@ -60,7 +60,7 @@ app.use('/', indexRouter);
 app.use('/dashboard', dashboardRouter);
 app.use('/users', usersRouter);
 app.use('/admin', loginRouter );
-app.use('/product',propertyRouter)
+app.use('/property',propertyRouter)
 
 
 // catch 404 and forward to error handler
