@@ -65,7 +65,7 @@ app.use('/', indexRouter);
 app.use('/dashboard',middelware.auth, dashboardRouter);
 app.use('/users', usersRouter);
 app.use('/admin', loginRouter );
-app.use('/product',propertyRouter);
+app.use('/property',propertyRouter)
 
 
 

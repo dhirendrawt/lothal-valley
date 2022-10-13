@@ -7,7 +7,7 @@ module.exports = {
     'login': (req, res) => {
 
         // console.log('login page');
-        res.render('login', { title: 'Login', message : req.flash('message'),passkey: req.flash('key'),emailkey: req.flash('key1')});
+        res.render('login', { title: 'Login', message : req.flash('message')});
     },
     'forget_pwd': (req, res) => {
         res.render('forgetPwd', { title: 'Forgot Password' });
