@@ -34,22 +34,19 @@ module.exports = {
             }
 
             const loggedinuser = await Users.find({ email: req.body.user_email });
-            session.auth = loggedinuser;
-            return res.redirect('/dashboard');
+
+           req.session.auth = loggedinuser;
+           return res.redirect('/dashboard');
 
         } catch (error) {
-            return {'massage':error};
+            return {'message':error};
         }
 
          
     },
-    'logout': (req,res)=>{
-        try {
-            const result = req.session.destroy();
-            res.redirect('/admin');
-        } catch (error) {
-            console.log('error: ',error)
-        }
+    'logout':  (req,res,next)=>{ 
+        delete req.session.auth;
+        return res.redirect('/admin');
     }
 
 }
