@@ -3,9 +3,6 @@
   <form action="/product/add_new_property" method="post">
   <div class="row">
     <div class="col-md-6">
-      {{#if messages}}
-      {{messages.validation_error}}
-      {{/if}}
       <div class="input-group input-group-outline   my-3">
         <label class="form-label">Property Title</label>
         <input type="text"  name="property_title" class="form-control">
@@ -56,5 +53,8 @@
     <button type="submit" class="btn btn-primary">Submit</button>
 
 </form>
+{{#if messages}}
+{{messages.validation_error}}
+{{/if}}
 
 </div>
