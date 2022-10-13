@@ -5,15 +5,14 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const { create  }=require('express-handlebars')
 var session = require('express-session') 
-
-var flash = require('connect-flash');
-
-var mongoose = require('./mongoose');
+var mongoose = require('./mongoose')
+var flash = require('express-flash')
 
 var indexRouter = require('./routes/index');
 var dashboardRouter = require('./routes/dashboard');
 var loginRouter = require('./routes/login')
 var usersRouter = require('./routes/users');
+var propertyRouter = require('./routes/property')
 
 var app = express()
 
@@ -55,12 +54,13 @@ app.use(session({
     secure : false
   }
 }))
-app.use(flash());
+app.use(flash())
 
 app.use('/', indexRouter);
 app.use('/dashboard', dashboardRouter);
 app.use('/users', usersRouter);
 app.use('/admin', loginRouter );
+app.use('/product',propertyRouter)
 
 
 // catch 404 and forward to error handler

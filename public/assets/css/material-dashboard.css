@@ -27633,5 +27633,9 @@ pre[class*="language-"] {
     overflow: auto !important;
   }
 }
-
+#basic-addon1  i {
+  color: #6c757d;
+  font-size: 23px;
+  padding-right: 10px;
+}
 /*# sourceMappingURL=dashboard-free.css.map */
