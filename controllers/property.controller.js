@@ -2,8 +2,13 @@ const Property = require('../models/property.model')
 const { validationResult } = require('express-validator')
 
 module.exports = {
-    "index" : ( req , res ,next) => {
-        res.render('property',{title:'Property',page_title_1:'Property Page',page_title_2:'Property',layout:'dashboard_layout', isproduct: true})
+    "index" : async ( req , res ,next) => {
+        
+            var data= await Property.find({});
+        
+            res.render('property',{title:'Property',page_title_1:'Property Page',page_title_2:'Property',layout:'dashboard_layout', properties: data, isproduct: true})
+        
+       
     },
     "addListing": (req , res , next) =>{
         res.render('add_property',{title:'Add Property',page_title_1:'Add Property Page',page_title_2:'Property',layout:'dashboard_layout', isproduct: true})
@@ -34,6 +39,10 @@ module.exports = {
         } catch (error) {
             console.log(error);
         }    
+        
+    },
+
+    "delete_property" : (req,res) =>{
         
     }
     
