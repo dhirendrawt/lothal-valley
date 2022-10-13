@@ -1,4 +1,3 @@
-var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
@@ -7,12 +6,13 @@ const { create  }=require('express-handlebars')
 var session = require('express-session') 
 var mongoose = require('./mongoose')
 var flash = require('express-flash')
-
 var indexRouter = require('./routes/index');
 var dashboardRouter = require('./routes/dashboard');
 var loginRouter = require('./routes/login')
 var usersRouter = require('./routes/users');
-var propertyRouter = require('./routes/property')
+var propertyRouter = require('./routes/property');
+var middelware = require('./middelwares/authentication.meddelwares');
+const { use } = require('./routes/index');
 
 var app = express()
 
@@ -27,6 +27,9 @@ const hbs = create({
       loud: (obj) => {return JSON.stringify(obj)}
   }
 });
+
+
+
 app.engine('hbs', hbs.engine);
 app.set('views', './views');
 app.set('view engine', 'hbs');
@@ -44,10 +47,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
-  name : 'user_login', 
   secret : 'jdkbc87632823hbdcjsdc',
-  resave : false,
-  saveUninitialized : true,
+  keys: ['auth', 'user'],
+  resave: false,
+  saveUninitialized: true,
   cookie : {
     maxAge : 7200000 ,
     sameSite : true ,
@@ -56,11 +59,14 @@ app.use(session({
 }))
 app.use(flash())
 
+
+
 app.use('/', indexRouter);
-app.use('/dashboard', dashboardRouter);
+app.use('/dashboard',middelware.auth, dashboardRouter);
 app.use('/users', usersRouter);
 app.use('/admin', loginRouter );
-app.use('/product',propertyRouter)
+app.use('/product',propertyRouter);
+
 
 
 // catch 404 and forward to error handler
