@@ -43,7 +43,7 @@
                       </div>
                     {{/if}}        --}}
               <form method="POST" role="form" class="text-start" action="/admin/authentication">
-                <div class="input-group input-group-outline my-3 ">
+                <div class="input-group input-group-outline my-3 focused is-focused">
                   <label class="form-label">Email</label>
                   <input type="email" name="user_email" class="form-control is-invalid">
                   {{#if message}}
@@ -54,7 +54,7 @@
                     {{/each}}
                   {{/if}}
                 </div>
-                <div class="input-group input-group-outline mb-3">
+                <div class="input-group input-group-outline mb-3 focused is-focused">
                   <label class="form-label">Password</label>
                   <input type="password" name="user_password" class="form-control is-invalid">
                   {{#if message}}
