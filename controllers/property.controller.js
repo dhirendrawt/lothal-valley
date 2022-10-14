@@ -18,18 +18,8 @@ module.exports = {
     "add_new_property" : async (req,res,next)=>{
         
         const error = validationResult(req)
-        // console.log(error)
-        // var form1 ={
-        //     "property_title" : req.body.property_title ,
-        //     "area" : req.body.area ,
-        //     "address" : req.body.address ,
-        //     "amount" : req.body.amount ,
-        //     "min_price" : req.body.min_price ,
-        //     "max_price" : req.body.max_price ,
-        //     "description" : req.body.description
-        // };
+     
         if(error.errors.length > 0){
-            // console.log(JSON.stringify(form1));
             req.flash("form1",[{
                 "property_title" : req.body.property_title ,
                 "area" : req.body.area ,
