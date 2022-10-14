@@ -1,5 +1,4 @@
 <div class='container'>
-
   <form action="/property/add_new_property" method="post">
     <div class="row">
       <div class="col-md-6">
@@ -87,7 +86,6 @@
       </div>
       <div class="col-md-6">
         <div class="input-group input-group-outline  my-3">
-          
           <textarea name="description" placeholder="Description" class="form-control is-invalid"></textarea>
           {{#if messages}}
             {{#each messages.product_error }}
@@ -100,6 +98,5 @@
       </div>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
-
   </form>
 </div>
