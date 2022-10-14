@@ -1,0 +1,104 @@
+<div class='container'>
+    <form action="/property/update_property" method="post"> 
+                <input type="hidden" name="update_id" value="{{data._id}}">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="input-group input-group-outline  focused is-focused my-3">
+                            <label class="form-label">Property Title</label>
+                            <input type="text" value="{{ data.property_title }}" name="property_title" class="form-control is-invalid">
+                            {{#if messages}}
+                                {{#each messages.product_error }}
+                                    {{#ifErrorCheck this "property_title"}}
+                                        <div class="invalid-feedback">{{ this.msg }}</div>
+                                    {{/ifErrorCheck}}
+                                {{/each}}
+                            {{/if}}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="input-group input-group-outline focused is-focused my-3">
+                        <label class="form-label">Area</label>
+                        <input type="number" value="{{ data.area }}" name="area" class="form-control is-invalid">
+                        {{#if messages}}
+                                {{#each messages.product_error }}
+                                    {{#ifErrorCheck this "area"}}
+                                        <div class="invalid-feedback">{{ this.msg }}</div>
+                                    {{/ifErrorCheck}}
+                                {{/each}}
+                            {{/if}}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="input-group input-group-outline focused is-focused my-3">
+                            <span class="input-group-text" id="basic-addon1"><i class="fa-sharp fa-solid fa-map-pin" ></i></span>
+                            <label class="form-label">Address</label>
+                            <input type="text" value="{{ data.address }}" name="address" class="form-control is-invalid"  aria-label="Username" aria-describedby="basic-addon1">
+                            {{#if messages}}
+                                {{#each messages.product_error }}
+                                    {{#ifErrorCheck this "address"}}
+                                        <div class="invalid-feedback">{{ this.msg }}</div>
+                                    {{/ifErrorCheck}}
+                                {{/each}}
+                            {{/if}}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="input-group input-group-outline focused is-focused my-3">
+                        <label class="form-label">Amount</label>
+                        <input type="number" value="{{ data.amount }}" name="amount" class="form-control is-invalid">
+                        {{#if messages}}
+                            {{#each messages.product_error }}
+                                {{#ifErrorCheck this "amount"}}
+                                    <div class="invalid-feedback">{{ this.msg }}</div>
+                                {{/ifErrorCheck}}
+                            {{/each}}
+                        {{/if}}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="input-group input-group-outline focused is-focused my-3">
+                        <label class="form-label">Min Price</label>
+                        <input type="number"  value="{{ data.min_price }}"  name="min_price" class="form-control is-invalid">
+                        {{#if messages}}
+                            {{#each messages.product_error }}
+                                {{#ifErrorCheck this "min_price"}}
+                                    <div class="invalid-feedback">{{ this.msg }}</div>
+                                {{/ifErrorCheck}}
+                            {{/each}}
+                        {{/if}}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="input-group input-group-outline focused is-focused my-3">
+                        <label class="form-label">Max Price</label>
+                        <input type="number"  value="{{ data.max_price }}" name="max_price" class="form-control is-invalid">
+                        {{#if messages}}
+                            {{#each messages.product_error }}
+                                {{#ifErrorCheck this "max_price"}}
+                                    <div class="invalid-feedback">{{ this.msg }}</div>
+                                {{/ifErrorCheck}}
+                            {{/each}}
+                        {{/if}}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="input-group input-group-outline focused is-focused my-3">
+                        <textarea  name="description" placeholder="Description" class="form-control is-invalid">{{ data.description }}</textarea>
+                       
+                        {{#if messages}}
+                            {{#each messages.product_error }}
+                                {{#ifErrorCheck this "description"}}
+                                    <div class="invalid-feedback">{{ this.msg }}</div>
+                                {{/ifErrorCheck}}
+                            {{/each}}
+                        {{/if}}
+                        </div>
+                    </div>
+                </div>
+    <button type="submit" class="btn btn-primary">Update</button>
+    </form>
+</div>

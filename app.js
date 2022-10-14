@@ -42,8 +42,6 @@ app.set('view engine', 'hbs');
 
 const port = process.env.PORT || 80
 
-
-
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

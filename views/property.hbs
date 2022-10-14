@@ -1,33 +1,33 @@
 <div class="container-fluid py-4">
-      <div class="row">
-        <div class="col-12">
-          <div class="card my-4">
-            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-                <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                <h6 class="text-white text-capitalize ps-3">Properties</h6>
-                <a  href="/property/add"  class="btn btn-primary btn-rounded float-lg-end" style="margin-top:30px;">
-                Add Property
-                </a>
-                </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="card my-4">
+        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+            <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+            <h6 class="text-white text-capitalize ps-3">Properties</h6>
+            <a  href="/property/add"  class="btn btn-primary btn-rounded float-lg-end" style="margin-top:30px;">
+            Add Property
+            </a>
             </div>
-            <div class="card-body px-0 pb-2">
-              <div class="table-responsive p-0">
-                <table class="table align-items-center mb-0">
-                  <thead>
-                    <tr>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Property Title</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Area</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Address</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Amount</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Minimum Price</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Maximum Price</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Description</th>
-                      <th class="text-left text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
-                    </tr>
-                  </thead>
-                  <tbody> 
-                    {{#if properties}}
-                      {{#each properties }}
+        </div>
+        <div class="card-body px-0 pb-2">
+          <div class="table-responsive p-0">
+            <table class="table align-items-center mb-0">
+              <thead>
+                <tr>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Property Title</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Area</th>
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Address</th>
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Amount</th>
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Minimum Price</th>
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Maximum Price</th>
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Description</th>
+                  <th class="text-left text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
+                </tr>
+              </thead>
+              <tbody> 
+                {{#if properties}}
+                  {{#each properties }}
                     <tr>
                       <td>
                         <div class="d-flex px-2 py-1">
@@ -35,7 +35,7 @@
                             <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
                           </div>
                           <div class="d-flex flex-column justify-content-center">
-                                <h6 class="mb-0 text-sm">{{this.property_title}}</h6>
+                            <h6 class="mb-0 text-sm">{{this.property_title}}</h6>
                           </div>
                         </div>
                       </td>
@@ -58,15 +58,12 @@
                         <span class="text-secondary text-xs font-weight-bold">{{this.description}}</span>
                       </td>
                       <td class="align-middle">
-
-                            <a type="button" class="badge badge-sm bg-gradient-warning" href="/property/edit_property/{{this._id}}">
-                              Edit
-                            </a>
-                       
-                            <button type="button" class="badge badge-sm bg-gradient-warning" data-bs-toggle="modal" data-bs-target="#exampleModal{{this._id}}">
-                              Delete
-                            </button>
-                      
+                        <a type="button" class="badge badge-sm bg-gradient-warning" href="/property/edit_property/{{this._id}}">
+                          Edit
+                        </a>
+                        <button type="button" class="badge badge-sm bg-gradient-warning" data-bs-toggle="modal" data-bs-target="#exampleModal{{this._id}}">
+                          Delete
+                        </button>
                       </td>
                     </tr>
                     <form action="/property/delete_property" method="post">
@@ -75,28 +72,28 @@
                         <div class="modal-dialog" role="document">
                           <div class="modal-content">
                             <div class="modal-header">
-                              <h5 class="modal-title" id="exampleModalLabel">Do you really want to delete this property?</h5>
-                              <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                              </button>
+                            <h5 class="modal-title" id="exampleModalLabel">Do you really want to delete this property?</h5>
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
                             </div>
                             <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >NO</button>
-                              <button type="submit" class="btn btn-primary">YES</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >NO</button>
+                            <button type="submit" class="btn btn-primary">YES</button>
                             </div>
                           </div>
                         </div>
                       </div>
-                      </form>
-                      {{/each}}
-                    {{/if}}
-                  </tbody>
-                </table>
-              </div>
-            </div>
+                    </form>
+                  {{/each}}
+                {{/if}}
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
+    </div>
+  </div>
 </div>
 
 

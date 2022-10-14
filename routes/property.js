@@ -17,7 +17,16 @@ router.post('/add_new_property', [
 ],  propertycontroller.add_new_property)
 
 router.post('/delete_property',propertycontroller.delete_property),
-router.get('/edit_property/:id',propertycontroller.edit_property)
+router.get('/edit_property/:id',propertycontroller.edit_property),
+router.post('/update_property', [
+    check('property_title').not().isEmpty(),
+    check('area').not().isEmpty(),
+    check('address').not().isEmpty(),
+    check('amount').not().isEmpty(),
+    check('min_price').not().isEmpty(),
+    check('max_price').not().isEmpty(),
+    check('description').not().isEmpty()
+],propertycontroller.update_property)
 
 
 module.exports = router

@@ -15,7 +15,7 @@ module.exports = {
         res.render('add_property',{title:'Add Property',page_title_1:'Add Property Page',page_title_2:'Property',layout:'dashboard_layout', isproduct: true})
     },
     
-    "add_new_property" : (req,res,next)=>{
+    "add_new_property" : async (req,res,next)=>{
         
         const error = validationResult(req)
         // console.log(error)
@@ -53,8 +53,8 @@ module.exports = {
                 max_price : req.body.max_price ,
                 description : req.body.description
             })
-            console.log(property);
-            property.save();   
+            // console.log(property);
+            await property.save();   
             res.redirect('/property') 
         } catch (error) {
             console.log(error);
@@ -68,11 +68,44 @@ module.exports = {
         res.redirect('/property')
     },
 
-    "edit_property" : (req,res) =>{
-        const id = req.params.id;
-        console.log(id); 
-        res.redirect('/property')
+    "edit_property" : async (req,res) =>{
+        const id = req.params.id;      
+        var data = await Property.findOne( {_id : id })
+        console.log(data); 
+        res.render('edit_property',{data : data , page_title_1 : 'Edit Property Details' , page_title_2 : 'Property Page' ,layout : 'dashboard_layout' , isproduct: true})
     },
-    
+
+    "update_property" : async  (req,res) =>{
+
+        const id = req.body.update_id
+
+        const error = validationResult(req)
+
+        if( error.errors.length > 0 )
+        {
+            req.flash('product_error', error.errors)
+            console.log('/property/edit_property/'+id)
+            return res.redirect(`/property/edit_property/${id}?isedited=true`)
+        }
+        try 
+        {
+            var doc = await Property.findOne({ _id : id })
+            doc.property_title = req.body.property_title
+            doc.area = req.body.area
+            doc.address = req.body.address
+            doc.amount = req.body.amount
+            doc.min_price = req.body.min_price
+            doc.max_price = req.body.max_price
+            doc.description = req.body.description
+            await doc.save();
+
+            res.redirect('/property') 
+        } 
+        catch (error) 
+        {
+            console.log(error);
+        }    
+
+    }
     
 }

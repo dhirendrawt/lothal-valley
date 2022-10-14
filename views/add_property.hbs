@@ -131,14 +131,7 @@
       </div>
       <div class="col-md-6">
         <div class="input-group input-group-outline  my-3">
-          
-          <textarea name="description" placeholder="Description" class="form-control is-invalid">
-            {{#if messages.form1}}
-                  {{#each messages.form1 }}
-                    {{this.description}}
-                  {{/each}}
-                {{/if}}
-           </textarea>
+          <textarea name="description" placeholder="Description" class="form-control is-invalid"></textarea>
           {{#if messages}}
             {{#each messages.product_error }}
               {{#ifErrorCheck this "description"}}
@@ -150,7 +143,6 @@
       </div>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
-
   </form>
   
 </div>
