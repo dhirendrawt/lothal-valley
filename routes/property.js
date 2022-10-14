@@ -18,8 +18,6 @@ router.post('/add_new_property', [
 
 router.post('/delete_property',propertycontroller.delete_property),
 router.get('/edit_property/:id',propertycontroller.edit_property)
-router.get('/properTytype',propertycontroller.propertyType)
-router.get('/propertyType_add',propertycontroller.propertyTypeCreate)
-router.post('/propertyType_add',propertycontroller.propertyType_add)
+
 
 module.exports = router
