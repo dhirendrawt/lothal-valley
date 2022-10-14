@@ -61,8 +61,19 @@ module.exports = {
         
     },
 
-    "delete_property" : (req,res) =>{
-     }
+
+    "delete_property" : async (req,res) =>{
+
+        await Property.deleteOne({ _id : req.body.property_id })
+
+        res.redirect('/property')
+    },
+
+    "edit_property" : (req,res) =>{
+        const id = req.params.id;
+        console.log(id); 
+        res.redirect('/property')
+    },
     "propertyType": (req , res , next) =>{
         res.render('propertyType',{title:'Add Property',page_title_1:'Property Type',page_title_2:'Property',layout:'dashboard_layout', isProperty: true})
     },
