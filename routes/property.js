@@ -15,5 +15,9 @@ router.post('/add_new_property', [
     check('max_price').not().isEmpty(),
     check('description').not().isEmpty()
 ],  propertycontroller.add_new_property)
+router.get('/properTytype',propertycontroller.propertyType)
+router.get('/propertyType_add',propertycontroller.propertyTypeCreate)
+router.post('/propertyType_add',propertycontroller.propertyType_add)
+
 
 module.exports = router
