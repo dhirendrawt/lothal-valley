@@ -1,11 +1,14 @@
 <div class="container-fluid py-4">
+  {{#if messages}}
+    {{messages}}
+  {{/if}}
       <div class="row">
         <div class="col-12">
           <div class="card my-4">
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                 <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
                 <h6 class="text-white text-capitalize ps-3">Authors table</h6>
-                <a  href="/property/propertyType_add"  class="btn btn-primary btn-rounded float-lg-end" style="margin-top:30px;">
+                <a  href="/property_Type/propertyType_add"  class="btn btn-primary btn-rounded float-lg-end" style="margin-top:30px;">
                 Add Property Type
                 </a>
                 </div>
@@ -18,8 +21,7 @@
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Serial No</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Property type</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
-                      <th class="text-secondary opacity-7"></th>
-                      <th class="text-secondary opacity-7"></th>
+                      <th class="text-secondary opacity-7">Operation</th>
 
                     </tr>
                   </thead>
@@ -45,16 +47,34 @@
                         </a>
                       </td>
                       <td class="align-middle">
-                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                          Edit
-                        </a>
-                      </td>
-                      <td class="align-middle">
-                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                          Delete
-                        </a>
+                        <a type="button" class="badge badge-sm bg-gradient-warning" href="/Property_type/edit_property_Type/{{this._id}}">
+                              Edit
+                            </a>
+                     
+                        <button type="button" class="badge badge-sm bg-gradient-warning" data-bs-toggle="modal" data-bs-target="#exampleModal{{this._id}}">
+                              Delete
+                        </button>
                       </td>
                     </tr>
+                    <form action="/property_Type/delete_property_type" method="post">
+                      <input type="hidden" name="property_id" value="{{this._id}}">
+                      <div class="modal fade" id="exampleModal{{this._id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Do you really want to delete this property Type?</h5>
+                              <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >NO</button>
+                              <button type="submit" class="btn btn-primary">YES</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      </form>
                      {{/each}}
                     {{/if}}
                     

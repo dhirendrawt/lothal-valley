@@ -11,6 +11,7 @@ var dashboardRouter = require('./routes/dashboard');
 var loginRouter = require('./routes/login')
 var usersRouter = require('./routes/users');
 var propertyRouter = require('./routes/property');
+var propertytypeRouter = require('./routes/property_type');
 var middelware = require('./middelwares/authentication.meddelwares');
 const Handlebars = require('handlebars');
 const { allowInsecurePrototypeAccess } = require('@handlebars/allow-prototype-access');
@@ -67,7 +68,8 @@ app.use('/', indexRouter);
 app.use('/dashboard',middelware.auth, dashboardRouter);
 app.use('/users', usersRouter);
 app.use('/admin', loginRouter );
-app.use('/property',propertyRouter)
+app.use('/property',propertyRouter);
+app.use('/property_Type',propertytypeRouter);
 
 
 
