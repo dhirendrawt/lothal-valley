@@ -1,11 +1,20 @@
 <div class='container'>
-
+  
   <form action="/property/add_new_property" method="post">
     <div class="row">
       <div class="col-md-6">
-        <div class="input-group input-group-outline   my-3">
-          <label class="form-label">Property Title</label>
-          <input type="text"  name="property_title" class="form-control is-invalid">
+        
+        <div class="input-group input-group-static mb-4">
+          <label >Property Title</label>
+          <input type="text"  name="property_title" 
+           class="form-control is-invalid" 
+           value={{#if messages.form1}}
+                  {{#each messages.form1 }}
+                    {{this.property_title}}
+                  {{/each}}
+                {{/if}}
+          >
+
           {{#if messages}}
             {{#each messages.product_error }}
               {{#ifErrorCheck this "property_title"}}
@@ -16,9 +25,16 @@
         </div>
       </div>
       <div class="col-md-6">
-        <div class="input-group input-group-outline  my-3">
-          <label class="form-label">Area</label>
-          <input type="number"  name="area" class="form-control is-invalid">
+        <div class="input-group input-group-static mb-4">
+          <label >Area</label>
+          <input type="number"  name="area"
+            class="form-control is-invalid"
+            value={{#if messages.form1}}
+                  {{#each messages.form1 }}
+                    {{this.area}}
+                  {{/each}}
+                {{/if}} 
+           >
           {{#if messages}}
             {{#each messages.product_error }}
               {{#ifErrorCheck this "area"}}
@@ -31,10 +47,18 @@
     </div>
     <div class="row">
       <div class="col-md-6">
-        <div class="input-group input-group-outline my-3">
+        <div class="input-group input-group-static mb-4">
             <span class="input-group-text" id="basic-addon1"><a href="/admin"><i class="fa-sharp fa-solid fa-map-pin" ></i></a></span>
-            <label class="form-label">Address</label>
-            <input type="text" name="address" class="form-control is-invalid"  aria-label="Username" aria-describedby="basic-addon1">
+            <label >Address</label>
+            <input type="text" name="address"
+             class="form-control is-invalid"  aria-label="Username"
+             aria-describedby="basic-addon1"
+             value={{#if messages.form1}}
+                    {{#each messages.form1 }}
+                      {{this.address}}
+                    {{/each}}
+                  {{/if}}
+            >
             {{#if messages}}
               {{#each messages.product_error }}
                 {{#ifErrorCheck this "address"}}
@@ -45,9 +69,16 @@
         </div>
       </div>
       <div class="col-md-6">
-        <div class="input-group input-group-outline  my-3">
-          <label class="form-label">Amount</label>
-          <input type="number" name="amount" class="form-control is-invalid">
+        <div class="input-group input-group-static mb-4">
+          <label >Amount</label>
+          <input type="number" name="amount" 
+           class="form-control is-invalid"
+            value={{#if messages.form1}}
+                  {{#each messages.form1 }}
+                    {{this.amount}}
+                  {{/each}}
+                {{/if}} 
+           >
           {{#if messages}}
             {{#each messages.product_error }}
               {{#ifErrorCheck this "amount"}}
@@ -60,9 +91,16 @@
     </div>
     <div class="row">
       <div class="col-md-6">
-        <div class="input-group input-group-outline  my-3">
-          <label class="form-label">Min Price</label>
-          <input type="number" name="min_price" class="form-control is-invalid">
+        <div class="input-group input-group-static mb-4">
+          <label >Min Price</label>
+          <input type="number" name="min_price" 
+           class="form-control is-invalid"
+            value={{#if messages.form1}}
+                  {{#each messages.form1 }}
+                    {{this.min_price}}
+                  {{/each}}
+                {{/if}} 
+          >
           {{#if messages}}
             {{#each messages.product_error }}
               {{#ifErrorCheck this "min_price"}}
@@ -73,9 +111,16 @@
         </div>
       </div>
       <div class="col-md-6">
-        <div class="input-group input-group-outline  my-3">
-          <label class="form-label">Max Price</label>
-          <input type="number" name="max_price" class="form-control is-invalid">
+        <div class="input-group input-group-static mb-4">
+          <label >Max Price</label>
+          <input type="number" name="max_price"
+           class="form-control is-invalid"
+            value={{#if messages.form1}}
+                  {{#each messages.form1 }}
+                    {{this.max_price}}
+                  {{/each}}
+                {{/if}} 
+           >
           {{#if messages}}
             {{#each messages.product_error }}
               {{#ifErrorCheck this "max_price"}}
@@ -88,7 +133,13 @@
       <div class="col-md-6">
         <div class="input-group input-group-outline  my-3">
           
-          <textarea name="description" placeholder="Description" class="form-control is-invalid"></textarea>
+          <textarea name="description" placeholder="Description" class="form-control is-invalid">
+            {{#if messages.form1}}
+                  {{#each messages.form1 }}
+                    {{this.description}}
+                  {{/each}}
+                {{/if}}
+           </textarea>
           {{#if messages}}
             {{#each messages.product_error }}
               {{#ifErrorCheck this "description"}}
@@ -102,4 +153,5 @@
     <button type="submit" class="btn btn-primary">Submit</button>
 
   </form>
+  
 </div>
