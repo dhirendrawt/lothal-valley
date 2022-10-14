@@ -12,7 +12,8 @@ var loginRouter = require('./routes/login')
 var usersRouter = require('./routes/users');
 var propertyRouter = require('./routes/property');
 var middelware = require('./middelwares/authentication.meddelwares');
-const { use } = require('./routes/index');
+const Handlebars = require('handlebars');
+const { allowInsecurePrototypeAccess } = require('@handlebars/allow-prototype-access');
 
 var app = express()
 
@@ -25,7 +26,8 @@ const hbs = create({
         return (a.param == b) ? option.fn(a) : option.inverse(a); 
       },
       loud: (obj) => {return JSON.stringify(obj)}
-  }
+  },
+   handlebars: allowInsecurePrototypeAccess(Handlebars)
 });
 
 
