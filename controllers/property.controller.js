@@ -42,8 +42,17 @@ module.exports = {
         
     },
 
-    "delete_property" : (req,res) =>{
-        
+    "delete_property" : async (req,res) =>{
+
+        await Property.deleteOne({ _id : req.body.property_id })
+
+        res.redirect('/property')
+    },
+
+    "edit_property" : (req,res) =>{
+        const id = req.params.id;
+        console.log(id); 
+        res.redirect('/property')
     }
     
 }
