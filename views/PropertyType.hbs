@@ -38,16 +38,20 @@
                         <p class="text-xs font-weight-bold mb-0"> {{this.property_type_name}}</p>
                       </td>
                       <td class="align-middle text-center text-sm">
-                        <a href="#">
+                        
                           {{#if this.status}}
-                            <span class="badge badge-sm bg-gradient-primary"> Online </span>
+                          <a href="/property_type/status_change/{{this._id}}">
+                            <span class="badge badge-sm bg-gradient-primary"> Active </span>
+                          </a>
                           {{else}}
-                           <span class="badge badge-sm bg-gradient-secondary"> Offline </span>
+                          <a href="/property_type/status_change/{{this._id}}">
+                            <span class="badge badge-sm bg-gradient-secondary"> InActive </span>
+                           </a>
                           {{/if}}
                         </a>
                       </td>
                       <td class="align-middle">
-                        <a type="button" class="badge badge-sm bg-gradient-warning" href="/Property_type/edit_property_Type/{{this._id}}">
+                        <a type="button" class="badge badge-sm bg-gradient-warning" href="/Property_type/edit_property_Type/{{this._id}}?isedit=true">
                               Edit
                             </a>
                      

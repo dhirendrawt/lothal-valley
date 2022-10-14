@@ -68,6 +68,7 @@ app.use('/users', usersRouter);
 app.use('/admin', loginRouter );
 app.use('/property',propertyRouter);
 app.use('/property_Type',propertytypeRouter);
+app.use('/status_change',propertytypeRouter);
 
 
 

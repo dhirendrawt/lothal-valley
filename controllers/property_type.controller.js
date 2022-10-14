@@ -52,9 +52,14 @@ module.exports = {
     },
 
     "edit_property_type" : async(req,res) =>{
+        console.log('isedit : ',req.query.isedit)
         const id = req.params.id;
-        var data = await Property_type.find({_id : id}); 
-        res.render('property_Type_edit',{data:JSON.parse(JSON.stringify(data)),title:'Add Property',page_title_1:'Property Type Add',page_title_2:'Property',layout:'dashboard_layout', isProperty: true})
+        if(req.query.isedit=='true'){
+            var data = await Property_type.find({_id : id}); 
+            res.render('property_Type_edit',{data:JSON.parse(JSON.stringify(data)),title:'Add Property',page_title_1:'Property Type Add',page_title_2:'Property',layout:'dashboard_layout', isProperty: true})
+        }else{
+            res.render('property_Type_edit',{data:JSON.parse(JSON.stringify([{_id:id}])),title:'Add Property',page_title_1:'Property Type Add',page_title_2:'Property',layout:'dashboard_layout', isProperty: true})
+        }
     },
     "update_property_type": async (req,res) =>{
         const error = validationResult(req)
@@ -73,7 +78,12 @@ module.exports = {
         } catch (error) {
             res.send("somethis want's worng");
         }
-        
-        
     },
+    "status_change" : async (req,res) =>{
+        var id = req.params.id;
+        var data = await Property_type.findOne({_id : id});
+        data.status = !data.status;
+        await data.save();
+        return res.redirect('/Property_type')
+        },
 }
