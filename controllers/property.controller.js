@@ -3,8 +3,13 @@ const Property_type = require('../models/property_type.model')
 const { validationResult } = require('express-validator')
 
 module.exports = {
-    "index" : ( req , res ,next) => {
-        res.render('property',{title:'Property',page_title_1:'Property Page',page_title_2:'Property',layout:'dashboard_layout', isproduct: true})
+    "index" : async ( req , res ,next) => {
+        
+            var data= await Property.find({});
+        
+            res.render('property',{title:'Property',page_title_1:'Property Page',page_title_2:'Property',layout:'dashboard_layout', properties: data, isproduct: true})
+        
+       
     },
     "addListing": (req , res , next) =>{
         res.render('add_property',{title:'Add Property',page_title_1:'Add Property Page',page_title_2:'Property',layout:'dashboard_layout', isproduct: true})
@@ -65,15 +70,27 @@ module.exports = {
             res.render('propertyType',{result : JSON.parse(JSON.stringify(result)),title:'Add Property',page_title_1:'Property Type',page_title_2:'Property',layout:'dashboard_layout', isProperty: true})
         } catch (error) {
             
-        }
-       
+    },
+    "delete_property" : async (req,res) =>{
+
+        await Property.deleteOne({ _id : req.body.property_id })
+
+        res.redirect('/property')
+    },
+
+    "edit_property" : (req,res) =>{
+        const id = req.params.id;
+        console.log(id); 
+        res.redirect('/property')
+    },
+    "propertyType": (req , res , next) =>{
+        res.render('propertyType',{title:'Add Property',page_title_1:'Property Type',page_title_2:'Property',layout:'dashboard_layout', isProperty: true})
     },
     "propertyTypeCreate": (req , res , next) =>{
         
         res.render('propertyType_add',{title:'Add Property',page_title_1:'Property Type Add',page_title_2:'Property',layout:'dashboard_layout', isProperty: true})
     },
-    "propertyType_add":async (req , res , next) =>{
-        
+    "propertyType_add":async (req , res , next) =>{ 
        try {
         
         var result = await Property_type.find({}).sort({serial_no: -1}).limit(1)
@@ -92,7 +109,9 @@ module.exports = {
        } catch (error) {
             console.log("Error : ",error);
        }
-
+   },
+    "propertyType_add":(req , res , next) =>{
+        console.log('in form ',req.body.property_type);
     }
     
 }
