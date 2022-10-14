@@ -15,6 +15,7 @@
                 <table class="table align-items-center mb-0">
                   <thead>
                     <tr>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Serial No</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Property type</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
                       <th class="text-secondary opacity-7"></th>
@@ -23,16 +24,26 @@
                     </tr>
                   </thead>
                   <tbody>
+                    
+                    
+                    {{#if result}}
+                      {{#each result}}                     
                     <tr>
-                     
                       <td>
-                        <p class="text-xs font-weight-bold mb-0">Manager</p>
-                        <p class="text-xs text-secondary mb-0">Organization</p>
+                        <h2 class="text-xs text-secondary mb-0"> {{this.serial_no}}</h2>
+                      </td>
+                      <td>
+                        <p class="text-xs font-weight-bold mb-0"> {{this.property_type_name}}</p>
                       </td>
                       <td class="align-middle text-center text-sm">
-                        <span class="badge badge-sm bg-gradient-success">Online</span>
+                        <a href="#">
+                          {{#if this.status}}
+                            <span class="badge badge-sm bg-gradient-primary"> Online </span>
+                          {{else}}
+                           <span class="badge badge-sm bg-gradient-secondary"> Offline </span>
+                          {{/if}}
+                        </a>
                       </td>
-                      
                       <td class="align-middle">
                         <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                           Edit
@@ -44,25 +55,8 @@
                         </a>
                       </td>
                     </tr>
-                    <tr>
-                      <td>
-                        <p class="text-xs font-weight-bold mb-0">Programator</p>
-                        <p class="text-xs text-secondary mb-0">Developer</p>
-                      </td>
-                      <td class="align-middle text-center text-sm">
-                        <span class="badge badge-sm bg-gradient-secondary">Offline</span>
-                      </td>
-                      <td class="align-middle">
-                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                          Edit
-                        </a>
-                      </td>
-                      <td class="align-middle">
-                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                          Delete
-                        </a>
-                      </td>
-                    </tr>
+                     {{/each}}
+                    {{/if}}
                     
                   </tbody>
                 </table>
