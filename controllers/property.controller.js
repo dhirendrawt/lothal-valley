@@ -18,7 +18,26 @@ module.exports = {
         
         const error = validationResult(req)
         // console.log(error)
+        // var form1 ={
+        //     "property_title" : req.body.property_title ,
+        //     "area" : req.body.area ,
+        //     "address" : req.body.address ,
+        //     "amount" : req.body.amount ,
+        //     "min_price" : req.body.min_price ,
+        //     "max_price" : req.body.max_price ,
+        //     "description" : req.body.description
+        // };
         if(error.errors.length > 0){
+            // console.log(JSON.stringify(form1));
+            req.flash("form1",[{
+                "property_title" : req.body.property_title ,
+                "area" : req.body.area ,
+                "address" : req.body.address ,
+                "amount" : req.body.amount ,
+                "min_price" : req.body.min_price ,
+                "max_price" : req.body.max_price ,
+                "description" : req.body.description
+            }]);
             req.flash('product_error',error.errors)
             return res.redirect('/property/add')
         }
@@ -42,6 +61,7 @@ module.exports = {
         
     },
 
+
     "delete_property" : async (req,res) =>{
 
         await Property.deleteOne({ _id : req.body.property_id })
@@ -53,6 +73,15 @@ module.exports = {
         const id = req.params.id;
         console.log(id); 
         res.redirect('/property')
+    },
+    "propertyType": (req , res , next) =>{
+        res.render('propertyType',{title:'Add Property',page_title_1:'Property Type',page_title_2:'Property',layout:'dashboard_layout', isProperty: true})
+    },
+    "propertyTypeCreate":(req , res , next) =>{
+        res.render('propertyType_add',{title:'Add Property',page_title_1:'Property Type Add',page_title_2:'Property',layout:'dashboard_layout', isProperty: true})
+    },
+    "propertyType_add":(req , res , next) =>{
+        console.log('in form ',req.body.property_type);
     }
     
 }
