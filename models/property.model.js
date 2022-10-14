@@ -13,4 +13,5 @@ const PropertySchema = new Schema({
 
 })
 
+
 module.exports = mongoose.model('Property',PropertySchema)

@@ -1,5 +1,6 @@
 const Property = require('../models/property.model')
-const { validationResult } = require('express-validator')
+const { validationResult } = require('express-validator');
+const { json } = require('express');
 
 module.exports = {
     "index" : async ( req , res ,next) => {
@@ -18,7 +19,26 @@ module.exports = {
         
         const error = validationResult(req)
         // console.log(error)
+        // var form1 ={
+        //     "property_title" : req.body.property_title ,
+        //     "area" : req.body.area ,
+        //     "address" : req.body.address ,
+        //     "amount" : req.body.amount ,
+        //     "min_price" : req.body.min_price ,
+        //     "max_price" : req.body.max_price ,
+        //     "description" : req.body.description
+        // };
         if(error.errors.length > 0){
+            // console.log(JSON.stringify(form1));
+            req.flash("form1",[{
+                "property_title" : req.body.property_title ,
+                "area" : req.body.area ,
+                "address" : req.body.address ,
+                "amount" : req.body.amount ,
+                "min_price" : req.body.min_price ,
+                "max_price" : req.body.max_price ,
+                "description" : req.body.description
+            }]);
             req.flash('product_error',error.errors)
             return res.redirect('/property/add')
         }
@@ -41,7 +61,6 @@ module.exports = {
         }    
         
     },
-
     "delete_property" : async (req,res) =>{
 
         await Property.deleteOne({ _id : req.body.property_id })
@@ -50,8 +69,7 @@ module.exports = {
     },
 
     "edit_property" : async (req,res) =>{
-        const id = req.params.id;
-        
+        const id = req.params.id;      
         var data = await Property.findOne( {_id : id })
         console.log(data); 
         res.render('edit_property',{data : data , page_title_1 : 'Edit Property Details' , page_title_2 : 'Property Page' ,layout : 'dashboard_layout' , isproduct: true})

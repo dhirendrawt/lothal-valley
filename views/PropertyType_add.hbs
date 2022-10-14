@@ -1,0 +1,24 @@
+<div class='container'>
+
+  <form action="/property_Type/propertyType_add" method="post">
+    <div class="input-group input-group-outline  focused is-focused my-3">
+      <label class="form-label">Property Type</label>
+      <input type="text" name="property_type" class="form-control is-invalid" 
+      value={{#if messages.form1}} 
+              {{#each messages.form1 }} 
+                {{this.property_type_name}} 
+              {{/each}} 
+            {{/if}}>
+      
+        {{#if messages}}
+          {{#each messages.propery_type_error }}
+            {{#ifErrorCheck this "property_type"}}
+              <div class="invalid-feedback"> {{ this.msg }}</div>
+            {{/ifErrorCheck}}
+          {{/each}}
+        {{/if}}
+      
+    </div>
+    <button type="submit" class="btn btn-primary">Add</button>
+  </form>
+</div>

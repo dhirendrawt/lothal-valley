@@ -1,0 +1,29 @@
+<div class='container'>
+   
+            {{#each data}}
+  <form action="/property_Type/edit_property_Type/{{this._id}}" method="post">
+    <div class="input-group input-group-outline  focused is-focused my-3">
+      <label  class="form-label">Property Type</label>
+      <input type="text" name="property_type_name" class="form-control is-invalid"
+        value=
+                {{this.property_type_name}}
+                {{#if messages.form1}} 
+              {{#each messages.form1 }} 
+                {{this.property_type_name}} 
+              {{/each}} 
+            {{/if}}
+           
+      >
+      {{#if messages}}
+          {{#each messages.propery_type_error }}
+            {{#ifErrorCheck this "property_type_name"}}
+               <div class="invalid-feedback">{{ this.msg }}</div>
+            {{/ifErrorCheck}}
+          {{/each}}
+        {{/if}}
+    </div>
+    <button type="submit" class="btn btn-primary">Update</button>
+ </form>
+  {{/each}}
+        
+</div>
