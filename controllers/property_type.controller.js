@@ -23,7 +23,7 @@ module.exports = {
         if(error.errors.length > 0){
             req.flash("form1",[{'property_type_name':req.body.Property_type}])
             req.flash('propery_type_error',error.errors)
-            return res.redirect('/property_Type/propertyType_add')
+            return res.redirect('/property_type/propertyType_add')
         }
        try {
         
@@ -37,8 +37,8 @@ module.exports = {
             status : true
         })
         console.log("data : ",property_type);
-        property_type.save();
-         res.redirect("/property_Type");
+        await property_type.save();
+         res.redirect("/property_type");
         
        } catch (error) {
             console.log("Error : ",error);
@@ -48,7 +48,7 @@ module.exports = {
 
     await Property_type.deleteOne({ _id : req.body.property_id })
 
-    res.redirect('/Property_type')
+    res.redirect('/property_type')
     },
 
     "edit_property_type" : async(req,res) =>{
@@ -74,7 +74,7 @@ module.exports = {
             data.property_type_name = req.body.property_type_name;
             await data.save();
             req.flash('Update sucessfull');
-            res.redirect('/Property_type');
+            res.redirect('/property_type');
         } catch (error) {
             res.send("somethis want's worng");
         }
@@ -84,6 +84,6 @@ module.exports = {
         var data = await Property_type.findOne({_id : id});
         data.status = !data.status;
         await data.save();
-        return res.redirect('/Property_type')
+        return res.redirect('/property_type')
         },
 }
