@@ -14,10 +14,12 @@ router.post('/propertyType_add',
 ,propertyTypecontroller.propertyType_add)
 router.post('/delete_property_type',propertyTypecontroller.delete_property_type)
 router.get('/edit_property_Type/:id',propertyTypecontroller.edit_property_type)
+
 router.post('/edit_property_Type/:id',
     [
         check('property_type_name').not().isEmpty()
     ]
-,propertyTypecontroller.update_property_type)
+    ,propertyTypecontroller.update_property_type)
+router.get('/status_change/:id',propertyTypecontroller.status_change);
 
 module.exports = router
