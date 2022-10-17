@@ -5,7 +5,7 @@ const { check  } = require('express-validator')
 
 
 router.get('/',propertycontroller.index)
-router.get('/add',propertycontroller.addListing)
+router.get('/add',propertycontroller.addProperty)
 router.post('/add_new_property', [
     check('property_title').not().isEmpty(),
     check('area').not().isEmpty(),
@@ -13,7 +13,8 @@ router.post('/add_new_property', [
     check('amount').not().isEmpty(),
     check('min_price').not().isEmpty(),
     check('max_price').not().isEmpty(),
-    check('description').not().isEmpty()
+    check('description').not().isEmpty(),
+    check('property_type').not().isEmpty()
 ],  propertycontroller.add_new_property)
 
 router.post('/delete_property',propertycontroller.delete_property),
@@ -25,7 +26,8 @@ router.post('/update_property', [
     check('amount').not().isEmpty(),
     check('min_price').not().isEmpty(),
     check('max_price').not().isEmpty(),
-    check('description').not().isEmpty()
+    check('description').not().isEmpty(),
+    check('property_type').not().isEmpty()
 ],propertycontroller.update_property)
 
 

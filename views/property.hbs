@@ -19,6 +19,7 @@
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Area</th>
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Address</th>
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Amount</th>
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Property Type</th>
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Minimum Price</th>
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Maximum Price</th>
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Description</th>
@@ -47,6 +48,9 @@
                       </td>
                       <td class="align-middle text-center">
                           <span class="badge badge-sm bg-gradient-primary">{{this.amount}}</span>
+                      </td>
+                      <td class="align-middle text-center">
+                          <span class="badge badge-sm bg-gradient-primary">{{this.property_type.property_type_name}}</span>
                       </td>
                       <td class="align-middle text-center">
                           <span class="badge badge-sm bg-gradient-danger">{{this.min_price}}</span>

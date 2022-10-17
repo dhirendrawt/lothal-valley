@@ -3,6 +3,7 @@
                 <input type="hidden" name="update_id" value="{{data._id}}">
                 <div class="row">
                     <div class="col-md-6">
+                      
                         <div class="input-group input-group-outline  focused is-focused my-3">
                             <label class="form-label">Property Title</label>
                             <input type="text" value="{{ data.property_title }}" name="property_title" class="form-control is-invalid">
@@ -97,6 +98,25 @@
                             {{/each}}
                         {{/if}}
                         </div>
+                    </div>
+                    <div class="col-md-6">
+                        <select name="property_type" class="form-control is-invalid" aria-label="Default select example">
+                            <option  value="" selected>Select Property Type:</option>
+                             {{#if property_types}}
+                                {{#each property_types}}
+                                    <option  value="{{this._id}}">{{this.property_type_name}}</option>
+                                {{/each}}
+                            {{/if}}
+                                       
+                        </select>
+        
+                            {{#if messages}}
+                                {{#each messages.product_error }}
+                                    {{#ifErrorCheck this "property_type"}}
+                                        <div class="invalid-feedback">{{ this.msg }}</div>
+                                    {{/ifErrorCheck}}
+                                {{/each}}
+                            {{/if}}
                     </div>
                 </div>
     <button type="submit" class="btn btn-primary">Update</button>
