@@ -10,8 +10,8 @@ module.exports = {
             {
                 console.log('no data')
             }
-                
-            res.render('propertyType',{result : JSON.parse(JSON.stringify(result)),title:'Add Property',page_title_1:'Property Type',page_title_2:'Property',layout:'dashboard_layout', isProperty: true})
+            console.log(result);
+            res.render('propertyType',{result : result,title:'Add Property',page_title_1:'Property Type',page_title_2:'Property',layout:'dashboard_layout', isProperty: true})
         
         } 
         catch (error) {
