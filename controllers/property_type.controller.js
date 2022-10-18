@@ -7,10 +7,15 @@ module.exports = {
         try {
             var result = await Property_type.find()
             if(!result)
+            {
                 console.log('no data')
-            //console.log(result);
+            }
+                
             res.render('propertyType',{result : JSON.parse(JSON.stringify(result)),title:'Add Property',page_title_1:'Property Type',page_title_2:'Property',layout:'dashboard_layout', isProperty: true})
-        } catch (error) {
+        
+        } 
+        catch (error) {
+            console.log(error);
         }
             
     },

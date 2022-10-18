@@ -30,7 +30,7 @@
               </div>
             </div>
             <div class="card-body">  
-               {{#if message}}
+                  {{#if message}}
                     {{# each message }}
                       {{#ifErrorCheck this "isUthrized"}}
                        <div class="alert alert-danger text-light" role="alert">{{ this.msg }}</div>

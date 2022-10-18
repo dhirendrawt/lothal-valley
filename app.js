@@ -37,9 +37,6 @@ app.engine('hbs', hbs.engine);
 app.set('views', './views');
 app.set('view engine', 'hbs');
 
-// var port = 8000;
-// app.set('port', port);
-
 const port = process.env.PORT || 80
 
 app.use(logger('dev'));
@@ -89,7 +86,6 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-// module.exports = app;
 
 app.listen(port,()=>{console.log(`port running at ${port}`)})
 
