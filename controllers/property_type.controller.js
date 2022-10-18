@@ -12,7 +12,7 @@ module.exports = {
                 console.log('no data')
             }
             console.log(result);
-            // res.render('propertyType',{result : result,title:'Add Property',page_title_1:'Property Type',page_title_2:'Property',layout:'dashboard_layout', isProperty: true})
+            return res.render('propertyType',{result : result,title:'Add Property',page_title_1:'Property Type',page_title_2:'Property',layout:'dashboard_layout', isProperty: true})
         
         } 
         catch (error) {
