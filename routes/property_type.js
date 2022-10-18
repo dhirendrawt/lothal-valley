@@ -5,9 +5,7 @@ const { check  } = require('express-validator')
 
 
 
-router.get('/',(req,res)=>{
-    res.send('page working')
-})
+router.get('/',propertyTypecontroller.index)
 // router.get('/propertyType_add',propertyTypecontroller.propertyTypeCreate)
 // router.post('/propertyType_add',
 //     [
