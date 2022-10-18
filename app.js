@@ -60,12 +60,11 @@ app.use(flash())
 
 
 app.use('/', indexRouter);
-app.use('/dashboard',middelware.auth, dashboardRouter);
-app.use('/users', usersRouter);
 app.use('/admin', loginRouter );
+app.use('/dashboard',middelware.auth, dashboardRouter);
 app.use('/property',propertyRouter);
 app.use('/property_type',propertytypeRouter);
-app.use('/status_change',propertytypeRouter);
+//app.use('/status_change',propertytypeRouter);
 
 
 

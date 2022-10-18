@@ -3,8 +3,6 @@ const router = express.Router()
 const propertyTypecontroller = require('../controllers/property_type.controller');
 const { check  } = require('express-validator')
 
-
-
 router.get('/',(req,res)=>{
     console.log('index route working');
 })
