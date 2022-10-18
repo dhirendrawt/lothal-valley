@@ -63,8 +63,8 @@ app.use('/', indexRouter);
 app.use('/admin', loginRouter );
 app.use('/dashboard',middelware.auth, dashboardRouter);
 app.use('/property',propertyRouter);
-app.use('/property_type',propertytypeRouter);
-//app.use('/status_change',propertytypeRouter);
+app.use('/property-type',propertytypeRouter);
+// app.use('/status_change',propertytypeRouter);
 
 
 
