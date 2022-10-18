@@ -1,0 +1,38 @@
+<div class='container'>
+        {{#each data}}
+        <form action="/admin/user-role/edit/{{this._id}}?isedit=false" method="post">
+        {{/each}}
+            <div class="input-group input-group-outline  focused is-focused my-3">
+                <label class="form-label">User Role</label>
+    
+                <input type="text" name="user_role_name" class="form-control is-invalid"
+                    value=
+                    {{#each data}}
+                    {{this.user_role_name}} 
+                    {{/each}}
+                    {{#if messages.form1}} 
+                        {{#each messages.form1 }}
+                            {{this.user_role_name}} 
+                        {{/each}}
+                    {{/if}}>
+                     {{#if messages}}
+                    {{#each messages.user_role_error }}
+                        {{#ifErrorCheck this "user_role_name"}}
+                        <div class="invalid-feedback"> {{ this.msg }}</div>
+                        {{/ifErrorCheck}}
+                    {{/each}}
+                    {{/if}}
+            </div>
+             {{!-- {{#if messages}}
+        hallo
+          {{#each messages.propery_type_error }}
+          hallo1
+            {{#ifErrorCheck this "property_type_name"}}
+              {{ this.msg }}
+            {{/ifErrorCheck}}
+          {{/each}}
+        {{/if}} --}}
+            <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+   
+</div>

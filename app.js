@@ -1,22 +1,26 @@
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 const { create  }=require('express-handlebars')
-var session = require('express-session') 
-var mongoose = require('./mongoose')
-var flash = require('express-flash')
-var indexRouter = require('./routes/index');
-var dashboardRouter = require('./routes/dashboard');
-var loginRouter = require('./routes/login')
-var usersRouter = require('./routes/users');
-var propertyRouter = require('./routes/property');
-var propertytypeRouter = require('./routes/property_type');
-var middelware = require('./middelwares/authentication.meddelwares');
+const session = require('express-session') 
+const mongoose = require('./mongoose')
+const flash = require('express-flash')
+
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
+
+const adminLoginRouter = require('./routes/admin/login');
+const adminDashboardRouter = require('./routes/admin/dashboard');
+const adminPropertyRouter = require('./routes/admin/property');
+const adminPropertyTypeRouter = require('./routes/admin/property_type');
+const adminUserRoleRouter = require('./routes/admin/user_role');
+
+const middelware = require('./middelwares/authentication.meddelwares');
 const Handlebars = require('handlebars');
 const { allowInsecurePrototypeAccess } = require('@handlebars/allow-prototype-access');
 
-var app = express()
+const app = express()
 
 const hbs = create({
   extname:'hbs',
@@ -50,7 +54,7 @@ app.use(session({
   resave: false,
   saveUninitialized: true,
   cookie : {
-    maxAge : 7200000 ,
+    maxAge : 72000000000 ,
     sameSite : true ,
     secure : false
   }
@@ -60,11 +64,11 @@ app.use(flash())
 
 
 app.use('/', indexRouter);
-app.use('/admin', loginRouter );
-app.use('/dashboard',middelware.auth, dashboardRouter);
-app.use('/property',propertyRouter);
-app.use('/property-type',propertytypeRouter);
-// app.use('/status_change',propertytypeRouter);
+app.use('/admin', adminLoginRouter );
+app.use('/admin/dashboard',middelware.auth,adminDashboardRouter);
+app.use('/admin/property',middelware.auth,adminPropertyRouter);
+app.use('/admin/property-type',middelware.auth,adminPropertyTypeRouter);
+app.use('/admin/user-role',middelware.auth,adminUserRoleRouter);
 
 
 
