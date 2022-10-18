@@ -4,20 +4,20 @@ const { json } = require('express');
 
 module.exports = {
     "index": async (req , res , next) =>{
-        res.send('page working')
-        // try {
-        //     var result = await Property_type.find()
-        //     if(!result)
-        //     {
-        //         console.log('no data')
-        //     }
-            
-        //     res.render('propertyType',{result : result,title:'Add Property',page_title_1:'Property Type',page_title_2:'Property',layout:'dashboard_layout', isProperty: true})
+        // res.send('page working')
+        try {
+            var result = await Property_type.find()
+            if(!result)
+            {
+                console.log('no data')
+            }
+            console.log(result);
+            // res.render('propertyType',{result : result,title:'Add Property',page_title_1:'Property Type',page_title_2:'Property',layout:'dashboard_layout', isProperty: true})
         
-        // } 
-        // catch (error) {
-        //     console.log(error);
-        // }
+        } 
+        catch (error) {
+            console.log(error);
+        }
             
     },
     "propertyTypeCreate": (req , res , next) =>{
