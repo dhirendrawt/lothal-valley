@@ -5,11 +5,14 @@ const { json } = require('express');
 
 module.exports = {
     "index" : async ( req , res ,next) => {
-        
-            var property_data= await Property.find().populate('property_type')
-        
-            res.render('admin/property/list', {title:'Property',page_title_1:'Property Page',page_title_2:'Property',layout:'dashboard_layout', properties: property_data, isproduct: true})
-        
+        try {        
+            const property_data= await Property.find().populate('property_type')
+            return res.render('admin/property/list', {title:'Property',page_title_1:'Property Page',page_title_2:'Property',layout:'dashboard_layout', properties: property_data, isproduct: true})
+        } catch (error) {
+            console.log(error);
+            req.flash('warning',' Something went wrong !');
+            return res.redirect('/admin/property');
+        }
        
     },
     "create": async (req , res , next) =>{
@@ -51,18 +54,26 @@ module.exports = {
                 property_type : req.body.property_type
             })
             
-            await property.save();   
-            res.redirect('/admin/property') 
+            await property.save(); 
+            req.flash('message','New record insert successfull !');  
+            return res.redirect('/admin/property') 
         } catch (error) {
             console.log(error);
+            req.flash('warning',' Something went wrong !');
+            return res.redirect('/admin/property');
         }    
         
     },
     "delete" : async (req,res) =>{
-
-        await Property.deleteOne({ _id : req.body.property_id })
-
-        res.redirect('/admin/property')
+        try {        
+            await Property.deleteOne({ _id : req.body.property_id })
+            req.flash('message','Record delete successfull !');
+            return res.redirect('/admin/property')
+        } catch (error) {
+            console.log(error);
+            req.flash('warning',' Something went wrong !');
+            return res.redirect('/admin/property');
+        }
     },
 
     "create_edit" : async (req,res) =>{
@@ -70,8 +81,7 @@ module.exports = {
         const data = await Property.findOne( { _id : id })
         const property_type_id = data.property_type
         const property_types = await Property_type.find({ 'status' : true })
-
-        res.render('admin/property/edit',{data : data , page_title_1 : 'Edit Property Details' , page_title_2 : 'Property Page' ,layout : 'dashboard_layout' , isproduct: true , property_types : property_types })
+        return res.render('admin/property/edit',{data : data , page_title_1 : 'Edit Property Details' , page_title_2 : 'Property Page' ,layout : 'dashboard_layout' , isproduct: true , property_types : property_types })
     },
 
     "update" : async  (req,res) =>{
@@ -81,7 +91,6 @@ module.exports = {
         if( error.errors.length > 0 )
         {
             req.flash('product_error', error.errors)
-            console.log('/property/edit_property/'+id)
             return res.redirect(`/admin/property/edit/${id}?isedited=true`)
         }
         try 
@@ -96,12 +105,14 @@ module.exports = {
             doc.description = req.body.description
             doc.property_type = req.body.property_type
             await doc.save();
-
-            res.redirect('/admin/property') 
+            req.flash('message','Record Update successfull !');
+            return res.redirect('/admin/property') 
         } 
         catch (error) 
         {
             console.log(error);
+            req.flash('warning',' Something went wrong !');
+            return res.redirect('/admin/property');
         }    
 
     }

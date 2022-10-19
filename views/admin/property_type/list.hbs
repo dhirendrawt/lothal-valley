@@ -1,4 +1,30 @@
 <div class="container-fluid py-4">
+  {{#if messages.message}}
+  <div class="alert alert-success alert-dismissible text-white fade show" role="alert">
+        <span class="alert-icon align-middle">
+          <span class="material-icons text-md">
+          thumb_up_off_alt
+          </span>
+        </span>
+        <span class="alert-text">{{messages.message}}</span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+  {{/if}}
+   {{#if messages.warning}}
+  <div class="alert alert-danger alert-dismissible text-white fade show" role="alert">
+        <span class="alert-icon align-middle">
+          <span class="material-icons text-md">
+          thumb_up_off_alt
+          </span>
+        </span>
+        <span class="alert-text"><strong>Warning!</strong> This is a warning alert—check it out!</span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {{/if}}
       <div class="row">
         <div class="col-12">
           <div class="card my-4">

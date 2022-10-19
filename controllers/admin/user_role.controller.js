@@ -2,8 +2,16 @@ const User_role = require('../../models/user_role.model')
 const { validationResult } = require('express-validator');
 module.exports = {
     "index": async (req , res ) =>{
-        const result = await User_role.find();
-       return res.render('admin/userRole/list',{result : JSON.parse(JSON.stringify(result)),title:'Add User Role',page_title_1:'User Role',page_title_2:'User',layout:'dashboard_layout', isUserRole: true})
+        try
+        {
+            const result = await User_role.find();
+            return res.render('admin/userRole/list',{result : JSON.parse(JSON.stringify(result)),title:'Add User Role',page_title_1:'User Role',page_title_2:'User',layout:'dashboard_layout', isUserRole: true})
+        }
+        catch (error) {
+            console.log(error);
+            req.flash('warning',' Something went wrong !');
+            return res.redirect('/admin/user-role');
+        }
     },
     "userRole_create": async(req,res) =>{
        return res.render('admin/userRole/add',{title:'Add User Role',page_title_1:'User Role Add',page_title_2:'User',layout:'dashboard_layout', isUserRole: true})
@@ -26,10 +34,13 @@ module.exports = {
             })
             console.log("data : ",user_role);
             await user_role.save();
+            req.flash('message','  New record insert successfully !');
             return res.redirect("/admin/user-role");
-        } catch (error) {
-            console.log("error : ",error)
-            return res.send(error);
+        } 
+        catch (error) {
+            console.log(error);
+            req.flash('warning',' Something went wrong !');
+            return res.redirect('/admin/user-role');
         }
     },
     "status_change" : async (req,res) =>{
@@ -38,21 +49,28 @@ module.exports = {
             const data = await User_role.findOne({_id : id});
             data.status = !data.status;
             await data.save();
+            req.flash('message','  Status update successfully !');
             return res.redirect('/admin/user-role');
-        } catch (error) {
-            console.log("error : ",error)
-            return res.send(error);
+        } 
+        catch (error) {
+            console.log(error);
+            req.flash('warning',' Something went wrong !');
+            return res.redirect('/admin/user-role');
         }
     },
     "delete" : async (req,res) =>{
         try {
             await User_role.deleteOne({ _id : req.body.property_id })
-        } catch (error) {
-            console.log("error : ",error)
-            return res.send(error);
+            req.flash('message','  Deleted successfully !');
+           return  res.redirect('/admin/user-role')
+        } 
+        catch (error) {
+            console.log(error);
+            req.flash('warning',' Something went wrong !');
+            return res.redirect('/admin/user-role');
         }
-
-    res.redirect('/admin/user-role')
+    
+    
     },
 
     "edit_create" : async(req,res) =>{
@@ -78,11 +96,12 @@ module.exports = {
             const data = await User_role.findOne({_id : id}); 
             data.user_role_name = req.body.user_role_name;
             await data.save();
-            req.flash('Update sucessfull');
+            req.flash('message','  Record update successfully !');
             return res.redirect('/admin/user-role');
         } catch (error) {
-            console.log("error : ",error)
-            return res.send(error);
+            console.log(error);
+            req.flash('warning',' Something went wrong !');
+            return res.redirect('/admin/user-role');
         }
     }
 }
