@@ -2,10 +2,16 @@ const User_role = require('../../models/user_role.model')
 const { validationResult } = require('express-validator');
 module.exports = {
     "index": async (req , res ) =>{
+        const { page = 1, limit = 15 } = req.query;
         try
         {
-            const result = await User_role.find();
-            return res.render('admin/userRole/list',{result : JSON.parse(JSON.stringify(result)),title:'Add User Role',page_title_1:'User Role',page_title_2:'User',layout:'dashboard_layout', isUserRole: true})
+
+            const result = await User_role.find()
+            .limit(limit * 1)
+            .skip((page - 1) * limit)
+            .exec();
+            const count = await User_role.count();            
+            return res.render('admin/userRole/list',{result:JSON.parse(JSON.stringify(result)), current: parseInt(page), pages:Math.ceil(count / limit),title:'Add User Role',page_title_1:'User Role',page_title_2:'User',layout:'dashboard_layout', isUserRole: true})
         }
         catch (error) {
             console.log(error);

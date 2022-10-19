@@ -53,8 +53,8 @@
                 </tr>
               </thead>
               <tbody> 
-                {{#if properties}}
-                  {{#each properties }}
+                {{#if result}}
+                  {{#each result }}
                     <tr>
                       <td>
                         <div class="d-flex px-2 py-1">
@@ -121,6 +121,13 @@
             </table>
           </div>
         </div>
+          <div class="container">
+              <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                  {{#paginate current=current pages=pages}}{{/paginate}}
+                </ul>
+              </nav>
+            </div>
       </div>
     </div>
   </div>
