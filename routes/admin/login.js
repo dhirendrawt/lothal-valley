@@ -1,6 +1,6 @@
 var express = require('express')
 var router = express.Router() 
-var logincontroller = require('../controllers/login.controller')
+var logincontroller = require('../../controllers/admin/login.controller')
 var { body, validationResult } = require('express-validator');
 
 

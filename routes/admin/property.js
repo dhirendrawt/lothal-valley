@@ -1,12 +1,12 @@
 const express = require('express')
 const router = express.Router()
-const propertycontroller = require('../controllers/property.controller') 
+const propertycontroller = require('../../controllers/admin/property.controller') 
 const { check  } = require('express-validator')
 
 
 router.get('/',propertycontroller.index)
-router.get('/add',propertycontroller.addProperty)
-router.post('/add_new_property', [
+router.get('/add',propertycontroller.create)
+router.post('/add', [
     check('property_title').not().isEmpty(),
     check('area').not().isEmpty(),
     check('address').not().isEmpty(),
@@ -15,11 +15,11 @@ router.post('/add_new_property', [
     check('max_price').not().isEmpty(),
     check('description').not().isEmpty(),
     check('property_type').not().isEmpty()
-],  propertycontroller.add_new_property)
+],  propertycontroller.add)
 
-router.post('/delete_property',propertycontroller.delete_property),
-router.get('/edit_property/:id',propertycontroller.edit_property),
-router.post('/update_property', [
+router.post('/delete',propertycontroller.delete),
+router.get('/edit/:id',propertycontroller.create_edit),
+router.post('/update', [
     check('property_title').not().isEmpty(),
     check('area').not().isEmpty(),
     check('address').not().isEmpty(),
@@ -28,7 +28,7 @@ router.post('/update_property', [
     check('max_price').not().isEmpty(),
     check('description').not().isEmpty(),
     check('property_type').not().isEmpty()
-],propertycontroller.update_property)
+],propertycontroller.update)
 
 
 module.exports = router

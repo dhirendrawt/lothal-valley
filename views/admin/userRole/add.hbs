@@ -1,18 +1,18 @@
 <div class='container'>
 
-  <form action="/property_Type/propertyType_add" method="post">
+  <form action="/admin/user-role/add" method="post">
     <div class="input-group input-group-outline  focused is-focused my-3">
-      <label class="form-label">Property Type</label>
-      <input type="text" name="property_type" class="form-control is-invalid" 
+      <label class="form-label">User Role</label>
+      <input type="text" name="user_Role" class="form-control is-invalid" 
       value={{#if messages.form1}} 
               {{#each messages.form1 }} 
-                {{this.property_type_name}} 
+                {{this.user_Role}} 
               {{/each}} 
             {{/if}}>
       
         {{#if messages}}
-          {{#each messages.propery_type_error }}
-            {{#ifErrorCheck this "property_type"}}
+          {{#each messages.user_Role_error }}
+            {{#ifErrorCheck this "user_Role"}}
               <div class="invalid-feedback"> {{ this.msg }}</div>
             {{/ifErrorCheck}}
           {{/each}}

@@ -1,4 +1,4 @@
-var Users = require('../models/users.model');
+var Users = require('../../models/users.model');
 const bcrypt = require("bcrypt");
 var session = require('express-session');
 var { body, validationResult } = require('express-validator');
@@ -7,10 +7,10 @@ module.exports = {
     'login': (req, res) => {
 
         // console.log('login page');
-        res.render('login', { title: 'Login', message : req.flash('message')});
+        res.render('admin/login', { title: 'Login', message : req.flash('message')});
     },
     'forget_pwd': (req, res) => {
-        res.render('forgetPwd', { title: 'Forgot Password' });
+        res.render('admin/forgetPwd', { title: 'Forgot Password' });
     },
     'authentication': async (req, res) => {
         
@@ -36,7 +36,7 @@ module.exports = {
             const loggedinuser = await Users.find({ email: req.body.user_email });
 
            req.session.auth = loggedinuser;
-           return res.redirect('/dashboard');
+           return res.redirect('/admin/dashboard');
 
         } catch (error) {
             return {'message':error};

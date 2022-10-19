@@ -12,14 +12,14 @@
       <ul class="navbar-nav">
         <li class="nav-item">
           {{#if isdashboard }}
-          <a class="nav-link text-white active bg-gradient-primary" href="/dashboard">
+          <a class="nav-link text-white active bg-gradient-primary" href="/admin/dashboard">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">dashboard</i>
             </div>
             <span class="nav-link-text ms-1">Dashboard</span>
           </a>
           {{else}}
-          <a class="nav-link text-white" href="/dashboard">
+          <a class="nav-link text-white" href="/admin/dashboard">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">dashboard</i>
             </div>
@@ -29,14 +29,14 @@
         </li>
         <li class="nav-item">
           {{#if isproduct }}
-            <a class="nav-link text-white  active bg-gradient-primary"  href="/property">
+            <a class="nav-link text-white  active bg-gradient-primary"  href="/admin/property">
               <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                 <i class="material-icons opacity-10">table_view</i>
               </div>
               <span class="nav-link-text ms-1">Properties</span>
             </a>
           {{else}}
-             <a class="nav-link text-white"  href="/property">
+             <a class="nav-link text-white"  href="/admin/property">
               <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                 <i class="material-icons opacity-10">table_view</i>
               </div>
@@ -46,18 +46,35 @@
         </li>
         <li class="nav-item">
          {{#if isProperty }}
-          <a class="nav-link text-white  active bg-gradient-primary " href="/property-type">
+          <a class="nav-link text-white  active bg-gradient-primary " href="/admin/property-type">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">receipt_long</i>
             </div>
             <span class="nav-link-text ms-1">Property Type</span>
           </a>
         {{else}}
-          <a class="nav-link text-white " href="/property-type">
+          <a class="nav-link text-white " href="/admin/property-type">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">receipt_long</i>
             </div>
             <span class="nav-link-text ms-1">Property Type</span>
+          </a>
+        {{/if}}
+        </li>
+        <li class="nav-item">
+         {{#if isUserRole }}
+          <a class="nav-link text-white  active bg-gradient-primary " href="/admin/user-role">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">receipt_long</i>
+            </div>
+            <span class="nav-link-text ms-1">User Role</span>
+          </a>
+        {{else}}
+          <a class="nav-link text-white " href="/admin/user-role">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">receipt_long</i>
+            </div>
+            <span class="nav-link-text ms-1">User Role</span>
           </a>
         {{/if}}
         </li>
