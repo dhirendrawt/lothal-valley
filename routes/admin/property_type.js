@@ -3,8 +3,6 @@ const router = express.Router()
 const propertyTypecontroller = require('../../controllers/admin/property_type.controller');
 const { check  } = require('express-validator')
 
-
-
 router.get('/',propertyTypecontroller.index)
 router.get('/add',propertyTypecontroller.create)
 router.post('/add',

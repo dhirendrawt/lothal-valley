@@ -1,0 +1,148 @@
+<div class='container'>
+  <form action="/admin/property/add" method="post">
+    <div class="row">
+    <div class="col-md-6">
+        <div class="input-group input-group-outline mb-4">
+            <label class="form-label">First Name</label>
+            <input type="text"  name="first_name" 
+            class="form-control is-invalid form-control-part" 
+            value=   {{#if messages.form1}}
+                        {{#each messages.form1 }}
+                            {{this.property_title}}
+                        {{/each}}
+                    {{/if}} >
+
+                    {{#if messages}}
+                        {{#each messages.product_error }}
+                            {{#ifErrorCheck this "property_title"}}
+                                <div class="invalid-feedback">{{ this.msg }}</div>
+                            {{/ifErrorCheck}}
+                        {{/each}}
+                    {{/if}}
+        </div>
+    </div>
+        <div class="col-md-6">
+            <div class="input-group input-group-outline mb-4">
+                <label class="form-label">Last Name</label>
+                <input type="number"  name="last_name"
+                class="form-control is-invalid form-control-part"
+                value=  {{#if messages.form1}} 
+                            {{#each messages.form1 }}
+                                {{this.area}}
+                            {{/each}}
+                        {{/if}} >
+                    
+                        {{#if messages}}
+                            {{#each messages.product_error }}
+                                {{#ifErrorCheck this "area"}}
+                                    <div class="invalid-feedback">{{ this.msg }}</div>
+                                {{/ifErrorCheck}}
+                            {{/each}}
+                        {{/if}}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="input-group input-group-outline mb-4">
+                <span class="input-group-text" id="basic-addon1"><a href="/admin"></a></span>
+                <label class="form-label">Email</label>
+                <input type="text" name="email"
+                class="form-control is-invalid form-control-part"  aria-label="Username"
+                aria-describedby="basic-addon1"
+                value={{#if messages.form1}}
+                        {{#each messages.form1 }}
+                        {{this.address}}
+                        {{/each}}
+                    {{/if}} >
+                    
+                    {{#if messages}}
+                        {{#each messages.product_error }}
+                        {{#ifErrorCheck this "address"}}
+                            <div class="invalid-feedback">{{ this.msg }}</div>
+                        {{/ifErrorCheck}}
+                        {{/each}}
+                    {{/if}}
+            </div>
+        </div>
+      <div class="col-md-6">
+        <div class="input-group input-group-outline mb-4">
+          <label class="form-label">Mobile Number</label>
+          <input type="number" name="mobile_number" 
+           class="form-control is-invalid form-control-part"
+            value={{#if messages.form1}}
+                    {{#each messages.form1 }}
+                      {{this.amount}}
+                    {{/each}}
+                  {{/if}} >
+                  
+                  {{#if messages}}
+                    {{#each messages.product_error }}
+                      {{#ifErrorCheck this "amount"}}
+                        <div class="invalid-feedback">{{ this.msg }}</div>
+                      {{/ifErrorCheck}}
+                    {{/each}}
+                  {{/if}}
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="input-group input-group-outline mb-4">
+          <label class="form-label">Min Price</label>
+          <input type="number" name="min_price" 
+           class="form-control is-invalid form-control-part"
+            value={{#if messages.form1}}
+                    {{#each messages.form1 }}
+                      {{this.min_price}}
+                    {{/each}}
+                  {{/if}} >
+          
+                  {{#if messages}}
+                    {{#each messages.product_error }}
+                      {{#ifErrorCheck this "min_price"}}
+                        <div class="invalid-feedback">{{ this.msg }}</div>
+                      {{/ifErrorCheck}}
+                    {{/each}}
+                  {{/if}}
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="input-group input-group-outline mb-4">
+          <label class="form-label">Max Price</label>
+          <input type="number" name="max_price"
+           class="form-control is-invalid"
+            value={{#if messages.form1}}
+                    {{#each messages.form1 }}
+                      {{this.max_price}}
+                    {{/each}}
+                  {{/if}} >
+          
+                  {{#if messages}}
+                    {{#each messages.product_error }}
+                      {{#ifErrorCheck this "max_price"}}
+                        <div class="invalid-feedback">{{ this.msg }}</div>
+                      {{/ifErrorCheck}}
+                    {{/each}}
+                  {{/if}}
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="input-group input-group-outline mb-4">
+          <textarea name="description" placeholder="Description" class="form-control is-invalid ">{{#if messages}}{{#each messages.product_error }}{{#ifErrorCheck this "max_price"}}<div class="invalid-feedback">{{ this.msg }}</div>{{/ifErrorCheck}}{{/each}}{{/if}}</textarea>
+          {{#if messages}}
+            {{#each messages.product_error }}
+              {{#ifErrorCheck this "description"}}
+                <div class="invalid-feedback">{{ this.msg }}</div>
+              {{/ifErrorCheck}}
+            {{/each}}
+          {{/if}}
+        </div>
+      </div>
+    </div>
+    
+      
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>

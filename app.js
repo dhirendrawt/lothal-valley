@@ -15,6 +15,7 @@ const adminDashboardRouter = require('./routes/admin/dashboard');
 const adminPropertyRouter = require('./routes/admin/property');
 const adminPropertyTypeRouter = require('./routes/admin/property_type');
 const adminUserRoleRouter = require('./routes/admin/user_role');
+const adminUsersRouter = require('./routes/admin/users');
 
 const middelware = require('./middelwares/authentication.meddelwares');
 const Handlebars = require('handlebars');
@@ -61,16 +62,13 @@ app.use(session({
 }))
 app.use(flash())
 
-
-
 app.use('/', indexRouter);
 app.use('/admin', adminLoginRouter );
 app.use('/admin/dashboard',middelware.auth,adminDashboardRouter);
 app.use('/admin/property',middelware.auth,adminPropertyRouter);
 app.use('/admin/property-type',middelware.auth,adminPropertyTypeRouter);
 app.use('/admin/user-role',middelware.auth,adminUserRoleRouter);
-
-
+app.use('/admin/users',adminUsersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -92,4 +90,3 @@ app.use(function(err, req, res, next) {
 
 
 app.listen(port,()=>{console.log(`port running at ${port}`)})
-
