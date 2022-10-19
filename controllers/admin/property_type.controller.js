@@ -5,7 +5,7 @@ const { json } = require('express');
 module.exports = {
     "index": async (req , res , next) =>{
         try {
-            var result = await Property_type.find()
+            const result = await Property_type.find()
             if(!result)
             {
                 console.log('no data')
@@ -15,6 +15,8 @@ module.exports = {
         } 
         catch (error) {
             console.log(error);
+            req.flash('warning',' Something went wrong !');
+            return res.redirect('/admin/property_type');
         }
             
     },
@@ -39,15 +41,27 @@ module.exports = {
         })
         console.log("data : ",property_type);
         await property_type.save();
-         res.redirect("/admin/property-type");
+        req.flash('message','New record insert successfull !');
+        return res.redirect("/admin/property-type");
         
        } catch (error) {
-            console.log("Error : ",error);
-       }
+        console.log(error);
+            req.flash('warning',' Something went wrong !');
+            return res.redirect('/admin/property_type');
+        }
    },
    "delete" : async (req,res) =>{
-    await Property_type.deleteOne({ _id : req.body.id })
-    res.redirect('/admin/property-type')
+        try
+        {
+            await Property_type.deleteOne({ _id : req.body.id })
+            req.flash('message','Record delete successfull !');
+            return res.redirect('/admin/property-type')
+        }
+        catch (error) {
+            console.log(error);
+            req.flash('warning',' Something went wrong !');
+            return res.redirect('/admin/property_type');
+        }
     },
 
     "edit" : async(req,res) =>{
@@ -55,9 +69,9 @@ module.exports = {
         const id = req.params.id;
         if(req.query.isedit=='true'){
             var data = await Property_type.find({_id : id}); 
-            res.render('admin/property_type/edit',{data:JSON.parse(JSON.stringify(data)),title:'Add Property',page_title_1:'Property Type Add',page_title_2:'Property',layout:'dashboard_layout', isProperty: true})
+            return res.render('admin/property_type/edit',{data:JSON.parse(JSON.stringify(data)),title:'Add Property',page_title_1:'Property Type Add',page_title_2:'Property',layout:'dashboard_layout', isProperty: true})
         }else{
-            res.render('admin/property_type/edit',{data:JSON.parse(JSON.stringify([{_id:id}])),title:'Add Property',page_title_1:'Property Type Add',page_title_2:'Property',layout:'dashboard_layout', isProperty: true})
+            return res.render('admin/property_type/edit',{data:JSON.parse(JSON.stringify([{_id:id}])),title:'Add Property',page_title_1:'Property Type Add',page_title_2:'Property',layout:'dashboard_layout', isProperty: true})
         }
     },
     "update": async (req,res) =>{
@@ -69,20 +83,32 @@ module.exports = {
         }
         try {
             const id = req.params.id
-            var data = await Property_type.findOne({_id : id}); 
+            const data = await Property_type.findOne({_id : id}); 
             data.property_type_name = req.body.property_type_name;
             await data.save();
-            req.flash('Update sucessfull');
-            res.redirect('/admin/property-type');
-        } catch (error) {
-            res.send("somethis want's worng");
+            req.flash('message','Record update successfull !');
+            return res.redirect('/admin/property-type');
+        } 
+        catch (error) {
+            console.log(error);
+            req.flash('warning',' Something went wrong !');
+            return res.redirect('/admin/property_type');
         }
     },
     "status_change" : async (req,res) =>{
-        var id = req.params.id;
-        var data = await Property_type.findOne({_id : id});
-        data.status = !data.status;
-        await data.save();
-        return res.redirect('/admin/property-type')
-        },
+        const id = req.params.id;
+        try
+        {
+            const data = await Property_type.findOne({_id : id});
+            data.status = !data.status;
+            await data.save();
+            req.flash('message','Status update successfull !');
+            return res.redirect('/admin/property-type')
+        }
+        catch (error) {
+            console.log(error);
+            req.flash('warning',' Something went wrong !');
+            return res.redirect('/admin/property_type');
+        }
+    },
 }
