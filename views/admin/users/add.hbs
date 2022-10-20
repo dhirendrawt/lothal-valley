@@ -88,45 +88,45 @@
     </div>
     <div class="row">
       <div class="col-md-6">
-        <div class="input-group input-group-outline mb-4">
-          <label class="form-label">Min Price</label>
-          <input type="number" name="min_price" 
-           class="form-control is-invalid form-control-part"
-            value={{#if messages.form1}}
-                    {{#each messages.form1 }}
-                      {{this.min_price}}
-                    {{/each}}
-                  {{/if}} >
-          
-                  {{#if messages}}
-                    {{#each messages.product_error }}
-                      {{#ifErrorCheck this "min_price"}}
-                        <div class="invalid-feedback">{{ this.msg }}</div>
-                      {{/ifErrorCheck}}
-                    {{/each}}
-                  {{/if}}
-        </div>
+        <select name="property_type" class="form-control is-invalid" aria-label="Default select example">
+          <option  value="" selected>Select User Role:</option>
+            {{#if user_role}}
+              {{#each user_role}}
+                <option  value="{{this._id}}">{{this.user_role_name}}</option>
+              {{/each}}
+            {{/if}}
+        </select>
+        
+          {{#if messages}}
+            {{#each messages.product_error }}
+              {{#ifErrorCheck this "property_type"}}
+                <div class="invalid-feedback">{{ this.msg }}</div>
+              {{/ifErrorCheck}}
+            {{/each}}
+          {{/if}}
+        
       </div>
+
       <div class="col-md-6">
-        <div class="input-group input-group-outline mb-4">
-          <label class="form-label">Max Price</label>
-          <input type="number" name="max_price"
-           class="form-control is-invalid"
-            value={{#if messages.form1}}
-                    {{#each messages.form1 }}
-                      {{this.max_price}}
-                    {{/each}}
-                  {{/if}} >
-          
-                  {{#if messages}}
-                    {{#each messages.product_error }}
-                      {{#ifErrorCheck this "max_price"}}
-                        <div class="invalid-feedback">{{ this.msg }}</div>
-                      {{/ifErrorCheck}}
-                    {{/each}}
-                  {{/if}}
-        </div>
+        <select name="property_type" class="form-control is-invalid" aria-label="Default select example">
+          <option  value="" selected>Select State:</option>
+            {{#if state}}
+              {{#each state}}
+                <option  value="{{this._id}}">{{this.user_role_name}}</option>
+              {{/each}}
+            {{/if}}
+        </select>
+        
+          {{#if messages}}
+            {{#each messages.product_error }}
+              {{#ifErrorCheck this "property_type"}}
+                <div class="invalid-feedback">{{ this.msg }}</div>
+              {{/ifErrorCheck}}
+            {{/each}}
+          {{/if}}
+        
       </div>
+      
       <div class="col-md-6">
         <div class="input-group input-group-outline mb-4">
           <textarea name="description" placeholder="Description" class="form-control is-invalid ">{{#if messages}}{{#each messages.product_error }}{{#ifErrorCheck this "max_price"}}<div class="invalid-feedback">{{ this.msg }}</div>{{/ifErrorCheck}}{{/each}}{{/if}}</textarea>
