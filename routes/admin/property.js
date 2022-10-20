@@ -29,6 +29,8 @@ router.post('/update', [
     check('description').not().isEmpty(),
     check('property_type').not().isEmpty()
 ],propertycontroller.update)
+router.get('/searching',propertycontroller.searching);
+
 
 
 module.exports = router
