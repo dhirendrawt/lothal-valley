@@ -5,9 +5,9 @@ const { json } = require('express');
 
 module.exports = {
     "index" : async ( req , res ,next) => {
-        const { page = 1, limit = 15 } = req.query;
+        const { page = 1, limit = 15 ,amount = 0} = req.query;
         try { 
-            const result = await Property.find()
+            const result = await Property.find({amount : { $gt: amount }}).populate('property_type')
             .limit(limit * 1)
             .skip((page - 1) * limit)
             .exec();
@@ -83,9 +83,9 @@ module.exports = {
 
     "create_edit" : async (req,res) =>{
         const id = req.params.id;      
-        const data = await Property.findOne( { _id : id })
-        const property_type_id = data.property_type
-        const property_types = await Property_type.find({ 'status' : true })
+        const data = await Property.findOne( { _id : id });
+        const property_type_id = data.property_type;
+        const property_types = await Property_type.find({ 'status' : true });
         return res.render('admin/property/edit',{data : data , page_title_1 : 'Edit Property Details' , page_title_2 : 'Property Page' ,layout : 'dashboard_layout' , isproduct: true , property_types : property_types })
     },
 
@@ -125,8 +125,15 @@ module.exports = {
         //res.json({aksahy:"snkjdf"})
         const key = req.query.key;
         const { page = 1, limit = 15,} = req.query;
+        var re = new RegExp('^'+key+'',"i");
 
-        const result = await Property.find({property_title: { $regex: new RegExp(key, 'i')} })
+        const result = await Property.find({
+                        "$or":[
+                            {property_title: re},
+                            {address :re}
+                            ]
+                    })
+                .populate('property_type')
                 //.limit(limit * 1)
                 .skip((page - 1) * limit)
                 .exec();
