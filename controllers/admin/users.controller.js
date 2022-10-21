@@ -4,12 +4,20 @@ const UsersData = require('../../models/users_data.model')
 const { Schema } = require('mongoose')
 const { validationResult } = require('express-validator')
 
+
 module.exports = {
     'index' : async (req,res)=>{
         const user_role = await userRole.find({})
         const data = await states.find()
     
         res.render('admin/users/add',{title : 'Users Add Page',page_title_1:'Add Users Page' ,layout:'dashboard_layout', user_role:user_role , data:data , isUsers: true})
+    },
+
+    'list' : async (req,res)=>{
+        const user_data = await UsersData.find().populate('state').populate('user_role')
+        // console.log(user_data[0].state.districts);
+
+        res.render('admin/users/list',{title : 'Users Page',page_title_1:'Users Page',banner:'Users',city:4 ,data:user_data ,layout:'dashboard_layout' , isUsers: true})
     },
 
     'state_data' : async (req,res)=>{
