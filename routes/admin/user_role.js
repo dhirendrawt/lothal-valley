@@ -19,5 +19,6 @@ router.post('/edit/:id',
         check('user_role_name').not().isEmpty()
     ] ,
     user_roleController.update);
+router.get('/searching',user_roleController.searching);
 
 module.exports = router

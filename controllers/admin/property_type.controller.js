@@ -112,4 +112,17 @@ module.exports = {
             return res.redirect('/admin/property_type');
         }
     },
+    "searching" : async(req,res) =>{
+        //res.json({aksahy:"snkjdf"})
+        const key = req.query.key;
+        const { page = 1, limit = 15,} = req.query;
+
+        const result = await Property_type.find({property_type_name: { $regex: new RegExp(key, 'i')} })
+                //.limit(limit * 1)
+                .skip((page - 1) * limit)
+                .exec();
+        const count = await Property_type.find({property_type_name:{ $regex: new RegExp(key, 'i')} }).count();
+        res.json(({result : result, current: parseInt(page), pages:Math.ceil(count / limit)}));
+    }
+        
 }
