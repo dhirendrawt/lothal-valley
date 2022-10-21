@@ -103,7 +103,7 @@ app.use('/', indexRouter);
 app.use('/admin', adminLoginRouter );
 app.use('/admin/dashboard',middelware.auth,adminDashboardRouter);
 app.use('/admin/property',middelware.auth,adminPropertyRouter);
-app.use('/admin/property-type',middelware.auth,adminPropertyTypeRouter);
+app.use('/admin/property-type',middelware.auth,middelware.auth,adminPropertyTypeRouter);
 app.use('/admin/user-role',adminUserRoleRouter);
 
 

@@ -115,9 +115,13 @@ module.exports = {
     "searching" : async(req,res) =>{
         //res.json({aksahy:"snkjdf"})
         const key = req.query.key;
+        var re = new RegExp('^'+key+'',"i");
         const { page = 1, limit = 15,} = req.query;
-
-        const result = await Property_type.find({property_type_name: { $regex: new RegExp(key, 'i')} })
+        const result = await Property_type.find({
+                        "$or":[
+                            {property_type_name: re}
+                            ]
+                    })
                 //.limit(limit * 1)
                 .skip((page - 1) * limit)
                 .exec();

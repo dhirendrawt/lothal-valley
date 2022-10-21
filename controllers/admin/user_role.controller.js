@@ -112,17 +112,24 @@ module.exports = {
     },
 
     "searching" : async(req,res) =>{
-        //res.json({aksahy:"snkjdf"})
-        const key = req.query.key;
+        var key = req.query.key;
+        
+        var re = new RegExp('^'+key+'',"i");
+        console.log(re)
         const { page = 1, limit = 15,} = req.query;
-
-        const result = await User_role.find({user_role_name: { $regex: new RegExp(key, 'i')} })
+            const result = await User_role.find(
+                {
+                    "$or":[
+                        {user_role_name: re}
+                        ]
+                }
+            )
                 //.limit(limit * 1)
                 .skip((page - 1) * limit)
                 .exec();
-            const count = await User_role.find({user_role_name:{ $regex: new RegExp(key, 'i')} }).count();
-            
-           res.json(({result : result, current: parseInt(page), pages:Math.ceil(count / limit)}))
+        const count = await User_role.find({user_role_name:{ $regex: new RegExp(key, 'i')} }).count();
+        
+        res.json(({result : result, current: parseInt(page), pages:Math.ceil(count / limit)}))
         
     }
 }
