@@ -9,10 +9,12 @@ const UsersDataSchema = new Schema({
     email : String,
     mobile : Number,
     user_role : {
-        type : Schema.Types.ObjectId
+        type : Schema.Types.ObjectId,
+        ref : 'User_role'
     },
     state : {
-        type : Schema.Types.ObjectId
+        type : Schema.Types.ObjectId,
+        ref : 'state'
     },
     city : Number,
     description : String,

@@ -2,7 +2,7 @@
   <form action="/admin/users/add_user" method="post">
     <div class="row">
         <div class="col-md-6">
-            <div class="input-group  input-group-outline mb-4">
+            <div class="input-group  input-group-outline   mb-4">
                 <label class="form-label">First Name</label>
                 <input type="text"  name="first_name" 
                 class="form-control is-invalid form-control-part" 
@@ -22,7 +22,7 @@
             </div>
         </div>
         <div class="col-md-6">
-            <div class="input-group   input-group-outline mb-4">
+            <div class="input-group    input-group-outline mb-4">
                 <label class="form-label">Last Name</label>
                 <input type="text"  name="last_name"
                 class="form-control is-invalid form-control-part"
@@ -44,7 +44,7 @@
     </div>
     <div class="row">
         <div class="col-md-6">
-            <div class="input-group   input-group-outline mb-4">
+            <div class="input-group    input-group-outline mb-4">
                 <span class="input-group-text" id="basic-addon1"><a href="/admin"></a></span>
                 <label class="form-label">Email</label>
                 <input type="email" name="email"
@@ -66,13 +66,13 @@
             </div>
         </div>
       <div class="col-md-6">
-        <div class="input-group   input-group-outline mb-4">
+        <div class="input-group    input-group-outline mb-4">
           <label class="form-label">Mobile Number</label>
           <input type="number" name="mobile_number" 
            class="form-control is-invalid form-control-part"
             value={{#if messages.form1}}
-                    {{#each messages.mobile_number }}
-                      {{this.amount}}
+                    {{#each messages.form1 }}
+                      {{this.mobile_number}}
                     {{/each}}
                   {{/if}} >
                   
@@ -112,7 +112,6 @@
           <option  value="" selected>Select State:</option>
             {{#if data}}
               {{#each data}}
-                {{this}}
                 <option  value="{{this._id}}">{{this.state}}</option>
               {{/each}}
             {{/if}}
@@ -158,6 +157,7 @@
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
 </div>
+
 <script>
 
   function cities(){

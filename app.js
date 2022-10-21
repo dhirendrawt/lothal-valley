@@ -1,24 +1,24 @@
-const express = require('express');
-const path = require('path');
-const cookieParser = require('cookie-parser');
-const logger = require('morgan');
+const express = require('express')
+const path = require('path')
+const cookieParser = require('cookie-parser')
+const logger = require('morgan')
 const { create  }=require('express-handlebars')
 const session = require('express-session') 
 const mongoose = require('./mongoose')
 const flash = require('express-flash')
 
-const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
+const indexRouter = require('./routes/index')
+const usersRouter = require('./routes/users')
 
-const adminLoginRouter = require('./routes/admin/login');
-const adminDashboardRouter = require('./routes/admin/dashboard');
-const adminPropertyRouter = require('./routes/admin/property');
-const adminPropertyTypeRouter = require('./routes/admin/property_type');
-const adminUserRoleRouter = require('./routes/admin/user_role');
-const adminUsersRouter = require('./routes/admin/users');
+const adminLoginRouter = require('./routes/admin/login')
+const adminDashboardRouter = require('./routes/admin/dashboard')
+const adminPropertyRouter = require('./routes/admin/property')
+const adminPropertyTypeRouter = require('./routes/admin/property_type')
+const adminUserRoleRouter = require('./routes/admin/user_role')
+const adminUsersRouter = require('./routes/admin/users')
 
-const middelware = require('./middelwares/authentication.meddelwares');
-const Handlebars = require('handlebars');
+const middelware = require('./middelwares/authentication.meddelwares')
+const Handlebars = require('handlebars')
 const { allowInsecurePrototypeAccess } = require('@handlebars/allow-prototype-access');
 
 const app = express()
@@ -38,17 +38,17 @@ const hbs = create({
 
 
 
-app.engine('hbs', hbs.engine);
-app.set('views', './views');
-app.set('view engine', 'hbs');
+app.engine('hbs', hbs.engine)
+app.set('views', './views')
+app.set('view engine', 'hbs')
 
 const port = process.env.PORT || 80
 
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(logger('dev'))
+app.use(express.json())
+app.use(express.urlencoded({ extended: false }))
+app.use(cookieParser())
+app.use(express.static(path.join(__dirname, 'public')))
 app.use(session({
   secret : 'jdkbc87632823hbdcjsdc',
   keys: ['auth', 'user'],
@@ -62,30 +62,30 @@ app.use(session({
 }))
 app.use(flash())
 
-app.use('/', indexRouter);
-app.use('/admin', adminLoginRouter );
-app.use('/admin/dashboard',middelware.auth,adminDashboardRouter);
-app.use('/admin/property',middelware.auth,adminPropertyRouter);
-app.use('/admin/property-type',middelware.auth,adminPropertyTypeRouter);
-app.use('/admin/user-role',middelware.auth,adminUserRoleRouter);
-app.use('/admin/users',adminUsersRouter);
+app.use('/', indexRouter)
+app.use('/admin', adminLoginRouter )
+app.use('/admin/dashboard',middelware.auth,adminDashboardRouter)
+app.use('/admin/property',middelware.auth,adminPropertyRouter)
+app.use('/admin/property-type',middelware.auth,adminPropertyTypeRouter)
+app.use('/admin/user-role',middelware.auth,adminUserRoleRouter)
+app.use('/admin/users',adminUsersRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   //next(createError(404));
-  res.render('error');
+  res.render('error')
 });
 
 // error handler
 app.use(function(err, req, res, next) {
   console.log(err);
   // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+  res.locals.message = err.message
+  res.locals.error = req.app.get('env') === 'development' ? err : {}
 
   // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+  res.status(err.status || 500)
+  res.render('error')
 });
 
 
