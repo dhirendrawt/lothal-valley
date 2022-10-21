@@ -1,41 +1,75 @@
 <div class="container-fluid py-4">
-  {{#if messages.message}}
-  <div class="alert alert-success alert-dismissible text-white fade show" role="alert">
-        <span class="alert-icon align-middle">
-          <span class="material-icons text-md">
+  <div id="alert">
+    {{#if messages.message}}
+    <div class="alert alert-success alert-dismissible text-white fade show" role="alert">
+      <span class="alert-icon align-middle">
+        <span class="material-icons text-md">
           thumb_up_off_alt
-          </span>
         </span>
-        <span class="alert-text">{{messages.message}}</span>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-  {{/if}}
-  {{#if messages.warning}}
-  <div class="alert alert-danger alert-dismissible text-white fade show" role="alert">
-        <span class="alert-icon align-middle">
-          <span class="material-icons text-md">
-          thumb_up_off_alt
-          </span>
-        </span>
-        <span class="alert-text"><strong>Warning!</strong> This is a warning alert—check it out!</span>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
+      </span>
+      <span class="alert-text">{{messages.message}}</span>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
     </div>
     {{/if}}
+    {{#if messages.warning}}
+    <div class="alert alert-danger alert-dismissible text-white fade show" role="alert">
+      <span class="alert-icon align-middle">
+        <span class="material-icons text-md">
+          thumb_up_off_alt
+        </span>
+      </span>
+      <span class="alert-text"><strong>Warning!</strong> This is a warning alert—check it out!</span>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    {{/if}}
+  </div>
   <div class="row">
     <div class="col-12">
       <div class="card my-4">
         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-            <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+          <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
             <h6 class="text-white text-capitalize ps-3">Properties</h6>
-            <a  href="/admin/property/add"  class="btn btn-primary btn-rounded float-lg-end" style="margin-top:30px;">
-            Add Property
-            </a>
-            </div>
+
+          </div>
         </div>
+
+        <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur"
+          data-scroll="true">
+          <div class="container-fluid py-1 px-3">
+            <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+              <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+                <div class="input-group input-group-outline">
+                  <label class="form-label">Search here...</label>
+                  <input type="text" id="searching" class="form-control">
+                </div>
+              </div>
+              <div class="btn-group dropup  mt-5">
+                    <button type="button" class="btn bg-gradient-primary dropdown-toggle " data-bs-toggle="dropdown"
+                      aria-expanded="false">
+                      Filter
+                    </button>
+                    <ul class="dropdown-menu px-2 py-3" aria-labelledby="dropdownMenuButton">
+                      <li><a class="dropdown-item border-radius-md" href="http://localhost/admin/property">Reset</a></li>
+                      <li><a class="dropdown-item border-radius-md" href="http://localhost/admin/property?amount=10000">greater than 10K</a></li>
+                      <li><a class="dropdown-item border-radius-md" href="http://localhost/admin/property?amount=20000">greater than 20K</a></li>
+                      <li><a class="dropdown-item border-radius-md" href="http://localhost/admin/property?amount=50000">greater than 50K</a></li>
+                    </ul>
+                  </div>
+              <ul class="navbar-nav  justify-content-end">
+                <li class="nav-item d-flex align-items-center">
+                  <a href="/admin/property/add" class="btn btn-primary btn-rounded float-lg-end"
+                    style="margin-top:30px;">
+                    Add Property
+                  </a>
+                </li>
+              </ul>
+            </div>
+        </nav>
+
         <div class="card-body px-0 pb-2">
           <div class="table-responsive p-0">
             <table class="table align-items-center mb-0">
@@ -43,87 +77,199 @@
                 <tr>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Property Title</th>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Area</th>
-                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Address</th>
-                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Amount</th>
-                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Property Type</th>
-                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Minimum Price</th>
-                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Maximum Price</th>
-                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Description</th>
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Address
+                  </th>
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Amount
+                  </th>
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Property
+                    Type</th>
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Minimum
+                    Price</th>
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Maximum
+                    Price</th>
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                    Description</th>
                   <th class="text-left text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
                 </tr>
               </thead>
-              <tbody> 
-                {{#if properties}}
-                  {{#each properties }}
-                    <tr>
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div>
-                            <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
-                          </div>
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">{{this.property_title}}</h6>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <p class="text-xs font-weight-bold mb-0">{{this.area}}</p>
-                      </td>
-                      <td class="align-middle text-center text-sm">
-                        <p class="text-xs font-weight-bold mb-0">{{this.address}}</p>
-                      </td>
-                      <td class="align-middle text-center">
-                          <span class="badge badge-sm bg-gradient-primary">{{this.amount}}</span>
-                      </td>
-                      <td class="align-middle text-center">
-                          <span class="badge badge-sm bg-gradient-primary">{{this.property_type.property_type_name}}</span>
-                      </td>
-                      <td class="align-middle text-center">
-                          <span class="badge badge-sm bg-gradient-danger">{{this.min_price}}</span>
-                      </td>
-                      <td class="align-middle text-center">
-                          <span class="badge badge-sm bg-gradient-danger">{{this.max_price}}</span>
-                      </td>
-                      <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">{{this.description}}</span>
-                      </td>
-                      <td class="align-middle">
-                        <a type="button" class="badge badge-sm bg-gradient-warning" href="/admin/property/edit/{{this._id}}">
-                          Edit
-                        </a>
-                        <button type="button" class="badge badge-sm bg-gradient-warning" data-bs-toggle="modal" data-bs-target="#exampleModal{{this._id}}">
-                          Delete
-                        </button>
-                      </td>
-                    </tr>
-                    <form action="/admin/property/delete" method="post">
-                      <input type="hidden" name="property_id" value="{{this._id}}">
-                      <div class="modal fade" id="exampleModal{{this._id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Do you really want to delete this property?</h5>
+              <tbody>
+                {{#if result}}
+                {{#each result }}
+                <tr>
+                  <td>
+                    <div class="d-flex px-2 py-1">
+                      <div>
+                        <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
+                      </div>
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="mb-0 text-sm">{{this.property_title}}</h6>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <p class="text-xs font-weight-bold mb-0">{{this.area}}</p>
+                  </td>
+                  <td class="align-middle text-center text-sm">
+                    <p class="text-xs font-weight-bold mb-0">{{this.address}}</p>
+                  </td>
+                  <td class="align-middle text-center">
+                    <span class="badge badge-sm bg-gradient-primary">{{this.amount}}</span>
+                  </td>
+                  <td class="align-middle text-center">
+                    <span class="badge badge-sm bg-gradient-primary">{{this.property_type.property_type_name}}</span>
+                  </td>
+                  <td class="align-middle text-center">
+                    <span class="badge badge-sm bg-gradient-danger">{{this.min_price}}</span>
+                  </td>
+                  <td class="align-middle text-center">
+                    <span class="badge badge-sm bg-gradient-danger">{{this.max_price}}</span>
+                  </td>
+                  <td class="align-middle text-center">
+                    <span class="text-secondary text-xs font-weight-bold">{{this.description}}</span>
+                  </td>
+                  <td class="align-middle">
+                    <a type="button" class="badge badge-sm bg-gradient-warning"
+                      href="/admin/property/edit/{{this._id}}">
+                      Edit
+                    </a>
+                    <button type="button" class="badge badge-sm bg-gradient-warning" data-bs-toggle="modal"
+                      data-bs-target="#exampleModal{{this._id}}">
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+                <div class="delete">
+                  <form action="/admin/property/delete" method="post">
+                    <input type="hidden" name="property_id" value="{{this._id}}">
+                    <div class="modal fade" id="exampleModal{{this._id}}" tabindex="-1" role="dialog"
+                      aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Do you really want to delete this property?
+                            </h5>
                             <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
+                              <span aria-hidden="true">&times;</span>
                             </button>
-                            </div>
-                            <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >NO</button>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">NO</button>
                             <button type="submit" class="btn btn-primary">YES</button>
-                            </div>
                           </div>
                         </div>
                       </div>
-                    </form>
-                  {{/each}}
+                    </div>
+                  </form>
+                </div>
+                {{/each}}
                 {{/if}}
               </tbody>
             </table>
           </div>
+        </div>
+        <div class="container" id="pagination">
+          <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+              {{#paginate current=current pages=pages}}{{/paginate}}
+            </ul>
+          </nav>
         </div>
       </div>
     </div>
   </div>
 </div>
 
+<script>
+  $(document).ready(function () {
+    //$("#alert").delay(100000).hide();
+    setTimeout("$('#alert').hide();", 5000);
 
+    $("#searching").on('keyup', function (e) {
+      $('tbody').empty();
+      $('#pagination').empty();
+      console.log(this.value);
+      $.ajax({
+        url: "/admin/property/searching?key=" + this.value,
+        method: 'get',
+        dataType: "json",
+        success: function (res) {
+          const result = res;
+          console.log(result.result);
+          var data = result.result;
+          console.log("data :", data)
+
+          for (let i = 0; i < data.length; i++) {
+            console.log(data[i].property_title);
+
+            var html1 = `<tr>
+                              <td>
+                              <div class="d-flex px-2 py-1">
+                                <div>
+                                  <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
+                                </div>
+                                <div class="d-flex flex-column justify-content-center">
+                                  <h6 class="mb-0 text-sm">`+ data[i].property_title + `</h6>
+                                </div>
+                              </div>
+                            </td>`;
+
+
+            html1 += `<td>
+                              <p class="text-xs font-weight-bold mb-0">`+ data[i].area + `</p>
+                            </td>`;
+
+            html1 += `<td class="align-middle text-center text-sm">
+                              <p class="text-xs font-weight-bold mb-0">`+ data[i].address + `</p>
+                            </td>`;
+
+            html1 += `<td class="align-middle text-center">
+                              <span class="badge badge-sm bg-gradient-primary">`+ data[i].amount + `</span>
+                          </td>`;
+            html1 += `<td class="align-middle text-center">
+                              <span class="badge badge-sm bg-gradient-primary">`+ data[i].property_type.property_type_name + `</span>
+                          </td>`;
+            html1 += `<td class="align-middle text-center">
+                              <span class="badge badge-sm bg-gradient-danger">`+ data[i].min_price + `</span>
+                          </td>`;
+            html1 += `<td class="align-middle text-center">
+                              <span class="badge badge-sm bg-gradient-danger">`+ data[i].max_price + `</span>
+                          </td>`;
+            html1 += `<td class="align-middle text-center">
+                            <span class="text-secondary text-xs font-weight-bold">`+ data[i].description + `</span>
+                          </td>`;
+
+            html1 += ` </td>
+                      <td class="align-middle">
+                        <a type="button" class="badge badge-sm bg-gradient-warning" href="/admin/property/edit/`+ data[i]._id + `?isedit=true">
+                          Edit</a>
+                        <button type="button" class="badge badge-sm bg-gradient-warning" data-bs-toggle="modal" data-bs-target="#exampleModal`+ data[i]._id + `">
+                          Delete</button>
+                      </td>
+                    </tr>`;
+            html1 += `<form action="http://localhost/admin/property/delete" method="post">
+                      <input type="hidden" name="id" value="`+ data[i]._id + `">
+                      <div class="modal fade" id="exampleModal`+ data[i]._id + `" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Do you really want to delete this property Type?</h5>
+                              <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >NO</button>
+                              <button type="submit" class="btn btn-primary">YES</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      </form>`;
+            $('tbody').append(html1);
+          }
+        }
+
+      })
+    })
+  });
+</script>

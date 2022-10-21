@@ -19,5 +19,6 @@ router.post('/edit/:id',
     ]
     ,propertyTypecontroller.update)
 router.get('/status_change/:id',propertyTypecontroller.status_change);
+router.get('/searching',propertyTypecontroller.searching);
 
 module.exports = router

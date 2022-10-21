@@ -4,13 +4,14 @@ const { json } = require('express');
 
 module.exports = {
     "index": async (req , res , next) =>{
+        const { page = 1, limit = 15 } = req.query;
         try {
             const result = await Property_type.find()
-            if(!result)
-            {
-                console.log('no data')
-            }
-            return res.render('admin/property_type/list',{result : result,title:'Add Property',page_title_1:'Property Type',page_title_2:'Property',layout:'dashboard_layout', isProperty: true})
+            .limit(limit * 1)
+            .skip((page - 1) * limit)
+            .exec();
+            const count = await Property_type.count();
+            return res.render('admin/property_type/list',{result:JSON.parse(JSON.stringify(result)), current: parseInt(page), pages:Math.ceil(count / limit),title:'Add Property',page_title_1:'Property Type',page_title_2:'Property',layout:'dashboard_layout', isProperty: true})
         
         } 
         catch (error) {
@@ -111,4 +112,21 @@ module.exports = {
             return res.redirect('/admin/property_type');
         }
     },
+    "searching" : async(req,res) =>{
+        //res.json({aksahy:"snkjdf"})
+        const key = req.query.key;
+        var re = new RegExp('^'+key+'',"i");
+        const { page = 1, limit = 15,} = req.query;
+        const result = await Property_type.find({
+                        "$or":[
+                            {property_type_name: re}
+                            ]
+                    })
+                //.limit(limit * 1)
+                .skip((page - 1) * limit)
+                .exec();
+        const count = await Property_type.find({property_type_name:{ $regex: new RegExp(key, 'i')} }).count();
+        res.json(({result : result, current: parseInt(page), pages:Math.ceil(count / limit)}));
+    }
+        
 }
