@@ -11,9 +11,10 @@ check('last_name').not().isEmpty(),
 check('email').not().isEmpty(),
 check('mobile_number').not().isEmpty(),
 check('user_role').not().isEmpty(),
-check('state_id').not().isEmpty(),
+check('state').not().isEmpty(),
 check('city').not().isEmpty(),
 check('description').not().isEmpty()]
-,usersController.add_user)
+,usersController.add_user),
+router.post('/delete',usersController.delete)
 
 module.exports = router

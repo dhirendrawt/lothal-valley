@@ -2,11 +2,14 @@ const Property = require('../../models/property.model')
 const Property_type = require('../../models/property_type.model')
 const { validationResult } = require('express-validator');
 const { json } = require('express');
+const { uploadFile , downloadFile } = require('../../S3Bucket')
+
 
 module.exports = {
     "index" : async ( req , res ,next) => {
         try {        
             const property_data= await Property.find().populate('property_type')
+
             return res.render('admin/property/list', {title:'Property',page_title_1:'Property Page',page_title_2:'Property',layout:'dashboard_layout', properties: property_data, isproduct: true})
         } catch (error) {
             console.log(error);
@@ -23,7 +26,9 @@ module.exports = {
     },
     
     "add" : async (req,res,next)=>{
-        
+
+        const image = req.file
+        console.log(image);
         const error = validationResult(req)
      
         if(error.errors.length > 0){
@@ -52,11 +57,17 @@ module.exports = {
                 max_price : req.body.max_price ,
                 description : req.body.description ,
                 property_type : req.body.property_type
+                
             })
             
             await property.save(); 
+
+            const result = await uploadFile(image)
+            console.log('s3 result is -->'+JSON.stringify(result));
+
             req.flash('message','New record insert successfull !');  
             return res.redirect('/admin/property') 
+
         } catch (error) {
             console.log(error);
             req.flash('warning',' Something went wrong !');

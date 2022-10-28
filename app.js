@@ -37,12 +37,12 @@ const hbs = create({
 });
 
 
-
 app.engine('hbs', hbs.engine)
 app.set('views', './views')
 app.set('view engine', 'hbs')
 
 const port = process.env.PORT || 80
+
 
 app.use(logger('dev'))
 app.use(express.json())
@@ -64,9 +64,9 @@ app.use(flash())
 
 app.use('/', indexRouter)
 app.use('/admin', adminLoginRouter )
-app.use('/admin/dashboard',middelware.auth,adminDashboardRouter)
-app.use('/admin/property',middelware.auth,adminPropertyRouter)
-app.use('/admin/property-type',middelware.auth,adminPropertyTypeRouter)
+app.use('/admin/dashboard',adminDashboardRouter)
+app.use('/admin/property',adminPropertyRouter)
+app.use('/admin/property-type',adminPropertyTypeRouter)
 app.use('/admin/user-role',middelware.auth,adminUserRoleRouter)
 app.use('/admin/users',adminUsersRouter)
 
