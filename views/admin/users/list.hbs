@@ -82,13 +82,13 @@
                           <span class="badge badge-sm bg-gradient-danger">{{data.state.state}} </span>
                       </td>
                       <td class="align-middle text-center">
-                          <span class="badge badge-sm bg-gradient-danger">{{data.state.districts.[0]}}</span>
+                          <span class="badge badge-sm bg-gradient-danger">{{data.state.districts.[1]}}</span>
                       </td>
                       <td class="align-middle text-center">
                         <span class="text-secondary text-xs font-weight-bold">{{data.city}}</span>
                       </td>
                       <td class="align-middle">
-                        <a type="button" class="badge badge-sm bg-gradient-warning" href="/admin/property/edit/{{this._id}}">
+                        <a type="button" class="badge badge-sm bg-gradient-warning" href="/admin/users/edit/{{this._id}}">
                           Edit
                         </a>
                         <button type="button" class="badge badge-sm bg-gradient-warning" data-bs-toggle="modal" data-bs-target="#exampleModal{{this._id}}">
@@ -96,13 +96,13 @@
                         </button>
                       </td>
                     </tr>
-                    <form action="/admin/property/delete" method="post">
-                      <input type="hidden" name="property_id" value="{{this._id}}">
+                    <form action="/admin/users/delete" method="post">
+                      <input type="hidden" name="user_id" value="{{this._id}}">
                       <div class="modal fade" id="exampleModal{{this._id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                           <div class="modal-content">
                             <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Do you really want to delete this property?</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Do you really want to delete this User?</h5>
                             <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                             </button>

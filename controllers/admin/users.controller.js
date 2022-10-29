@@ -29,6 +29,8 @@ module.exports = {
     
     'add_user' : async (req,res)=>{
 
+        console.log(req.body.state_id);
+
         const error = validationResult(req); 
 
         if(error.errors.length > 0){
@@ -44,7 +46,7 @@ module.exports = {
             }]);
             console.log(error.errors);
             req.flash('product_error',error.errors)
-            return res.redirect('/admin/users')
+            return res.redirect('/admin/users/add_user_page')
         }
 
         await UsersData.create({
@@ -60,5 +62,11 @@ module.exports = {
         })
 
         return res.redirect('/admin/dashboard')
+    },
+    'delete' : async ( req , res ) => {
+        // console.log(req.body.user_id);
+        await UsersData.deleteOne({ _id : req.body.user_id })
+        req.flash('message','Record delete successfull !');
+        return res.redirect('/admin/users')
     }
 }
