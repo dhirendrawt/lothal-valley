@@ -7,10 +7,14 @@ const { uploadFile , downloadFile } = require('../../S3Bucket')
 
 module.exports = {
     "index" : async ( req , res ,next) => {
-        try {        
-            const property_data= await Property.find().populate('property_type')
-
-            return res.render('admin/property/list', {title:'Property',page_title_1:'Property Page',page_title_2:'Property',layout:'dashboard_layout', properties: property_data, isproduct: true})
+        const { page = 1, limit = 15 ,amount = 0} = req.query;
+        try { 
+            const result = await Property.find({amount : { $gt: amount }}).populate('property_type')
+            .limit(limit * 1)
+            .skip((page - 1) * limit)
+            .exec();
+            const count = await Property.count();
+            return res.render('admin/property/list', {result : JSON.parse(JSON.stringify(result)), current: parseInt(page), pages:Math.ceil(count / limit), title:'Property',page_title_1:'Property Page',page_title_2:'Property',layout:'dashboard_layout',  isproduct: true});
         } catch (error) {
             console.log(error);
             req.flash('warning',' Something went wrong !');
@@ -89,9 +93,9 @@ module.exports = {
 
     "create_edit" : async (req,res) =>{
         const id = req.params.id;      
-        const data = await Property.findOne( { _id : id })
-        const property_type_id = data.property_type
-        const property_types = await Property_type.find({ 'status' : true })
+        const data = await Property.findOne( { _id : id });
+        const property_type_id = data.property_type;
+        const property_types = await Property_type.find({ 'status' : true });
         return res.render('admin/property/edit',{data : data , page_title_1 : 'Edit Property Details' , page_title_2 : 'Property Page' ,layout : 'dashboard_layout' , isproduct: true , property_types : property_types })
     },
 
@@ -126,6 +130,27 @@ module.exports = {
             return res.redirect('/admin/property');
         }    
 
+    },
+    "searching" : async(req,res) =>{
+        //res.json({aksahy:"snkjdf"})
+        const key = req.query.key;
+        const { page = 1, limit = 15,} = req.query;
+        var re = new RegExp('^'+key+'',"i");
+
+        const result = await Property.find({
+                        "$or":[
+                            {property_title: re},
+                            {address :re}
+                            ]
+                    })
+                .populate('property_type')
+                //.limit(limit * 1)
+                .skip((page - 1) * limit)
+                .exec();
+            const count = await Property.find({property_title:{ $regex: new RegExp(key, 'i')} }).count();
+            
+           res.json(({result : result, current: parseInt(page), pages:Math.ceil(count / limit)}))
+        
     }
     
 }
