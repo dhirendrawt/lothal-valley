@@ -2,8 +2,11 @@ const Property = require('../../models/property.model')
 const Property_type = require('../../models/property_type.model')
 const { validationResult } = require('express-validator');
 const { json } = require('express');
-const { uploadFile , downloadFile } = require('../../S3Bucket')
-
+// const { uploadFile , downloadFile } = require('../../S3Bucket')
+const ImageModel = require('../../models/image.model')
+const fs = require('fs')
+const path = require('path')
+const dirname = require('../../dirname')
 
 module.exports = {
     "index" : async ( req , res ,next) => {
@@ -39,8 +42,8 @@ module.exports = {
                 "amount" : req.body.amount ,
                 "min_price" : req.body.min_price ,
                 "max_price" : req.body.max_price ,
-                "description" : req.body.description,
-                "property_type" : req.body.property_type
+                "description" : req.body.description ,
+                "property_type" : req.body.property_type 
             }]);
             console.log(error.errors);
             req.flash('product_error',error.errors)
@@ -48,6 +51,18 @@ module.exports = {
         }
       
         try {
+            
+            const base64_image = base64_encode(req.file)
+
+            // function to encode file data to base64 encoded string
+            function base64_encode(image) {
+                // read binary data
+                var bitmap = fs.readFileSync(path.join(dirname + '/uploads/' + req.file.filename));
+                // convert binary data to base64 encoded string
+                return new Buffer(bitmap).toString('base64');
+            }
+
+
             const property = new Property({
                 property_title : req.body.property_title ,
                 area : req.body.area ,
@@ -56,15 +71,13 @@ module.exports = {
                 min_price : req.body.min_price ,
                 max_price : req.body.max_price ,
                 description : req.body.description ,
-                property_type : req.body.property_type
+                property_type : req.body.property_type ,
+                image : base64_image
                 
             })
             
             await property.save(); 
-
-            const result = await uploadFile(image)
-            console.log('s3 result is -->'+JSON.stringify(result));
-
+            
             req.flash('message','New record insert successfull !');  
             return res.redirect('/admin/property') 
 

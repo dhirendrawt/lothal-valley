@@ -32,6 +32,7 @@ const hbs = create({
         return (a.param == b) ? option.fn(a) : option.inverse(a); 
       },
       loud: (obj) => {return JSON.stringify(obj)}
+      
   },
    handlebars: allowInsecurePrototypeAccess(Handlebars)
 });
