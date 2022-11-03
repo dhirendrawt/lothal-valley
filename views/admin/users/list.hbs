@@ -104,13 +104,16 @@
                           <span class="badge badge-sm bg-gradient-danger">{{data.state.state}} </span>
                       </td>
                       <td class="align-middle text-center">
+
                           <span class="badge badge-sm bg-gradient-danger">{{#findCity data.state.districts data.city}}{{this}}{{/findCity}}</span>
                       </td>
                       <td class="align-middle text-center">
                         <span class="text-secondary text-xs font-weight-bold">{{data.description}}</span>
                       </td>
                       <td class="align-middle">
+
                         <a type="button" class="badge badge-sm bg-gradient-warning" href="/admin/users/edit/{{this._id}}?isedit=true">
+
                           Edit
                         </a>
                         <button type="button" class="badge badge-sm bg-gradient-warning" data-bs-toggle="modal" data-bs-target="#exampleModal{{this._id}}">
@@ -118,6 +121,7 @@
                         </button>
                       </td>
                     </tr>
+
                     <div class="delete">
                     <form action="/admin/users/delete" method="post">
                       <input type="hidden" name="id" value="{{this._id}}">
@@ -125,7 +129,7 @@
                         <div class="modal-dialog" role="document">
                           <div class="modal-content">
                             <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Do you really want to delete this property?</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Do you really want to delete this User?</h5>
                             <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                             </button>

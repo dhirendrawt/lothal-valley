@@ -42,6 +42,8 @@ module.exports = {
     
     'add' : async (req,res)=>{
 
+        console.log(req.body.state_id);
+
         const error = validationResult(req); 
 
         if(error.errors.length > 0){
@@ -55,8 +57,10 @@ module.exports = {
                 "city" : req.body.city,
                 "description" : req.body.description
             }]);
+
             req.flash('user_error',error.errors)
             return res.redirect('/admin/users/add')
+
         }
         try {
             
@@ -160,5 +164,14 @@ module.exports = {
         } catch (error) {
             console.log(error);
         }
+        })
+
+        return res.redirect('/admin/dashboard')
+    },
+    'delete' : async ( req , res ) => {
+        // console.log(req.body.user_id);
+        await UsersData.deleteOne({ _id : req.body.user_id })
+        req.flash('message','Record delete successfull !');
+        return res.redirect('/admin/users')
     }
 }
