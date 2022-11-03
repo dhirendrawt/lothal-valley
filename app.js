@@ -31,8 +31,47 @@ const hbs = create({
       ifErrorCheck: (a, b, option) => { 
         return (a.param == b) ? option.fn(a) : option.inverse(a); 
       },
-      loud: (obj) => {return JSON.stringify(obj)}
-      
+      loud: (obj) => {return JSON.stringify(obj)},
+
+      findCity: (a,b,option) => {
+        return (a[b] ? option.fn(a[b]):option.inverse(a))
+      },
+
+      paginate: function(options){
+        let output = "";
+
+        if(options.hash.current === 1){
+            output += `<li class="page-item disabled"><a class="page-link">F</a></li>`;
+        }else{
+            output += `<li class="page-item"><a href="?page=1" class="page-link">F</a></li>`;
+        }
+
+        let i = (Number(options.hash.current) > 5 ? Number(options.hash.current) - 4 : 1);
+
+        if(i !== 1){
+            output += `<li class="page-item disabled"><a class="page-link">....</a></li>`;
+        }
+
+        for(; i <= (Number(options.hash.current) + 4) && i <= options.hash.pages; i++){
+            if(i === options.hash.current){
+                output += `<li class="page-item active"><a class="page-link">${i}</a></li>`;
+            }else{
+                output += `<li class="page-item"><a href="?page=${i}" class="page-link">${i}</a></li>`;
+            }
+            if(i === Number(options.hash.current) + 4 && i < options.hash.pages){
+                output += `<li class="page-item disabled"><a class="page-link">....</a></li>`;
+            }
+        }
+
+        if(options.hash.current === options.hash.pages){
+            output += `<li class="page-item disabled"><a class="page-link">L</a></li>`;
+        }else{
+            output += `<li class="page-item"><a href="?page=${options.hash.pages}" class="page-link">L</a></li>`;
+        }
+
+        return output;
+    }
+
   },
    handlebars: allowInsecurePrototypeAccess(Handlebars)
 });
@@ -63,6 +102,7 @@ app.use(session({
 }))
 app.use(flash())
 
+
 app.use('/', indexRouter)
 app.use('/admin', adminLoginRouter )
 app.use('/admin/dashboard',adminDashboardRouter)
@@ -70,6 +110,7 @@ app.use('/admin/property',adminPropertyRouter)
 app.use('/admin/property-type',adminPropertyTypeRouter)
 app.use('/admin/user-role',middelware.auth,adminUserRoleRouter)
 app.use('/admin/users',adminUsersRouter)
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
