@@ -2,8 +2,11 @@ const Property = require('../../models/property.model')
 const Property_type = require('../../models/property_type.model')
 const { validationResult } = require('express-validator');
 const { json } = require('express');
-const { uploadFile , downloadFile } = require('../../S3Bucket')
-
+// const { uploadFile , downloadFile } = require('../../S3Bucket')
+const ImageModel = require('../../models/image.model')
+const fs = require('fs')
+const path = require('path')
+const dirname = require('../../dirname')
 
 module.exports = {
     "index" : async ( req , res ,next) => {
@@ -31,8 +34,9 @@ module.exports = {
     
     "add" : async (req,res,next)=>{
 
-        const image = req.file
+        const image = req.files
         console.log(image);
+        
         const error = validationResult(req)
      
         if(error.errors.length > 0){
@@ -43,8 +47,8 @@ module.exports = {
                 "amount" : req.body.amount ,
                 "min_price" : req.body.min_price ,
                 "max_price" : req.body.max_price ,
-                "description" : req.body.description,
-                "property_type" : req.body.property_type
+                "description" : req.body.description ,
+                "property_type" : req.body.property_type 
             }]);
             console.log(error.errors);
             req.flash('product_error',error.errors)
@@ -52,6 +56,30 @@ module.exports = {
         }
       
         try {
+            // const image_array = []
+        //     image.forEach(x=>{console.log("foreach"+JSON.stringify(x));
+        //     base64_encode(x)
+        // })
+
+            const image_array = image.map(base64_encode)
+
+            console.log(image_array);
+
+            // const base64_image = base64_encode(image)
+
+            // function to encode file data to base64 encoded string
+            
+            function base64_encode(image) {
+                // read binary data
+                console.log('data in base 64 is--'+JSON.stringify(image.filename));
+                var bitmap = fs.readFileSync(path.join(dirname + '/uploads/' + image.filename));
+                // // convert binary data to base64 encoded string
+                const data = new Buffer(bitmap).toString('base64');
+                
+            }
+
+            console.log('final array is --'+image_array);
+
             const property = new Property({
                 property_title : req.body.property_title ,
                 area : req.body.area ,
@@ -60,15 +88,13 @@ module.exports = {
                 min_price : req.body.min_price ,
                 max_price : req.body.max_price ,
                 description : req.body.description ,
-                property_type : req.body.property_type
+                property_type : req.body.property_type ,
+                image : base64_image
                 
             })
             
             await property.save(); 
-
-            const result = await uploadFile(image)
-            console.log('s3 result is -->'+JSON.stringify(result));
-
+            
             req.flash('message','New record insert successfull !');  
             return res.redirect('/admin/property') 
 

@@ -158,80 +158,40 @@
           {{/if}}
       </div>
       <div class="col-md-12">
-        <div class="fileinput fileinput-new text-center" data-provides="fileinput">
-            <div class="fileinput-new thumbnail img-circle img-raised">
-              <img src="https://epicattorneymarketing.com/wp-content/uploads/2016/07/Headshot-Placeholder-1.png" rel="nofollow" alt="...">
+        <div class="d-flex justify-content-between ">
+            <div class="custom-file mb-3">
+                <input type="file" class="custom-file-input is-invalid" id="customFile" name="image" multiple>
+                <label class="custom-file-label" for="customFile"></label>
+                {{#if messages}}
+                  {{#each messages.product_error }}
+                    {{#ifErrorCheck this "image"}}
+                      <div class="invalid-feedback">{{ this.msg }}</div>
+                    {{/ifErrorCheck}}
+                  {{/each}}
+                {{/if}}
             </div>
-            <div class="fileinput-preview fileinput-exists thumbnail img-circle img-raised"></div>
-            <div>
-              <span class="btn btn-raised btn-round btn-rose btn-file">
-              <span class="fileinput-new">Add Picture</span>
-              <span class="fileinput-exists">Change</span>
-              <input type="file" name="image" /></span>
-              <br />
-              <a href="javascript:;" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
+            {{!-- <div class="custom-file mb-3">
+                <input type="file" class="custom-file-input" id="customFile" name="image1">
+                <label class="custom-file-label" for="customFile"></label>
             </div>
-        </div>
-        {{!-- <div class="fileinput fileinput-new text-center" data-provides="fileinput">
-            <div class="fileinput-new thumbnail img-circle img-raised">
-              <img src="https://epicattorneymarketing.com/wp-content/uploads/2016/07/Headshot-Placeholder-1.png" rel="nofollow" alt="...">
+            <div class="custom-file mb-3">
+                <input type="file" class="custom-file-input" id="customFile" name="image2">
+                <label class="custom-file-label" for="customFile"></label>
             </div>
-            <div class="fileinput-preview fileinput-exists thumbnail img-circle img-raised"></div>
-            <div>
-              <span class="btn btn-raised btn-round btn-rose btn-file">
-              <span class="fileinput-new">Add Picture</span>
-              <span class="fileinput-exists">Change</span>
-              <input type="file" name="..." /></span>
-              <br />
-              <a href="javascript:;" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
-            </div>
-        </div>
-        <div class="fileinput fileinput-new text-center" data-provides="fileinput">
-            <div class="fileinput-new thumbnail img-circle img-raised">
-              <img src="https://epicattorneymarketing.com/wp-content/uploads/2016/07/Headshot-Placeholder-1.png" rel="nofollow" alt="...">
-            </div>
-            <div class="fileinput-preview fileinput-exists thumbnail img-circle img-raised"></div>
-            <div>
-              <span class="btn btn-raised btn-round btn-rose btn-file">
-              <span class="fileinput-new">Add Picture</span>
-              <span class="fileinput-exists">Change</span>
-              <input type="file" name="..." /></span>
-              <br />
-              <a href="javascript:;" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
-            </div>
-        </div>
-        <div class="fileinput fileinput-new text-center" data-provides="fileinput">
-            <div class="fileinput-new thumbnail img-circle img-raised">
-              <img src="https://epicattorneymarketing.com/wp-content/uploads/2016/07/Headshot-Placeholder-1.png" rel="nofollow" alt="...">
-            </div>
-            <div class="fileinput-preview fileinput-exists thumbnail img-circle img-raised"></div>
-            <div>
-              <span class="btn btn-raised btn-round btn-rose btn-file">
-              <span class="fileinput-new">Add Picture</span>
-              <span class="fileinput-exists">Change</span>
-              <input type="file" name="..." /></span>
-              <br />
-              <a href="javascript:;" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
-            </div>
-        </div>
-        <div class="fileinput fileinput-new text-center" data-provides="fileinput">
-            <div class="fileinput-new thumbnail img-circle img-raised">
-              <img src="https://epicattorneymarketing.com/wp-content/uploads/2016/07/Headshot-Placeholder-1.png" rel="nofollow" alt="...">
-            </div>
-            <div class="fileinput-preview fileinput-exists thumbnail img-circle img-raised"></div>
-            <div>
-              <span class="btn btn-raised btn-round btn-rose btn-file">
-              <span class="fileinput-new">Add Picture</span>
-              <span class="fileinput-exists">Change</span>
-              <input type="file" name="..." /></span>
-              <br />
-              <a href="javascript:;" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
-            </div>
-        </div> --}}
+            <div class="custom-file mb-3">
+                <input type="file" class="custom-file-input" id="customFile" name="image3">
+                <label class="custom-file-label" for="customFile"></label>
+            </div> --}}
+        </div>  
       </div>
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
 </div>
-
+<script>
+  $(".custom-file-input").on("change", function() {
+  var fileName = $(this).val().split("\\").pop();
+  $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+});
+</script>
 
 
