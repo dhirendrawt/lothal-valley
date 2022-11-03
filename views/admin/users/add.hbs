@@ -1,5 +1,5 @@
 <div class='container'>
-  <form action="/admin/users/add_user" method="post">
+  <form action="/admin/users/add" method="post">
     <div class="row">
         <div class="col-md-6">
             <div class="input-group  input-group-outline   mb-4">
@@ -13,7 +13,7 @@
                         {{/if}} >
 
                         {{#if messages}}
-                            {{#each messages.product_error }}
+                            {{#each messages.user_error }}
                                 {{#ifErrorCheck this "first_name"}}
                                     <div class="invalid-feedback">{{ this.msg }}</div>
                                 {{/ifErrorCheck}}
@@ -33,7 +33,7 @@
                         {{/if}} >
                     
                         {{#if messages}}
-                            {{#each messages.product_error }}
+                            {{#each messages.user_error }}
                                 {{#ifErrorCheck this "last_name"}}
                                     <div class="invalid-feedback">{{ this.msg }}</div>
                                 {{/ifErrorCheck}}
@@ -57,7 +57,7 @@
                       {{/if}} >
                     
                     {{#if messages}}
-                        {{#each messages.product_error }}
+                        {{#each messages.user_error }}
                         {{#ifErrorCheck this "email"}}
                             <div class="invalid-feedback">{{ this.msg }}</div>
                         {{/ifErrorCheck}}
@@ -77,7 +77,7 @@
                   {{/if}} >
                   
                   {{#if messages}}
-                    {{#each messages.product_error }}
+                    {{#each messages.user_error }}
                       {{#ifErrorCheck this "mobile_number"}}
                         <div class="invalid-feedback">{{ this.msg }}</div>
                       {{/ifErrorCheck}}
@@ -98,7 +98,7 @@
         </select>
         
           {{#if messages}}
-            {{#each messages.product_error }}
+            {{#each messages.user_error }}
               {{#ifErrorCheck this "user_role"}}
                 <div class="invalid-feedback">{{ this.msg }}</div>
               {{/ifErrorCheck}}
@@ -118,7 +118,7 @@
         </select>
         
           {{#if messages}}
-            {{#each messages.product_error }}
+            {{#each messages.user_error }}
               {{#ifErrorCheck this "state_id"}}
                 <div class="invalid-feedback">{{ this.msg }}</div>
               {{/ifErrorCheck}}
@@ -133,7 +133,7 @@
         </select>
         
           {{#if messages}}
-            {{#each messages.product_error }}
+            {{#each messages.user_error }}
               {{#ifErrorCheck this "city"}}
                 <div class="invalid-feedback">{{ this.msg }}</div>
               {{/ifErrorCheck}}
@@ -143,9 +143,9 @@
       
       <div class="col-md-6">
         <div class="input-group input-group-outline mb-4">
-          <textarea name="description" placeholder="Description" class="form-control is-invalid mt-4">{{#if messages}}{{#each messages.product_error }}{{#ifErrorCheck this "max_price"}}<div class="invalid-feedback">{{ this.msg }}</div>{{/ifErrorCheck}}{{/each}}{{/if}}</textarea>
+          <textarea name="description" placeholder="Description" class="form-control is-invalid mt-4">{{#if messages}}{{#each messages.user_error }}{{#ifErrorCheck this "max_price"}}<div class="invalid-feedback">{{ this.msg }}</div>{{/ifErrorCheck}}{{/each}}{{/if}}</textarea>
           {{#if messages}}
-            {{#each messages.product_error }}
+            {{#each messages.user_error }}
               {{#ifErrorCheck this "description"}}
                 <div class="invalid-feedback">{{ this.msg }}</div>
               {{/ifErrorCheck}}

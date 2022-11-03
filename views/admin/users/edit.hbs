@@ -1,0 +1,209 @@
+<div class='container'>
+    <form action="/admin/users/edit/{{result._id}}?isedit=false" method="post">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="input-group input-group-outline  focused is-focused  mb-4">
+                <label class="form-label">First Name</label>
+                <input type="text"  name="first_name" 
+                class="form-control is-invalid form-control-part" 
+                value=  {{#each result}}
+                          {{this.first_name}} 
+                        {{/each}}
+                        {{#if messages.form1}}
+                          {{#each messages.form1 }}
+                            {{this.first_name}}
+                          {{/each}}
+                        {{/if}} >
+
+                        {{#if messages}}
+                            {{#each messages.user_error }}
+                                {{#ifErrorCheck this "first_name"}}
+                                    <div class="invalid-feedback">{{ this.msg }}</div>
+                                {{/ifErrorCheck}}
+                            {{/each}}
+                        {{/if}}
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="input-group input-group-outline  focused is-focused  mb-4">
+                <label class="form-label">Last Name</label>
+                <input type="text"  name="last_name"
+                class="form-control is-invalid form-control-part"
+                value=  {{#each result}}
+                          {{this.last_name}} 
+                        {{/each}}
+                        {{#if messages.form1}} 
+                            {{#each messages.form1 }}
+                                {{this.last_name}}
+                            {{/each}}
+                        {{/if}} >
+                    
+                        {{#if messages}}
+                            {{#each messages.user_error }}
+                                {{#ifErrorCheck this "last_name"}}
+                                    <div class="invalid-feedback">{{ this.msg }}</div>
+                                {{/ifErrorCheck}}
+                            {{/each}}
+                        {{/if}}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="input-group input-group-outline  focused is-focused  mb-4">
+                <span class="input-group-text" id="basic-addon1"><a href="/admin"></a></span>
+                <label class="form-label">Email</label>
+                <input type="email" name="email"
+                class="form-control is-invalid form-control-part"  aria-label="Username"
+                aria-describedby="basic-addon1"
+                value={{#each result}}
+                          {{this.email}} 
+                      {{/each}}
+                      {{#if messages.form1}}
+                        {{#each messages.form1 }}
+                          {{this.email}}
+                        {{/each}}
+                      {{/if}} >
+                    
+                    {{#if messages}}
+                        {{#each messages.user_error }}
+                        {{#ifErrorCheck this "email"}}
+                            <div class="invalid-feedback">{{ this.msg }}</div>
+                        {{/ifErrorCheck}}
+                        {{/each}}
+                    {{/if}}
+            </div>
+        </div>
+      <div class="col-md-6">
+        <div class="input-group input-group-outline  focused is-focused  mb-4">
+          <label class="form-label">Mobile Number</label>
+          <input type="number" name="mobile_number" 
+           class="form-control is-invalid form-control-part"
+            value={{#each result}}
+                    {{this.mobile}} 
+                  {{/each}}
+                  {{#if messages.form1}}
+                    {{#each messages.form1 }}
+                      {{this.mobile_number}}
+                    {{/each}}
+                  {{/if}} >
+                  
+                  {{#if messages}}
+                    {{#each messages.user_error }}
+                      {{#ifErrorCheck this "mobile_number"}}
+                        <div class="invalid-feedback">{{ this.msg }}</div>
+                      {{/ifErrorCheck}}
+                    {{/each}}
+                  {{/if}}
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <select name="user_role" class="form-control is-invalid" aria-label="Default select example">
+          <option  value="" selected>Select User Role:</option>
+            {{#if user_role}}
+              {{#each user_role}}
+                <option  value="{{this._id}}">{{this.user_role_name}}</option>
+              {{/each}}
+            {{/if}}
+        </select>
+        
+          {{#if messages}}
+            {{#each messages.user_error }}
+              {{#ifErrorCheck this "user_role"}}
+                <div class="invalid-feedback">{{ this.msg }}</div>
+              {{/ifErrorCheck}}
+            {{/each}}
+          {{/if}}
+        
+      </div>
+
+      <div class="col-md-6">
+        <select id="state_id" onchange="cities()"  name="state" class="form-control   is-invalid" aria-label="Default select example">
+          <option  value="" selected>Select State:</option>
+            {{#if state}}
+              {{#each state}}
+                <option  value="{{this._id}}">{{this.state}}</option>
+              {{/each}}
+            {{/if}}
+        </select>
+        
+          {{#if messages}}
+            {{#each messages.user_error }}
+              {{#ifErrorCheck this "state_id"}}
+                <div class="invalid-feedback">{{ this.msg }}</div>
+              {{/ifErrorCheck}}
+            {{/each}}
+          {{/if}}
+      </div>
+
+      <div class="col-md-6">
+        <select id="city_select"  name="city" class="form-control   is-invalid mt-4" aria-label="Default select example">
+          <option  value="" selected>Select City:</option>
+
+        </select>
+        
+          {{#if messages}}
+            {{#each messages.user_error }}
+              {{#ifErrorCheck this "city"}}
+                <div class="invalid-feedback">{{ this.msg }}</div>
+              {{/ifErrorCheck}}
+            {{/each}}
+          {{/if}}
+      </div>
+      
+      <div class="col-md-6">
+        <div class="input-group input-group-outline mb-4">
+          <textarea name="description" placeholder="Description" class="form-control is-invalid mt-4">
+            {{result.description}} 
+          </textarea>
+          {{#if messages}}
+            {{#each messages.user_error }}
+              {{#ifErrorCheck this "description"}}
+                <div class="invalid-feedback">{{ this.msg }}</div>
+              {{/ifErrorCheck}}
+            {{/each}}
+          {{/if}}
+        </div>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+
+<script>
+
+  function cities(){
+
+    var select = document.getElementById("city_select");
+    var length = select.options.length;
+
+    for (i = length-1; i >= 0; i--) {
+      select.options[i] = null;
+    }
+    
+    $('#city_select')
+          .append($("<option></option>")
+          .attr("value", "")
+          .text("Select City"))
+
+    const state_id=$('#state_id').val()
+
+    $.ajax({
+      url : "/admin/users/state_data" ,
+      type : "post",
+      data : {state_id : state_id},
+      success:function(data)
+      {
+      $.each(data,function(key,value)
+      {
+        $('#city_select')
+          .append($("<option></option>")
+          .attr("value", key)
+          .text(value)); 
+        })
+      }
+    })
+  }
+</script>

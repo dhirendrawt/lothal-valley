@@ -13,7 +13,8 @@ const PropertySchema = new Schema({
     property_type : {
         type : Schema.Types.ObjectId ,
         ref: 'Property_type' 
-    }
+    },
+    image : String
 })
 
 
