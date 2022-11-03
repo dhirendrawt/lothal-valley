@@ -30,8 +30,9 @@ module.exports = {
     
     "add" : async (req,res,next)=>{
 
-        const image = req.file
+        const image = req.files
         console.log(image);
+        
         const error = validationResult(req)
      
         if(error.errors.length > 0){
@@ -51,17 +52,29 @@ module.exports = {
         }
       
         try {
-            
-            const base64_image = base64_encode(req.file)
+            // const image_array = []
+        //     image.forEach(x=>{console.log("foreach"+JSON.stringify(x));
+        //     base64_encode(x)
+        // })
+
+            const image_array = image.map(base64_encode)
+
+            console.log(image_array);
+
+            // const base64_image = base64_encode(image)
 
             // function to encode file data to base64 encoded string
+            
             function base64_encode(image) {
                 // read binary data
-                var bitmap = fs.readFileSync(path.join(dirname + '/uploads/' + req.file.filename));
-                // convert binary data to base64 encoded string
-                return new Buffer(bitmap).toString('base64');
+                console.log('data in base 64 is--'+JSON.stringify(image.filename));
+                var bitmap = fs.readFileSync(path.join(dirname + '/uploads/' + image.filename));
+                // // convert binary data to base64 encoded string
+                const data = new Buffer(bitmap).toString('base64');
+                
             }
 
+            console.log('final array is --'+image_array);
 
             const property = new Property({
                 property_title : req.body.property_title ,
