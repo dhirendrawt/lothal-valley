@@ -33,6 +33,10 @@ const hbs = create({
       },
       loud: (obj) => {return JSON.stringify(obj)},
 
+      findCity: (a,b,option) => {
+        return (a[b] ? option.fn(a[b]):option.inverse(a))
+      },
+
       paginate: function(options){
         let output = "";
 

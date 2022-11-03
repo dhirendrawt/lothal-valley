@@ -1,12 +1,15 @@
 <div class='container'>
-  <form action="/admin/users/add" method="post">
+    <form action="/admin/users/edit/{{result._id}}?isedit=false" method="post">
     <div class="row">
         <div class="col-md-6">
-            <div class="input-group  input-group-outline   mb-4">
+            <div class="input-group input-group-outline  focused is-focused  mb-4">
                 <label class="form-label">First Name</label>
                 <input type="text"  name="first_name" 
                 class="form-control is-invalid form-control-part" 
-                value=  {{#if messages.form1}}
+                value=  {{#each result}}
+                          {{this.first_name}} 
+                        {{/each}}
+                        {{#if messages.form1}}
                           {{#each messages.form1 }}
                             {{this.first_name}}
                           {{/each}}
@@ -22,11 +25,14 @@
             </div>
         </div>
         <div class="col-md-6">
-            <div class="input-group    input-group-outline mb-4">
+            <div class="input-group input-group-outline  focused is-focused  mb-4">
                 <label class="form-label">Last Name</label>
                 <input type="text"  name="last_name"
                 class="form-control is-invalid form-control-part"
-                value=  {{#if messages.form1}} 
+                value=  {{#each result}}
+                          {{this.last_name}} 
+                        {{/each}}
+                        {{#if messages.form1}} 
                             {{#each messages.form1 }}
                                 {{this.last_name}}
                             {{/each}}
@@ -44,13 +50,16 @@
     </div>
     <div class="row">
         <div class="col-md-6">
-            <div class="input-group    input-group-outline mb-4">
+            <div class="input-group input-group-outline  focused is-focused  mb-4">
                 <span class="input-group-text" id="basic-addon1"><a href="/admin"></a></span>
                 <label class="form-label">Email</label>
                 <input type="email" name="email"
                 class="form-control is-invalid form-control-part"  aria-label="Username"
                 aria-describedby="basic-addon1"
-                value={{#if messages.form1}}
+                value={{#each result}}
+                          {{this.email}} 
+                      {{/each}}
+                      {{#if messages.form1}}
                         {{#each messages.form1 }}
                           {{this.email}}
                         {{/each}}
@@ -66,11 +75,14 @@
             </div>
         </div>
       <div class="col-md-6">
-        <div class="input-group    input-group-outline mb-4">
+        <div class="input-group input-group-outline  focused is-focused  mb-4">
           <label class="form-label">Mobile Number</label>
           <input type="number" name="mobile_number" 
            class="form-control is-invalid form-control-part"
-            value={{#if messages.form1}}
+            value={{#each result}}
+                    {{this.mobile}} 
+                  {{/each}}
+                  {{#if messages.form1}}
                     {{#each messages.form1 }}
                       {{this.mobile_number}}
                     {{/each}}
@@ -110,8 +122,8 @@
       <div class="col-md-6">
         <select id="state_id" onchange="cities()"  name="state" class="form-control   is-invalid" aria-label="Default select example">
           <option  value="" selected>Select State:</option>
-            {{#if data}}
-              {{#each data}}
+            {{#if state}}
+              {{#each state}}
                 <option  value="{{this._id}}">{{this.state}}</option>
               {{/each}}
             {{/if}}
@@ -143,7 +155,9 @@
       
       <div class="col-md-6">
         <div class="input-group input-group-outline mb-4">
-          <textarea name="description" placeholder="Description" class="form-control is-invalid mt-4">{{#if messages}}{{#each messages.user_error }}{{#ifErrorCheck this "max_price"}}<div class="invalid-feedback">{{ this.msg }}</div>{{/ifErrorCheck}}{{/each}}{{/if}}</textarea>
+          <textarea name="description" placeholder="Description" class="form-control is-invalid mt-4">
+            {{result.description}} 
+          </textarea>
           {{#if messages}}
             {{#each messages.user_error }}
               {{#ifErrorCheck this "description"}}
