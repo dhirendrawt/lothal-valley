@@ -75,7 +75,8 @@
             <table class="table align-items-center mb-0">
               <thead>
                 <tr>
-                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Property Title</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Property Images</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Title</th>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Area</th>
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Address
                   </th>
@@ -92,63 +93,64 @@
                   <th class="text-left text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
                 </tr>
               </thead>
-
+              
               <tbody>
-                {{#if result}}
-                {{#each result }}
-                <tr>
-                  <td>
-                    <div class="d-flex px-2 py-1">
-                      <div>
-                        <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
-                      </div>
-                      <div class="d-flex flex-column justify-content-center">
-                        <h6 class="mb-0 text-sm">{{this.property_title}}</h6>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <p class="text-xs font-weight-bold mb-0">{{this.area}}</p>
-                  </td>
-                  <td class="align-middle text-center text-sm">
-                    <p class="text-xs font-weight-bold mb-0">{{this.address}}</p>
-                  </td>
-                  <td class="align-middle text-center">
-                    <span class="badge badge-sm bg-gradient-primary">{{this.amount}}</span>
-                  </td>
-                  <td class="align-middle text-center">
-                    <span class="badge badge-sm bg-gradient-primary">{{this.property_type.property_type_name}}</span>
-                  </td>
-                  <td class="align-middle text-center">
-                    <span class="badge badge-sm bg-gradient-danger">{{this.min_price}}</span>
-                  </td>
-                  <td class="align-middle text-center">
-                    <span class="badge badge-sm bg-gradient-danger">{{this.max_price}}</span>
-                  </td>
-                  <td class="align-middle text-center">
-                    <span class="text-secondary text-xs font-weight-bold">{{this.description}}</span>
-                  </td>
-                  <td class="align-middle">
-                    <a type="button" class="badge badge-sm bg-gradient-warning"
-                      href="/admin/property/edit/{{this._id}}">
-                      Edit
-                    </a>
-                    <button type="button" class="badge badge-sm bg-gradient-warning" data-bs-toggle="modal"
-                      data-bs-target="#exampleModal{{this._id}}">
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-                <div class="delete">
-                  <form action="/admin/property/delete" method="post">
-                    <input type="hidden" name="property_id" value="{{this._id}}">
-                    <div class="modal fade" id="exampleModal{{this._id}}" tabindex="-1" role="dialog"
-                      aria-labelledby="exampleModalLabel" aria-hidden="true">
-                      <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Do you really want to delete this property?
-                            </h5>
+                {{#if properties}}
+                  {{#each properties }}
+                    <tr>
+                      <td>
+                        {{!-- {{properties.image.[0]}} --}}
+                          <div class="d-flex px-2 py-1">
+                          {{#each this.image }}
+                            <div>
+                              <img src="data:;base64, {{this}}" class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
+                            </div>
+                          {{/each}}
+                        </div>
+                      </td>
+                      <td>
+                        <p class="text-xs font-weight-bold mb-0">{{this.property_title}}</p>
+                      </td>
+                      <td>
+                        <p class="text-xs font-weight-bold mb-0">{{this.area}}</p>
+                      </td>
+                      <td class="align-middle text-center text-sm">
+                        <p class="text-xs font-weight-bold mb-0">{{this.address}}</p>
+                      </td>
+                      <td class="align-middle text-center">
+                          <span class="badge badge-sm bg-gradient-primary">{{this.amount}}</span>
+                      </td>
+                      <td class="align-middle text-center">
+                          <span class="badge badge-sm bg-gradient-primary">{{this.property_type.property_type_name}}</span>
+                      </td>
+                      <td class="align-middle text-center">
+                          <span class="badge badge-sm bg-gradient-danger">{{this.min_price}}</span>
+                      </td>
+                      <td class="align-middle text-center">
+                          <span class="badge badge-sm bg-gradient-danger">{{this.max_price}}</span>
+                      </td>
+                      <td class="align-middle text-center">
+                        <span class="text-secondary text-xs font-weight-bold">{{this.description}}</span>
+                      </td>
+                      <td class="align-middle">
+                        <a type="button" class="badge badge-sm bg-gradient-warning" href="/admin/property/info/{{this._id}}">
+                          View
+                        </a>
+                        <a type="button" class="badge badge-sm bg-gradient-warning" href="/admin/property/edit/{{this._id}}">
+                          Edit
+                        </a>
+                        <button type="button" class="badge badge-sm bg-gradient-warning" data-bs-toggle="modal" data-bs-target="#exampleModal{{this._id}}">
+                          Delete
+                        </button>
+                      </td>
+                    </tr>
+                    <form action="/admin/property/delete" method="post">
+                      <input type="hidden" name="property_id" value="{{this._id}}">
+                      <div class="modal fade" id="exampleModal{{this._id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Do you really want to delete this property?</h5>
 
                             <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">&times;</span>

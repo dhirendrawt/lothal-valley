@@ -1,0 +1,53 @@
+<div class="col-12 mt-4">
+    <div class="mb-5 ps-3">
+    {{#if property_data}}
+    <h6 class="mb-1"></h6>
+    <p class="text-sm">Architects design houses</p>
+    </div>
+    <div class="row">
+   
+        {{#each property_data.image}}
+            <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
+                <div class="card card-blog card-plain">
+                    <div class="card-header p-0 mt-n4 mx-3">
+                    <a class="d-block shadow-xl border-radius-xl">
+                        <img src="data:;base64, {{this}}" alt="img-blur-shadow" class="img-fluid shadow border-radius-xl">
+                    </a>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+    <div class="col-12 col-xl-4">
+        <div class="card card-plain h-100">
+            <div class="card-header pb-0 p-3">
+                <div class="row">
+                <div class="col-md-8 d-flex align-items-center">
+                    <h6 class="mb-0">{{property_data.property_title}}</h6>
+                </div>
+                {{!-- <div class="col-md-4 text-end">
+                    <a href="javascript:;">
+                    <i class="fas fa-user-edit text-secondary text-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Profile"></i>
+                    </a>
+                </div> --}}
+                </div>
+            </div>
+            <div class="card-body p-3">
+                <p class="text-sm">
+                {{property_data.description}}
+                </p>
+                <hr class="horizontal gray-light my-4">
+                <ul class="list-group">
+                <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">Area:</strong> &nbsp; {{property_data.area}}</li>
+                <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Address:</strong> &nbsp; {{property_data.address}}</li>
+                <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Minimum Price:</strong> &nbsp; {{property_data.min_price}}</li>
+                <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Maximum Price:</strong> &nbsp; {{property_data.max_price}}</li>
+                <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Amount:</strong> &nbsp; {{property_data.amount}}</li>
+                <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Property Type:</strong> &nbsp; {{property_data.property_type.property_type_name}}</li>
+                
+                </ul>
+            </div>
+        </div>
+    </div>
+    {{/if}}
+</div>

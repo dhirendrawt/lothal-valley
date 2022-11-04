@@ -164,7 +164,7 @@ module.exports = {
         } catch (error) {
             console.log(error);
         }
-        })
+       
 
         return res.redirect('/admin/dashboard')
     },
