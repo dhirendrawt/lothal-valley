@@ -28,5 +28,6 @@ router.post('/edit/:id',[check('first_name').not().isEmpty(),
         ,usersController.update);
 router.post('/delete',usersController.delete);
 router.get('/searching',usersController.searching);
+router.get('/user-details/:id',usersController.userDetails)
 
 module.exports = router
