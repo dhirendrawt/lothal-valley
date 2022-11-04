@@ -14,10 +14,7 @@ const PropertySchema = new Schema({
         type : Schema.Types.ObjectId ,
         ref: 'Property_type' 
     },
-    image : String,
-    image2 :String,
-    image3 :String,
-    image4 :String
+    image : [String]
 })
 
 
