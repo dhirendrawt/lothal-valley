@@ -10,14 +10,15 @@ const dirname = require('../../dirname')
 
 module.exports = {
     "index" : async ( req , res ,next) => {
-        const { page = 1, limit = 15 ,amount = 0} = req.query;
+        const { page = 1, limit = 15 ,amount = 0 } = req.query;
         try { 
-            const result = await Property.find({amount : { $gt: amount }}).populate('property_type')
+            const properties = await Property.find({amount : { $gt: amount }}).populate('property_type')
             .limit(limit * 1)
             .skip((page - 1) * limit)
             .exec();
             const count = await Property.count();
-            return res.render('admin/property/list', {result : JSON.parse(JSON.stringify(result)), current: parseInt(page), pages:Math.ceil(count / limit), title:'Property',page_title_1:'Property Page',page_title_2:'Property',layout:'dashboard_layout',  isproduct: true});
+            return res.render('admin/property/list', {properties : JSON.parse(JSON.stringify(properties)), current: parseInt(page), pages:Math.ceil(count / limit), title:'Property',page_title_1:'Property Page',page_title_2:'Property',layout:'dashboard_layout',  isproduct: true});
+
         } catch (error) {
             console.log(error);
             req.flash('warning',' Something went wrong !');
@@ -35,7 +36,6 @@ module.exports = {
     "add" : async (req,res,next)=>{
 
         const image = req.files
-        console.log(image);
         
         const error = validationResult(req)
      
@@ -56,29 +56,20 @@ module.exports = {
         }
       
         try {
-            // const image_array = []
-        //     image.forEach(x=>{console.log("foreach"+JSON.stringify(x));
-        //     base64_encode(x)
-        // })
 
             const image_array = image.map(base64_encode)
-
-            console.log(image_array);
-
-            // const base64_image = base64_encode(image)
 
             // function to encode file data to base64 encoded string
             
             function base64_encode(image) {
                 // read binary data
-                console.log('data in base 64 is--'+JSON.stringify(image.filename));
+                // console.log('data in base 64 is--'+JSON.stringify(image.filename));
                 var bitmap = fs.readFileSync(path.join(dirname + '/uploads/' + image.filename));
                 // // convert binary data to base64 encoded string
                 const data = new Buffer(bitmap).toString('base64');
-                
+                return data
             }
 
-            console.log('final array is --'+image_array);
 
             const property = new Property({
                 property_title : req.body.property_title ,
@@ -89,7 +80,7 @@ module.exports = {
                 max_price : req.body.max_price ,
                 description : req.body.description ,
                 property_type : req.body.property_type ,
-                image : base64_image
+                image : image_array
                 
             })
             
@@ -176,6 +167,21 @@ module.exports = {
             const count = await Property.find({property_title:{ $regex: new RegExp(key, 'i')} }).count();
             
            res.json(({result : result, current: parseInt(page), pages:Math.ceil(count / limit)}))
+        
+    },
+    "info_page": async(req,res)=>{
+        // req.params.id
+        try{
+            const property_data = await Property.findOne({ _id : req.params.id}).populate('property_type');
+            res.render('admin/property/propertyInfo',{'property_data':property_data, title:'Property', page_title_1:'Property Page',page_title_2:'Property',layout:'dashboard_layout',  isproduct: true})
+
+        }
+        catch(err){
+            console.log(err);
+            req.flash('warning',' Something went wrong !');
+            return res.redirect('/admin/property');
+        }
+        
         
     }
     

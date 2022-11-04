@@ -39,6 +39,7 @@ router.post('/update', [
     check('property_type').not().isEmpty()
 ],propertycontroller.update)
 router.get('/searching',propertycontroller.searching);
+router.get('/info/:id',propertycontroller.info_page)
 
 
 
