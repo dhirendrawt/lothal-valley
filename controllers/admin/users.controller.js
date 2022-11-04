@@ -19,6 +19,11 @@ module.exports = {
             console.log(error);
         }
     },
+    'userDetails': async(req,res)=> {
+        const id = req.params.id;
+        const data = await UsersData.findOne({ _id : id }).populate('state').populate('user_role');
+        return res.render('admin/users/details',{ title : 'Users Page',page_title_1:'Users Page',banner:'Users' ,layout:'dashboard_layout' , isUsers: true});
+    },
     'create' : async (req,res)=>{
         try {
             const user_role = await userRole.find({});
@@ -147,8 +152,6 @@ module.exports = {
         const { page = 1, limit = 15,} = req.query;
         var re = new RegExp('^'+key+'',"i");
         try {
-            
-        
         const result = await UsersData.find({
                         "$or":[
                             {first_name: re},
@@ -160,11 +163,10 @@ module.exports = {
                 .skip((page - 1) * limit)
                 .exec();
             const count = await UsersData.find({first_name:{ $regex: new RegExp(key, 'i')} }).count();
-           res.json(({result : result, current: parseInt(page), pages:Math.ceil(count / limit)}))
+           return res.json(({result : result, current: parseInt(page), pages:Math.ceil(count / limit)}))
         } catch (error) {
             console.log(error);
         }
-       
 
         return res.redirect('/admin/dashboard')
     },
