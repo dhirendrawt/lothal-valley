@@ -1,13 +1,30 @@
 <div class="col-12 mt-4">
     <div class="mb-5 ps-3">
-    {{#if property_data}}
-    <h6 class="mb-1"></h6>
-    <p class="text-sm">Architects design houses</p>
     </div>
+    {{#if property_data}}
     <div class="row">
-   
-        {{#each property_data.image}}
+        
             <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
+                <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner"> 
+                            {{#each property_data.image}}
+                            <div class="carousel-item active">
+                            <img src="data:;base64, {{this}}" class="d-block w-100" alt="..." style=" width: 100px,height:100px">
+                            </div>
+                            {{/each}}
+                        </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+ 
+            {{!-- <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
                 <div class="card card-blog card-plain">
                     <div class="card-header p-0 mt-n4 mx-3">
                     <a class="d-block shadow-xl border-radius-xl">
@@ -15,21 +32,15 @@
                     </a>
                     </div>
                 </div>
-            </div>
-        {{/each}}
+            </div> --}}
     </div>
     <div class="col-12 col-xl-4">
         <div class="card card-plain h-100">
             <div class="card-header pb-0 p-3">
                 <div class="row">
-                <div class="col-md-8 d-flex align-items-center">
-                    <h6 class="mb-0">{{property_data.property_title}}</h6>
-                </div>
-                {{!-- <div class="col-md-4 text-end">
-                    <a href="javascript:;">
-                    <i class="fas fa-user-edit text-secondary text-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Profile"></i>
-                    </a>
-                </div> --}}
+                    <div class="col-md-8 d-flex align-items-center">
+                        <h6 class="mb-0">{{property_data.property_title}}</h6>
+                    </div>
                 </div>
             </div>
             <div class="card-body p-3">
@@ -51,3 +62,4 @@
     </div>
     {{/if}}
 </div>
+
