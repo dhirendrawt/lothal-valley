@@ -7,7 +7,7 @@ const session = require('express-session')
 const mongoose = require('./mongoose')
 const flash = require('express-flash')
 
-const indexRouter = require('./routes/index')
+const mainRouter = require('./routes/main')
 const usersRouter = require('./routes/users')
 
 const adminLoginRouter = require('./routes/admin/login')
@@ -16,6 +16,8 @@ const adminPropertyRouter = require('./routes/admin/property')
 const adminPropertyTypeRouter = require('./routes/admin/property_type')
 const adminUserRoleRouter = require('./routes/admin/user_role')
 const adminUsersRouter = require('./routes/admin/users')
+
+const userDashboardRouter = require('./routes/user/dashboard')
 
 const middelware = require('./middelwares/authentication.meddelwares')
 const Handlebars = require('handlebars')
@@ -102,8 +104,8 @@ app.use(session({
 }))
 app.use(flash())
 
-
-app.use('/', indexRouter)
+//.....admin routes....
+app.use('/', mainRouter)
 app.use('/admin', adminLoginRouter )
 app.use('/admin/dashboard',middelware.auth,adminDashboardRouter)
 app.use('/admin/property',middelware.auth,adminPropertyRouter)
@@ -111,6 +113,8 @@ app.use('/admin/property-type',middelware.auth,adminPropertyTypeRouter)
 app.use('/admin/user-role',middelware.auth,adminUserRoleRouter)
 app.use('/admin/users',adminUsersRouter)
 
+//.......user routers.....
+app.use('/user',userDashboardRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
