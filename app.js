@@ -7,7 +7,7 @@ const session = require('express-session')
 const mongoose = require('./mongoose')
 const flash = require('express-flash')
 
-const mainRouter = require('./routes/main')
+const homeRouter = require('./routes/home')
 const usersRouter = require('./routes/users')
 
 const adminLoginRouter = require('./routes/admin/login')
@@ -105,7 +105,7 @@ app.use(session({
 app.use(flash())
 
 //.....admin routes....
-app.use('/', mainRouter)
+app.use('/', homeRouter)
 app.use('/admin', adminLoginRouter )
 app.use('/admin/dashboard',middelware.auth,adminDashboardRouter)
 app.use('/admin/property',middelware.auth,adminPropertyRouter)
