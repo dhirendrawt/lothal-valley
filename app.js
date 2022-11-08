@@ -39,7 +39,7 @@ const hbs = create({
         return (a[b] ? option.fn(a[b]):option.inverse(a))
       },
       ifVerify: (a,b,option) => {
-        return (a.pen_verified_status == b ? option.fn(a._id) : option.inverse(a))
+        return (a!=b ? option.fn("none") : option.inverse(a))
       },
       isVerifyStatus: (a,option) => {
         if(a==2){
