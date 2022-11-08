@@ -1176,8 +1176,8 @@ text-align:center;
 }
 
 .bgc {
-	background: -webkit-gradient(linear, left top, left bottom, from(rgba(32, 51, 100, 0.8)), to(rgba(32, 51, 100, 0.8))), url(../images/open1.jpg) no-repeat center center;
-	background: linear-gradient(rgba(32, 51, 100, 0.8), rgba(32, 51, 100, 0.8)), url(../images/open1.jpg) no-repeat center center;
+	background: -webkit-gradient(linear, left top, left bottom, from(rgba(32, 51, 100, 0.8)), to(rgba(32, 51, 100, 0.8))), url(../../img/main//open1.jpg) no-repeat center center;
+	background: linear-gradient(rgba(32, 51, 100, 0.8), rgba(32, 51, 100, 0.8)), url(../../img/main//open1.jpg) no-repeat center center;
 	padding: 2rem;
 	background-size: cover;
 }
