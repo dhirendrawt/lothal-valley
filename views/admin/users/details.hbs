@@ -1,21 +1,135 @@
+{{#if data}}
+    
+        
+    
+
 <div class="container-fluid py-4">
     <div class="row">
-        <div class="col-8">
+        <div class="col-2">
             <div class=" my-4">
-                <h6>hallo</h6>
+                <h6>Name:</h6>
             </div>
             <div class=" my-4">
-                <h6>hallo</h6>
+                <h6>Email</h6>
+            </div>
+            <div class=" my-4">
+                <h6>Mobile:</h6>
+            </div>
+            <div class=" my-4">
+                <h6>Role:</h6>
+            </div>
+            <div class=" my-4">
+                <h6>State:</h6>
+            </div>
+            <div class=" my-4">
+                <h6>City:</h6>
+            </div>
+            <div class=" my-4">
+                <h6>Discription:</h6>
+            </div>
+        </div>
+        <div class="col-6">
+             <div class=" my-4">
+                <p>{{data.first_name}}</p>
+            </div>
+            <div class=" my-4">
+                <p>{{data.email}}</p>
+            </div>
+            <div class=" my-4">
+                <p>{{data.mobile}}</p>
+            </div>
+            <div class=" my-4">
+                <p>{{data.user_role.user_role_name}}</p>
+            </div>
+            <div class=" my-4">
+                <p>{{data.state.state}}</p>
+            </div>
+            <div class=" my-4">
+                <p>{{#findCity data.state.districts data.city}}{{this}}{{/findCity}}</p>
+            </div>
+            <div class=" my-4">
+                <p>{{data.description}}</p>
             </div>
         </div>
         <div class="col-4">
-            <div class="card my-4">
-                <h6>hallo</h6>
-                <p>kjsdfkjsd</p>
-            </div>
-            <div class="card my-4">
-                <h6>hallo</h6>
+            <div class="my-4">
+                <img  style="height:200px;" src="data:;base64, {{data.image}}"  alt="profile image">
+                <div>
+                    <a type="button" class="badge badge-sm bg-gradient-warning"
+                    style="pointer-events: {{#ifVerify data.image_verified_status 1}}{{this}}{{/ifVerify}}"
+                    href="/admin/users/verify/{{data._id}}?type=image&isverify=true">
+                        verify
+                    </a>
+                    <a type="button" class="badge badge-sm bg-gradient-warning" 
+                    style="pointer-events: {{#ifVerify data.image_verified_status 1}}{{this}}{{/ifVerify}}"
+                    href="/admin/users/verify/{{data._id}}?type=image&isverify=flase">
+                        Rejected
+                    </a>
+                    <h6>{{#isVerifyStatus data.image_verified_status}}
+                            {{this}}
+                        {{/isVerifyStatus}}
+                    </h6>
+                </div>
             </div>
         </div>
     </div>
+    
+    <div class="row" style="border:solid 2px;">
+        <div class="col-4">
+            <div class="my-4">
+                <img style="height:100px;"src="data:;base64, {{data.adhar_image}}" alt="profile image">
+            </div>
+        </div>
+        <div class="col-6" style="">
+            <h6>Adhar Card</h6>
+        </div>
+        <div class='col-2'>
+            <a type="button" class="badge badge-sm bg-gradient-warning"
+             style="pointer-events: {{#ifVerify data.adhar_verified_status 1}}{{this}}{{/ifVerify}}"
+             href="/admin/users/verify/{{data._id}}?type=adhar&isverify=true">
+                verify
+            </a>
+            <a type="button" class="badge badge-sm bg-gradient-warning"
+             style="pointer-events: {{#ifVerify data.adhar_verified_status 1}}{{this}}{{/ifVerify}}"
+             href="/admin/users/verify/{{data._id}}?type=adhar&isverify=flase">
+                Rejected
+            </a>
+            <h6>{{#isVerifyStatus data.adhar_verified_status}}
+                    {{this}}
+                {{/isVerifyStatus}}
+            </h6>
+        </div>
+    </div>
+    <div class="row" style="border:solid 2px;">
+        <div class="col-4">
+            <div class="my-4">
+                <img style="height:100px;" src="data:;base64, {{data.pen_image}}" alt="profile image">
+            </div>
+        </div>
+        <div class="col-6">
+            <h6>pen Card</h6>
+        </div>
+        <div class='col-2' >
+           <a type="button" class="badge badge-sm bg-gradient-warning"
+             style="pointer-events: {{#ifVerify data.pen_verified_status 1}}{{this}}{{/ifVerify}}"
+             href="/admin/users/verify/{{data._id}}?type=penCard&isverify=true">
+                verify
+            </a>
+            <a type="button" class="badge badge-sm bg-gradient-warning" 
+             style="pointer-events: {{#ifVerify data.pen_verified_status 1}}{{this}}{{/ifVerify}}"
+             href="/admin/users/verify/{{data._id}}?type=penCard&isverify=flase">
+                Rejected
+            </a>
+            <h6>{{#isVerifyStatus data.pen_verified_status}}
+                    {{this}}
+                {{/isVerifyStatus}}
+            </h6>
+        </div>
+    </div>
+    <hr>
+    <a type="button" class="badge badge-sm bg-gradient-warning" 
+             href="/admin/users/verify/{{data._id}}?type=submit">
+                Submit
+    </a>
 </div>
+{{/if}}

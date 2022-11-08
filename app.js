@@ -38,6 +38,18 @@ const hbs = create({
       findCity: (a,b,option) => {
         return (a[b] ? option.fn(a[b]):option.inverse(a))
       },
+      ifVerify: (a,b,option) => {
+        return (a.pen_verified_status == b ? option.fn(a._id) : option.inverse(a))
+      },
+      isVerifyStatus: (a,option) => {
+        if(a==2){
+          return option.fn("Verified.....");
+        }else if(a==0){
+          return option.fn("Rejected...")
+        }else{
+          return ;
+        }
+      },
 
       paginate: function(options){
         let output = "";
