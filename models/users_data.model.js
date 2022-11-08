@@ -18,6 +18,13 @@ const UsersDataSchema = new Schema({
     },
     city : Number,
     description : String,
+    verified_status:{ type:Number , default: 1 },
+    image : String,
+    image_verified_status:{ type:Number , default: 1 },
+    adhar_image : String,
+    adhar_verified_status:{ type:Number , default: 1 },
+    pen_image : String,
+    pen_verified_status:{ type:Number , default: 1 },
     created_at : { type:Date , default: Date.now }
 })
 

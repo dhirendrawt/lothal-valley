@@ -36,7 +36,7 @@ module.exports = {
     "add" : async (req,res,next)=>{
 
         const image = req.files
-        
+        console.log('image:',image);
         const error = validationResult(req)
      
         if(error.errors.length > 0){

@@ -3,7 +3,11 @@ const states = require('../../models/states.model')
 const UsersData = require('../../models/users_data.model')
 const { Schema } = require('mongoose')
 const { validationResult } = require('express-validator')
-
+const fs = require('fs')
+const path = require('path')
+const dirname = require('../../dirname')
+const { ConfigService } = require('aws-sdk')
+const { Console } = require('console')
 
 module.exports = {
     'index' : async (req,res)=>{
@@ -22,7 +26,7 @@ module.exports = {
     'userDetails': async(req,res)=> {
         const id = req.params.id;
         const data = await UsersData.findOne({ _id : id }).populate('state').populate('user_role');
-        return res.render('admin/users/details',{ title : 'Users Page',page_title_1:'Users Page',banner:'Users' ,layout:'dashboard_layout' , isUsers: true});
+        return res.render('admin/users/details',{ data : JSON.parse(JSON.stringify(data)),title : 'Users Page',page_title_1:'Users Page',banner:'Users' ,layout:'dashboard_layout' , isUsers: true});
     },
     'create' : async (req,res)=>{
         try {
@@ -35,20 +39,17 @@ module.exports = {
             return res.redirect('/admin/users');
         }
     },
-
-    
-
     'state_data' : async (req,res)=>{
-   
-        const data = await states.find({_id:req.body.state_id}).select('districts')
-        
-        res.send(200,data[0].districts)
+        const data = await states.find({_id:req.body.state_id}).select('districts');
+        res.status(200).send(data[0].districts);
     },
-    
     'add' : async (req,res)=>{
-
-        console.log(req.body.state_id);
-
+        console.log('hiii');
+        //console.log('files',req.files["image"])
+        
+        const {image, adhar, penCard} = req.files
+        console.log('adhar:',adhar)
+        console.log('image:',image);
         const error = validationResult(req); 
 
         if(error.errors.length > 0){
@@ -69,6 +70,23 @@ module.exports = {
         }
         try {
             
+            const image_data = base64_encode(image[0]);
+            const adhar_image =base64_encode(adhar[0]);
+            const pen_image =base64_encode(penCard[0]);
+            
+            
+            // function to encode file data to base64 encoded string
+            
+            function base64_encode(img) {
+                console.log('file_name:',img)
+                // read binary data
+                // console.log('data in base 64 is--'+JSON.stringify(image.filename));
+                var bitmap = fs.readFileSync(path.join(dirname + '/uploads/' + img.filename));
+                // // convert binary data to base64 encoded string
+                const data = new Buffer(bitmap).toString('base64');
+                return data
+            }
+
 
         await UsersData.create({
             first_name : req.body.first_name ,
@@ -78,7 +96,10 @@ module.exports = {
             user_role : req.body.user_role ,
             state : req.body.state ,
             city : req.body.city ,
-            description : req.body.description 
+            description : req.body.description ,
+            image:image_data,
+            adhar_image : adhar_image,
+            pen_image : pen_image
         });
         req.flash('message','New record insert successfull !');  
         return res.redirect('/admin/users');
@@ -94,9 +115,9 @@ module.exports = {
         const state = await states.find();
         if(req.query.isedit=='true'){
         const data = await UsersData.findOne({ _id : id });
-        return res.render('admin/users/edit',{result : data,user_role : user_role,state : state , page_title_1 : 'Edit Users Details' , page_title_2 : 'Usres Page' ,layout : 'dashboard_layout' , isusers: true  })
+        return res.render('admin/users/edit',{result : data,user_role : user_role,state : state , page_title_1 : 'Edit Users Details' , page_title_2 : 'Usres Page' ,layout : 'dashboard_layout' , isUsers: true  })
         }else{
-            return res.render('admin/users/edit',{result : {_id:id},user_role : user_role,state : state , page_title_1 : 'Edit Users Details' , page_title_2 : 'Usres Page' ,layout : 'dashboard_layout' , isusers: true  })
+            return res.render('admin/users/edit',{result : {_id:id},user_role : user_role,state : state , page_title_1 : 'Edit Users Details' , page_title_2 : 'Usres Page' ,layout : 'dashboard_layout' , isUsers: true  })
         }
     },
     "update" : async(req,res)=>{
@@ -170,10 +191,36 @@ module.exports = {
 
         return res.redirect('/admin/dashboard')
     },
-    'delete' : async ( req , res ) => {
-        // console.log(req.body.user_id);
-        await UsersData.deleteOne({ _id : req.body.user_id })
-        req.flash('message','Record delete successfull !');
-        return res.redirect('/admin/users')
+    'verify' : async ( req , res ) => {
+        console.log('hii');
+        const id = req.params.id;
+        const {type, isverify} =  req.query
+        const data = await UsersData.findOne({_id : id});
+        if(type == "adhar"){
+            if(isverify == "true"){
+                data.adhar_verified_status = 2;
+            }else{
+                data.adhar_verified_status = 0;
+            }
+        }else if(type == "image"){
+            if(isverify == "true"){
+                data.image_verified_status = 2;
+            }else{
+                data.image_verified_status = 0;
+            }
+        }else if(type == "penCard"){
+            if(isverify == "true"){
+                data.pen_verified_status = 2;
+            }else{
+                data.pen_verified_status = 0;
+            }
+        }else if((data.image_verified_status == 2) && (data.pen_verified_status == 2) && (data.adhar_verified_status == 2)){
+            data.verified_status = 2;
+        }else{
+            data.verified_status = 0;
+        }
+        data.save();
+
+        return res.redirect('/admin/users/user-details/'+req.params.id);
     }
 }

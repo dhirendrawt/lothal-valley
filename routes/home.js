@@ -7,5 +7,9 @@ const homeController = require('../controllers/home.controller');
 //   res.render('index', { title: 'Lothal Valley' });
 // });
 router.get('/',homeController.index);
+router.get('/about',homeController.about);
+router.get('/contact',homeController.contact);
+router.get('/properties',homeController.properties);
+router.get('/blog',homeController.blog);
 
 module.exports = router;
