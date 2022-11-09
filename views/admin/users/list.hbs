@@ -41,6 +41,10 @@
           data-scroll="true">
           <div class="container-fluid py-1 px-3">
             <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+              <input type="hidden" id="type" value={{type}}>
+              {{#buttonCreateUser type}}
+                {{this}}
+              {{/buttonCreateUser}}
               <div class="ms-md-auto pe-md-3 d-flex align-items-center">
                 <div class="input-group input-group-outline">
                   <label class="form-label">Search here...</label>
@@ -60,6 +64,7 @@
 
         <div class="card-body px-0 pb-2">
           <div class="table-responsive p-0">
+            <h4>{{type}}</h4>
             <table class="table align-items-center mb-0">
               <thead>
                 <tr>
@@ -150,7 +155,7 @@
         <div class="container" id="pagination">
           <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center">
-              {{#paginate current=current pages=pages}}{{/paginate}}
+              {{#paginate current=current pages=pages type=type}}{{/paginate}}
             </ul>
           </nav>
         </div>
@@ -164,13 +169,13 @@
   $(document).ready(function () {
     //$("#alert").delay(100000).hide();
     setTimeout("$('#alert').hide();", 5000);
-
-    $("#searching").on('keyup', function (e) {
-      $('tbody').empty();
+    const type = $('#type').val();
+    $("#searching").on('keyup',async function (e) {
+     await $('tbody').empty();
       $('#pagination').empty();
       console.log(this.value);
       $.ajax({
-        url: "/admin/users/searching?key=" + this.value,
+        url: "/admin/users/searching?key=" + this.value+"&type="+type,
         method: 'get',
         dataType: "json",
         success: function (res) {
@@ -246,7 +251,7 @@
                         </div>
                       </div>
                       </form>`;
-            $('tbody').append(html1);
+            $('tbody').html(html1);
           }
         }
 

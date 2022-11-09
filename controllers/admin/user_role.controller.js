@@ -2,7 +2,7 @@ const User_role = require('../../models/user_role.model')
 const { validationResult } = require('express-validator');
 module.exports = {
     "index": async (req , res ) =>{
-        const { page = 1, limit = 15,} = req.query;
+        const { page = 1, limit = 15} = req.query;
         try
         {
             
