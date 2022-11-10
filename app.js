@@ -16,7 +16,7 @@ const adminPropertyRouter = require('./routes/admin/property')
 const adminPropertyTypeRouter = require('./routes/admin/property_type')
 const adminUserRoleRouter = require('./routes/admin/user_role')
 const adminUsersRouter = require('./routes/admin/users')
-const adminPlotsRouter = require('./routes/admin/plots')
+
 
 const userDashboardRouter = require('./routes/user/dashboard')
 
@@ -112,7 +112,6 @@ app.use('/admin/dashboard',middelware.auth,adminDashboardRouter)
 app.use('/admin/property',middelware.auth,adminPropertyRouter)
 app.use('/admin/property-type',middelware.auth,adminPropertyTypeRouter)
 app.use('/admin/user-role',middelware.auth,adminUserRoleRouter)
-app.use('/admin/plots',adminPlotsRouter)
 app.use('/admin/users',adminUsersRouter)
 
 
