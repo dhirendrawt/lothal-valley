@@ -55,16 +55,19 @@
             <div class="my-4">
                 <img  style="height:200px;" src="data:;base64, {{data.image}}"  alt="profile image">
                 <div>
-                    <a type="button" class="badge badge-sm bg-gradient-warning"
-                    style="pointer-events: {{#ifVerify data.image_verified_status 1}}{{this}}{{/ifVerify}}"
-                    href="/admin/users/verify/{{data._id}}?type=image&isverify=true">
+                    <button onclick="displaynone()">
+                    <a type="button" class="badge badge-sm bg-gradient-warning " 
+                    {{!-- style="pointer-events: {{#ifVerify data.image_verified_status 1}}{{this}}{{/ifVerify}}" --}}
+                    href="/admin/users/verify/{{data._id}}?type=image&isverify=true" onclick="displaynone();return false;">
                         verify
                     </a>
-                    <a type="button" class="badge badge-sm bg-gradient-warning" 
-                    style="pointer-events: {{#ifVerify data.image_verified_status 1}}{{this}}{{/ifVerify}}"
+                    </button>
+                    <a type="button" class="badge badge-sm bg-gradient-warning" class="image" 
+                    {{!-- style="pointer-events: {{#ifVerify data.image_verified_status 1}}{{this}}{{/ifVerify}}" --}}
                     href="/admin/users/verify/{{data._id}}?type=image&isverify=flase">
                         Rejected
                     </a>
+                    
                     <h6>{{#isVerifyStatus data.image_verified_status}}
                             {{this}}
                         {{/isVerifyStatus}}
@@ -84,6 +87,7 @@
             <h6>Adhar Card</h6>
         </div>
         <div class='col-2'>
+            
             <a type="button" class="badge badge-sm bg-gradient-warning"
              style="pointer-events: {{#ifVerify data.adhar_verified_status 1}}{{this}}{{/ifVerify}}"
              href="/admin/users/verify/{{data._id}}?type=adhar&isverify=true">
@@ -133,3 +137,12 @@
     </a>
 </div>
 {{/if}}
+
+<script>
+   fuction displaynone(){
+    //e.preventDefault();         
+    alert('working');
+    console.log("hiii");
+    return false;
+   }
+</script>

@@ -11,14 +11,20 @@ const { Console } = require('console')
 
 module.exports = {
     'index' : async (req,res)=>{
-        const { page = 1, limit = 15 ,amount = 0} = req.query;
+        const { page = 1, limit = 15 ,amount = 0,type="verify"} = req.query;
+        var userstatus = 2;
+        if(type == "pending"){
+            userstatus = 1;
+        }else if(type == "reject"){
+            userstatus = 0;
+        }
         try {
-            const user_data = await UsersData.find().populate('state').populate('user_role')
+            const user_data = await UsersData.find({ verified_status : userstatus }).populate('state').populate('user_role')
             .limit(limit * 1)
             .skip((page - 1) * limit)
             .exec();
-            const count = await UsersData.count();
-            res.render('admin/users/list',{data : JSON.parse(JSON.stringify(user_data)), current: parseInt(page), pages:Math.ceil(count / limit),title : 'Users Page',page_title_1:'Users Page',banner:'Users' ,layout:'dashboard_layout' , isUsers: true})
+            const count = await UsersData.count({ verified_status : userstatus });
+            res.render('admin/users/list',{data : JSON.parse(JSON.stringify(user_data)), current: parseInt(page), pages:Math.ceil(count / limit), type:type, title : 'Users Page',page_title_1:'Users Page',banner:'Users' ,layout:'dashboard_layout' , isUsers: true})
         } catch (error) {
             console.log(error);
         }
@@ -169,22 +175,34 @@ module.exports = {
         }
     },
     "searching" : async(req,res) =>{
-        const key = req.query.key;
-        const { page = 1, limit = 15,} = req.query;
+        const {key, page = 1, limit = 15, type} = req.query;
+        var userstatus = 2;
+        if(type == "pending"){
+            userstatus = 1;
+        }else if(type == "reject"){
+            userstatus = 0;
+        }
         var re = new RegExp('^'+key+'',"i");
         try {
         const result = await UsersData.find({
                         "$or":[
                             {first_name: re},
                             {email: re}
-                            ]
+                            ],
+                        "$and":[{ verified_status : userstatus }]
                     })
                 .populate('state').populate('user_role')
                 //.limit(limit * 1)
                 .skip((page - 1) * limit)
                 .exec();
-            const count = await UsersData.find({first_name:{ $regex: new RegExp(key, 'i')} }).count();
-           return res.json(({result : result, current: parseInt(page), pages:Math.ceil(count / limit)}))
+            const count = await UsersData.find({
+                "$or":[
+                    {first_name: re},
+                    {email: re}
+                    ],
+                "$and":[{ verified_status : userstatus }]
+            }).count();
+            return res.json(({result : result, current: parseInt(page), pages:Math.ceil(count / limit)}))
         } catch (error) {
             console.log(error);
         }
