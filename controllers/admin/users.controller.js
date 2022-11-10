@@ -1,14 +1,10 @@
 const userRole = require('../../models/user_role.model')
 const states = require('../../models/states.model')
 const UsersData = require('../../models/users_data.model')
-const { Schema } = require('mongoose')
 const { validationResult } = require('express-validator')
 const fs = require('fs')
 const path = require('path')
 const dirname = require('../../dirname')
-const { ConfigService } = require('aws-sdk')
-const { Console } = require('console')
-
 module.exports = {
     'index' : async (req,res)=>{
         const { page = 1, limit = 15 ,amount = 0,type="verify"} = req.query;
