@@ -736,162 +736,405 @@ footer a {
 /* Ploat Map */
 /*========================================================================================*/
 .plot_map {
-	padding-top: 19rem;
-	background: #e6e6e6;
+	padding-top: 25rem;
+	background: #E6E6E6;
 	padding-bottom: 12rem;
-}
-.park {
-	position: relative;
-}
-.park table {
+ }
+ .park {
+	 position: relative;
+	 z-index: 1;
+ }
+ .park.wide-road {
+	 position: relative;
+	 z-index: -9;
+ }
+ .park table {
 	width: 189px;
 	transform: rotate(48deg);
 	position: absolute;
 	right: -175px;
 	top: -292px;
-}
-.park img {
+ }
+ .park img {
 	width: 290px;
-}
-.table-bordered td, .table-bordered th {
-	border: 2px solid #0df900;
+ }
+ .table-bordered td, .table-bordered th {
+	border: 2px solid #0DF900;
 	background: #fff;
-}
-.table-2 .table-bordered td, .table-bordered th {
+ }
+ .table-2 .table-bordered td, .table-bordered th {
 	height: 105px;
-	border: 3px solid #ff0101;
-}
-.table-3 .table-bordered td, .table-bordered th {
+	border: 3px solid #FF0101;
+ }
+ .table-3 .table-bordered td, .table-bordered th {
 	height: 35px;
-	border: 3px solid #ff0101;
-}
-.table-3 .table {
+	border: 3px solid #FF0101;
+ }
+ .table-3 .table {
 	width: 55%;
-}
-.table-3 {
+ }
+ .table-3 {
 	position: relative;
 	right: -56px;
-}
-.img-table {
-	position: absolute;
-	top: -84px;
-	right: -41px;
-	margin: -1px;
-}
-.row.map1 {
+ }
+ .img-table {
+	 position: relative;
+	 top: -84px;
+	 right: -41px;
+	 margin: -1px;
+ }
+ .row.map1 {
 	position: relative;
 	top: 8px;
-}
-.table-4 {
+ }
+ .table-4 {
 	position: relative;
 	bottom: 3px;
 	height: 107px;
-}
-.img-table img {
+ }
+ .img-table img {
 	width: 262px;
-}
-.table.table-4 {
+ }
+ .table.table-4 {
 	width: 100%;
-}
-.box-table-part {
+ }
+ .box-table-part {
 	display: flex;
 	align-items: center;
 	justify-content: end;
-}
-.img-table2 img {
+ }
+ .img-table2 img {
 	width: 133px;
-}
-.img-table2 img {
+ }
+ .img-table2 img {
 	width: 134px;
-}
-.table-5 .table-2 .table-bordered td, .table-bordered th {
+ }
+ .table-5 .table-2 .table-bordered td, .table-bordered th {
 	height: 105px;
-	border: 3px solid #ff0101;
+	border: 3px solid #FF0101;
 	width: 45px;
-}
-.table-6.table-3 .table.table-4 {
+ }
+ .table-6.table-3 .table.table-4 {
 	width: 32%;
 	height: 108px;
 	position: relative;
 	z-index: 999;
-}
-.table-6 {
+ }
+ .table-6 {
 	position: relative;
-}
-.img-part-3 img {
+ }
+ .img-part-3 img {
 	width: 300px;
-}
-.img-part-3 {
+ }
+ .img-part-3 {
 	position: absolute;
 	top: 0;
-}
-.img-part-3 img {
+ }
+ .img-part-3 img {
 	width: 371px;
-}
-.img-part-3 {
+ }
+ .img-part-3 {
 	position: absolute;
 	top: -3px;
 	z-index: 0;
 	left: 0px;
-}
-.table-2.table-7 {
+ }
+ .table-2.table-7 {
 	display: flex;
 	position: relative;
-}
-.img-part-4 img {
+ }
+ .img-part-4 img {
 	width: 250px;
-}
-.img-part-4 {
-	position: absolute;
-	right: -124px;
-}
-.table-7 .table-bordered td, .table-bordered th {
+ }
+ .img-part-4 {
+	 position: absolute;
+	 right: -124px;
+	 z-index: -1;
+ }
+ .table-7 .table-bordered td, .table-bordered th {
 	height: 105px;
-	border: 3px solid #ff0101;
-}
-.table-7 .table.table-4 {
+	border: 3px solid #FF0101;
+ }
+ .table-7 .table.table-4 {
 	width: 70%;
-}
-.table-7 {
+ }
+ .table-7 {
 	position: relative;
-}
-.img-part-5 {
-	position: absolute;
-	top: -3px;
-	right: -16px;
-}
-.img-part-5 img {
+ }
+ .img-part-5 {
+	 position: absolute;
+	 top: -3px;
+	 right: -16px;
+	 z-index: -4;
+ }
+ .img-part-5 img {
 	width: 568px;
-}
-.bg {
-	background: #98999b !important;
-}
-.number {
+ }
+ .bg {
+	background: #98999B !important;
+ }
+ .number {
 	text-align: center;
 	padding: 0 !important;
 	vertical-align: middle !important;
 	color: #333;
-}
-.park h5 {
+ }
+ .park h5 {
 	text-align: right;
 	transform: rotate(-42deg);
 	margin: 0;
 	font-size: 18px;
-}
-.wide {
+ }
+ .wide {
 	position: absolute;
 	right: 105px;
 	top: 80px;
-}
-.park.wide-road img {
+ }
+ .park.wide-road img {
 	width: 100%;
-}
-.lothal {
+ }
+ .lothal {
 	border: 1px solid #333;
 	border-radius: 50%;
 	padding: 0 5px;
-}
-/*============================================================================================*/
+ }
+ .table.table-4.table-44 {
+	width: 50%;
+	transform: rotate(-41deg);
+	position: relative;
+	left: -155px;
+	top: 10px;
+ }
+ .table.table-22 {
+	position: absolute;
+	top: -170px;
+	right: -120px;
+ }
+ .table.table-4.table-55 {
+	width: 50%;
+	position: absolute;
+	top: -199px;
+	right: 198px;
+	transform: rotate(46deg);
+ }
+ .ploat_top_table {
+	 position: relative;
+	 z-index: 2;
+ }
+ .plot_map .table tbody tr:last-child td {
+	 border-width: unset;
+ }
+ .img-table img {
+	 position: absolute;
+	 top: -215px;
+	 right: -15px;
+	 margin: -1px;
+	 z-index: -1;
+ }
+ .plot-map {
+	 position: relative;
+	 z-index: 0;
+ }/*ploat*/
+ .plot_map {
+	padding-top: 25rem;
+	background: #E6E6E6;
+	padding-bottom: 12rem;
+ }
+ .park {
+	 position: relative;
+	 z-index: 1;
+ }
+ .park.wide-road {
+	 position: relative;
+	 z-index: -9;
+ }
+ .park table {
+	width: 189px;
+	transform: rotate(48deg);
+	position: absolute;
+	right: -175px;
+	top: -292px;
+ }
+ .park img {
+	width: 290px;
+ }
+ .table-bordered td, .table-bordered th {
+	border: 2px solid #0DF900;
+	background: #fff;
+ }
+ .table-2 .table-bordered td, .table-bordered th {
+	height: 105px;
+	border: 3px solid #FF0101;
+ }
+ .table-3 .table-bordered td, .table-bordered th {
+	height: 35px;
+	border: 3px solid #FF0101;
+ }
+ .table-3 .table {
+	width: 55%;
+ }
+ .table-3 {
+	position: relative;
+	right: -56px;
+ }
+ .img-table {
+	 position: relative;
+	 top: -84px;
+	 right: -41px;
+	 margin: -1px;
+ }
+ .row.map1 {
+	position: relative;
+	top: 8px;
+ }
+ .table-4 {
+	position: relative;
+	bottom: 3px;
+	height: 107px;
+ }
+ .img-table img {
+	width: 262px;
+ }
+ .table.table-4 {
+	width: 100%;
+ }
+ .box-table-part {
+	display: flex;
+	align-items: center;
+	justify-content: end;
+ }
+ .img-table2 img {
+	width: 133px;
+ }
+ .img-table2 img {
+	width: 134px;
+ }
+ .table-5 .table-2 .table-bordered td, .table-bordered th {
+	height: 105px;
+	border: 3px solid #FF0101;
+	width: 45px;
+ }
+ .table-6.table-3 .table.table-4 {
+	width: 32%;
+	height: 108px;
+	position: relative;
+	z-index: 999;
+ }
+ .table-6 {
+	position: relative;
+ }
+ .img-part-3 img {
+	width: 300px;
+ }
+ .img-part-3 {
+	position: absolute;
+	top: 0;
+ }
+ .img-part-3 img {
+	width: 371px;
+ }
+ .img-part-3 {
+	position: absolute;
+	top: -3px;
+	z-index: 0;
+	left: 0px;
+ }
+ .table-2.table-7 {
+	display: flex;
+	position: relative;
+ }
+ .img-part-4 img {
+	width: 250px;
+ }
+ .img-part-4 {
+	 position: absolute;
+	 right: -124px;
+	 z-index: -1;
+ }
+ .table-7 .table-bordered td, .table-bordered th {
+	height: 105px;
+	border: 3px solid #FF0101;
+ }
+ .table-7 .table.table-4 {
+	width: 70%;
+ }
+ .table-7 {
+	position: relative;
+ }
+ .img-part-5 {
+	 position: absolute;
+	 top: -3px;
+	 right: -16px;
+	 z-index: -4;
+ }
+ .img-part-5 img {
+	width: 568px;
+ }
+ .bg {
+	background: #98999B !important;
+ }
+ .number {
+	text-align: center;
+	padding: 0 !important;
+	vertical-align: middle !important;
+	color: #333;
+ }
+ .park h5 {
+	text-align: right;
+	transform: rotate(-42deg);
+	margin: 0;
+	font-size: 18px;
+ }
+ .wide {
+	position: absolute;
+	right: 105px;
+	top: 80px;
+ }
+ .park.wide-road img {
+	width: 100%;
+ }
+ .lothal {
+	border: 1px solid #333;
+	border-radius: 50%;
+	padding: 0 5px;
+ }
+ .table.table-4.table-44 {
+	width: 50%;
+	transform: rotate(-41deg);
+	position: relative;
+	left: -155px;
+	top: 10px;
+ }
+ .table.table-22 {
+	position: absolute;
+	top: -170px;
+	right: -120px;
+ }
+ .table.table-4.table-55 {
+	width: 50%;
+	position: absolute;
+	top: -199px;
+	right: 198px;
+	transform: rotate(46deg);
+ }
+ .ploat_top_table {
+	 position: relative;
+	 z-index: 2;
+ }
+ .plot_map .table tbody tr:last-child td {
+	 border-width: unset;
+ }
+ .img-table img {
+	 position: absolute;
+	 top: -215px;
+	 right: -15px;
+	 margin: -1px;
+	 z-index: -1;
+ }
+ .plot-map {
+	 position: relative;
+	 z-index: 0;
+ }/*============================================================================================*/
 /* Login */
 /*========================================================================================*/
 .login-page {
@@ -1261,182 +1504,4 @@ text-align:center;
 	margin-top: 5px;
 }
 
-/*ploat*/
-.plot_map {
-	padding-top: 32rem;
-	background: #e6e6e6;
-	padding-bottom: 12rem;
-}
-.park {
-	position: relative;
-}
-.park table {
-	width: 189px;
-	transform: rotate(48deg);
-	position: absolute;
-	right: -175px;
-	top: -292px;
-}
-.park img {
-	width: 290px;
-}
-.table-bordered td, .table-bordered th {
-	border: 2px solid #0df900;
-	background: #fff;
-}
-.table-2 .table-bordered td, .table-bordered th {
-	height: 105px;
-	border: 3px solid #ff0101;
-}
-.table-3 .table-bordered td, .table-bordered th {
-	height: 35px;
-	border: 3px solid #ff0101;
-}
-.table-3 .table {
-	width: 55%;
-}
-.table-3 {
-	position: relative;
-	right: -56px;
-}
-.img-table {
-	position: absolute;
-	top: -84px;
-	right: -41px;
-	margin: -1px;
-}
-.row.map1 {
-	position: relative;
-	top: 8px;
-}
-.table-4 {
-	position: relative;
-	bottom: 3px;
-	height: 107px;
-}
-.img-table img {
-	width: 262px;
-}
-.table.table-4 {
-	width: 100%;
-}
-.box-table-part {
-	display: flex;
-	align-items: center;
-	justify-content: end;
-}
-.img-table2 img {
-	width: 133px;
-}
-.img-table2 img {
-	width: 134px;
-}
-.table-5 .table-2 .table-bordered td, .table-bordered th {
-	height: 105px;
-	border: 3px solid #ff0101;
-	width: 45px;
-}
-.table-6.table-3 .table.table-4 {
-	width: 32%;
-	height: 108px;
-	position: relative;
-	z-index: 999;
-}
-.table-6 {
-	position: relative;
-}
-.img-part-3 img {
-	width: 300px;
-}
-.img-part-3 {
-	position: absolute;
-	top: 0;
-}
-.img-part-3 img {
-	width: 371px;
-}
-.img-part-3 {
-	position: absolute;
-	top: -3px;
-	z-index: 0;
-	left: 0px;
-}
-.table-2.table-7 {
-	display: flex;
-	position: relative;
-}
-.img-part-4 img {
-	width: 250px;
-}
-.img-part-4 {
-	position: absolute;
-	right: -124px;
-}
-.table-7 .table-bordered td, .table-bordered th {
-	height: 105px;
-	border: 3px solid #ff0101;
-}
-.table-7 .table.table-4 {
-	width: 70%;
-}
-.table-7 {
-	position: relative;
-}
-.img-part-5 {
-	position: absolute;
-	top: -3px;
-	right: -16px;
-}
-.img-part-5 img {
-	width: 568px;
-}
-.bg {
-	background: #98999b !important;
-}
-.number {
-	text-align: center;
-	padding: 0 !important;
-	vertical-align: middle !important;
-	color: #333;
-}
-.park h5 {
-	text-align: right;
-	transform: rotate(-42deg);
-	margin: 0;
-	font-size: 18px;
-}
-.wide {
-	position: absolute;
-	right: 105px;
-	top: 80px;
-}
-.park.wide-road img {
-	width: 100%;
-}
-.lothal {
-	border: 1px solid #333;
-	border-radius: 50%;
-	padding: 0 5px;
-}
-.table.table-4.table-44 {
-	width: 50%;
-	transform: rotate(-41deg);
-	position: relative;
-	left: -155px;
-	top: 10px;
-}
-.table.table-22 {
-	position: absolute;
-	top: -170px;
-	right: -120px;
-}
-.table.table-4.table-55 {
-	width: 50%;
-	position: absolute;
-	top: -199px;
-	right: 198px;
-	transform: rotate(46deg);
-}
-.ploat_top_table {
-	position: relative;
-}
+
