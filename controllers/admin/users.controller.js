@@ -170,10 +170,5 @@ module.exports = {
 
         return res.redirect('/admin/dashboard')
     },
-    'delete' : async ( req , res ) => {
-        // console.log(req.body.user_id);
-        await UsersData.deleteOne({ _id : req.body.user_id })
-        req.flash('message','Record delete successfull !');
-        return res.redirect('/admin/users')
-    }
+    
 }
