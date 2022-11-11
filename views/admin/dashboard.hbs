@@ -1,4 +1,4 @@
- 
+ <link id="pagestyle" href="/assets/css/main/style.css" rel="stylesheet" />
 <body>
 	<section class="plot_map">
 		<div class="container">
@@ -558,98 +558,53 @@
 		<br>
 		<p>KYC DETAILS</p>
 		<br>
-		<form>
-		{{!-- <div class="form-group">
-			<label for="applicant_name">Applicant's Name</label>
-			<input type="text" class="form-control" id="applicant_name" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
-		</div>
-		<br>
-		<div class="form-group">
-			<label for="co_applicant_name">Co-Applicant's Name</label>
-			<input type="text" class="form-control" id="co_applicant_name" placeholder="Co-Applicant's Name">
-		</div>
-		<br>
-		<div class="form-group">
-			<label for="email">Email</label>
-			<input type="text" class="form-control" id="email" placeholder="Email">
-		</div>
-		<br>
-		<div class="form-group">
-			<label for="mobile">Mobile</label>
-			<input type="text" class="form-control" id="mobile" placeholder="Mobile">
-		</div>
-		<br>
-
-		<div class="form-group">
-			<label for="address">Address</label>
-			<input type="text" class="form-control" id="address" placeholder="Address">
-		</div>
-		<br>
-
-		<label for="dob">Date Of Birth</label>
-		<input id="dob" data-provide="datepicker">
-
-		<br>
-
-		<div class="form-check">
-		<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-		<label class="form-check-label" for="flexRadioDefault1">
-			Male
-		</label>
-		</div>
-		
-		<div class="form-check">
-		<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-		<label class="form-check-label" for="flexRadioDefault2">
-			Female
-		</label>
-		</div> --}}
+		<form action="/admin/users/dashboard_form/" method="post" enctype="multipart/form-data">
 
 		<div class="tab">Name:
 		<p>
 			<div class="form-group">
 			<label for="applicant_name">Applicant's Name</label>
-			<input type="text" class="form-control" id="applicant_name" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+			<input type="text" class="form-control" name="applicant_name" id="applicant_name" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
 			</div>
 		</p>
 		<p>
 			<div class="form-group">
 			<label for="co_applicant_name">Co-Applicant's Name</label>
-			<input type="text" class="form-control" id="co_applicant_name" placeholder="Co-Applicant's Name">
+			<input type="text" class="form-control" name="co_applicant_name" id="co_applicant_name" placeholder="Co-Applicant's Name">
 			</div>
 		</p>
 		<p>
 			<div class="form-group">
 			<label for="email">Email</label>
-			<input type="text" class="form-control" id="email" placeholder="Email">
+			<input type="text" class="form-control" name="email" id="email" placeholder="Email">
 			</div>
 		</p>
 		<p>
 			<div class="form-group">
 			<label for="mobile">Mobile</label>
-			<input type="text" class="form-control" id="mobile" placeholder="Mobile">
+			<input type="text" class="form-control" name="mobile" id="mobile" placeholder="Mobile">
 			</div>
 		</p>
 		<p>
 			<div class="form-group">
 			<label for="address">Address</label>
-			<input type="text" class="form-control" id="address" placeholder="Address">
+			<input type="text" class="form-control" name="address" id="address" placeholder="Address">
 			</div>
 		</p>
 		<p>
 			<label for="dob">Date Of Birth</label>
-			<input id="dob" data-provide="datepicker">
+			<input name="date_of_birth" id="dob" data-provide="datepicker">
 		</p>
 		<p>
 			<div class="form-check">
-			<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+			<input class="form-check-input" type="radio" name="gender" value="male" id="flexRadioDefault1">
 			<label class="form-check-label" for="flexRadioDefault1">
 				Male
 			</label>
 			</div>
 
 			<div class="form-check">
-			<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+			<input class="form-check-input" type="radio" name="gender" value="female" id="flexRadioDefault2" checked>
 			<label class="form-check-label" for="flexRadioDefault2">
 				Female
 			</label>
@@ -663,28 +618,33 @@
 		<p>
 			<div>
 			<label for="formFileLg" class="form-label">Receipt Documents</label>
-			<input class="form-control form-control-lg" id="formFileLg" type="file">
+			<input name="receipt_documents" class="form-control form-control-lg" id="formFileLg" type="file">
 			</div>
 		</p>
 		<p>
 			<div>
 			<label for="formFileLg" class="form-label">Allotment Letter</label>
-			<input class="form-control form-control-lg" id="formFileLg" type="file">
+			<input name="allotment_letter" class="form-control form-control-lg" id="formFileLg" type="file">
 			</div>
 		</p>
 		<p>
 			<div>
 			<label for="formFileLg" class="form-label">Welcome Letter</label>
-			<input class="form-control form-control-lg" id="formFileLg" type="file">
+			<input name="welcome_letter" class="form-control form-control-lg" id="formFileLg" type="file">
 			</div>
 		</p>
 		<p>
 			<div>
 			<label for="formFileLg" class="form-label">Pending Documents</label>
-			<input class="form-control form-control-lg" id="formFileLg" type="file">
+			<input name="pending_documents" class="form-control form-control-lg" id="formFileLg" type="file">
 			</div>
 
 		</p>
+
+		<div class="modal-footer">
+        <button type="submit" class="btn btn-danger" >Submit</button>
+      	</div>
+
 		</div>
 
 
@@ -699,9 +659,11 @@
 		<div style="text-align:center;margin-top:40px;">
 		<span class="step"></span>
 		<span class="step"></span>
-		<span class="step"></span>
-		<span class="step"></span>
+		
 		</div>
+
+		
+
 
 		</form>
       </div>
