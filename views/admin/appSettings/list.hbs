@@ -1,0 +1,172 @@
+<div class="container-fluid py-4">
+  <div id="alert">
+  {{#if messages.message}}
+    <div class="alert alert-success alert-dismissible text-white fade show" role="alert">
+          <span class="alert-icon align-middle">
+            <span class="material-icons text-md">
+            thumb_up_off_alt
+            </span>
+          </span>
+          <span class="alert-text">{{messages.message}}</span>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+          </button>
+    </div>
+  {{/if}}
+  {{#if messages.warning}}
+    <div class="alert alert-danger alert-dismissible text-white fade show" role="alert">
+      <span class="alert-icon align-middle">
+        <span class="material-icons text-md">
+        thumb_up_off_alt
+        </span>
+      </span>
+      <span class="alert-text">{{messages.warning}}</span>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  {{/if}}
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="card my-4">
+        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+            <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+              
+              <h6 class="text-white text-capitalize ps-3">{{banner}}</h6>
+              
+            </div>
+        </div>
+        <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur"
+          data-scroll="true">
+          <div class="container-fluid py-1 px-3">
+            <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">              
+              <ul class="navbar-nav  justify-content-end">
+                <li class="nav-item d-flex align-items-center">
+                  <a  href="/admin/setting/add"  class="btn btn-primary btn-rounded float-lg-end" style="margin-top:30px;">
+              Add AppSetting
+              </a>
+                </li>
+              </ul>
+            </div>
+        </nav>
+
+        <div class="card-body px-0 pb-2">
+          <div class="table-responsive p-0">
+            <table class="table align-items-center mb-0">
+              <thead>
+                <tr>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Addres</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">City</th>
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">State</th>
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Country</th>
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Email</th>
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Phone</th>
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Pin code</th>
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Description</th>
+                  <th class="text-left text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ins Link</th>
+                  <th class="text-left text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">fab Link</th>
+                  <th class="text-left text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">tw Link</th>
+                  <th class="text-left text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ln Link</th>
+                </tr>
+              </thead>
+              <tbody> 
+                {{#if data}}
+                  {{#each data as |data| }}
+                    <tr>
+                      <td>
+                        <div class="d-flex px-2 py-1">
+                          <div>
+                            <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
+                          </div>
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm">{{data.addres}}</h6>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="align-middle text-center">
+                          <span class="badge badge-sm bg-gradient-danger">{{#findCity data.state.districts data.city}}{{this}}{{/findCity}}</span>
+                      </td>
+                      <td class="align-middle text-center text-sm">
+                        <p class="text-xs font-weight-bold mb-0">{{data.state.state}}</p>
+                      </td>
+                      <td class="align-middle text-center">
+                          <span class="badge badge-sm bg-gradient-primary">{{data.country}}</span>
+                      </td>
+                      <td class="align-middle text-center">
+                          <span class="badge badge-sm bg-gradient-primary">{{data.email}}</span>
+                      </td>
+                      <td class="align-middle text-center">
+                          <span class="badge badge-sm bg-gradient-danger">{{data.phone}} </span>
+                      </td>
+                      <td class="align-middle text-center">
+
+                          <span class="badge badge-sm bg-gradient-danger">{{data.pin_code}}</span>
+                      </td>
+                      <td class="align-middle text-center">
+                        <span class="text-secondary text-xs font-weight-bold">{{data.description}}</span>
+                      </td>
+                      <td class="align-middle text-center">
+                        <span class="text-secondary text-xs font-weight-bold">{{data.lnstagram_link}}</span>
+                      </td>
+                      <td class="align-middle text-center">
+                        <span class="text-secondary text-xs font-weight-bold">{{data.facebook_link}}</span>
+                      </td>
+                      <td class="align-middle text-center">
+                        <span class="text-secondary text-xs font-weight-bold">{{data.Twitter_link}}</span>
+                      </td>
+                      <td class="align-middle text-center">
+                        <span class="text-secondary text-xs font-weight-bold">{{data.linkedin_link}}</span>
+                      </td>
+                     
+                      </td>
+                    </tr>
+
+                    <div class="delete">
+                    <form action="/admin/users/delete" method="post">
+                      <input type="hidden" name="id" value="{{this._id}}">
+                      <div class="modal fade" id="exampleModal{{this._id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Do you really want to delete this User?</h5>
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                            </div>
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >NO</button>
+                            <button type="submit" class="btn btn-primary">YES</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                    </div>
+                  {{/each}}
+                {{/if}}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="container" id="pagination">
+          <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+              {{#paginate current=current pages=pages type=type}}{{/paginate}}
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  $(document).ready(function () {
+    //$("#alert").delay(100000).hide();
+    setTimeout("$('#alert').hide();", 5000);
+    
+  });
+</script>
+
