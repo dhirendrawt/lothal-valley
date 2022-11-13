@@ -3,54 +3,83 @@
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-lg-5 col-md-10 col-12">
-					<form class="login">
+					<form class="login" action="/user/signup" method="post">
 						<h4 class="mb-4">Sign Up</h4>
-						<p class="mb-2">I am</p>
-						<div class="d-flex justify-content-between mb-4">
-							<div class="custom-control custom-radio">
-								<input type="radio" class="custom-control-input" id="customRadio" name="example1" value="customEx">
-								<label class="custom-control-label" for="customRadio">Buyer/Owner</label>
-							</div>
-							<div class="custom-control custom-radio">
-								<input type="radio" class="custom-control-input" id="customRadio2" name="example1" value="customEx">
-								<label class="custom-control-label" for="customRadio2">Agent</label>
-							</div>
-							<div class="custom-control custom-radio">
-								<input type="radio" class="custom-control-input" id="customRadio3" name="example1" value="customEx">
-								<label class="custom-control-label" for="customRadio3">Builder</label>
-							</div>
-						</div>
+						{{#if messages.message}}
+                    		{{# each messages.message }}
+                      			{{#ifErrorCheck this "agree"}}
+                       				<div class="alert alert-danger text-light" role="alert">{{ this.msg }}</div>
+                      			{{/ifErrorCheck}}
+                    		{{/each}}
+                  		{{/if}}
+						
 						<div class="form-group">
-							<input type="type" class="form-control" placeholder="Name" id="">
+							<input type="type" class="form-control" placeholder="Name" name="name" 
+							value={{#if messages.form_value}}
+												{{#each messages.form_value }}
+													{{this.name}}
+												{{/each}}
+											{{/if}}>
 						</div>
+						{{#if messages.message}}
+                    		{{# each messages.message }}
+                      			{{#ifErrorCheck this "name"}}
+                       				<div class="alert alert-danger text-light" role="alert">{{ this.msg }}</div>
+                      			{{/ifErrorCheck}}
+                    		{{/each}}
+                  		{{/if}}
+						
 						<div class="form-group">
-							<input type="email" class="form-control" placeholder="Email" id="">
+							<input type="email" class="form-control" placeholder="Email" name="email" 
+							value={{#if messages.form_value}}
+												{{#each messages.form_value }}
+													{{this.email}}
+												{{/each}}
+											{{/if}}>
 						</div>
+						{{#if messages.message}}
+                    		{{# each messages.message }}
+                      			{{#ifErrorCheck this "email"}}
+                       				<div class="alert alert-danger text-light" role="alert">{{ this.msg }}</div>
+                      			{{/ifErrorCheck}}
+                    		{{/each}}
+                  		{{/if}}
+						
 						<div class="form-group">
-							<input type="password" class="form-control" placeholder="Password" id="">
+							<input type="password" class="form-control" placeholder="Password" name="password" id="">
 						</div>
+						{{#if messages.message}}
+                    		{{# each messages.message }}
+                      			{{#ifErrorCheck this "password"}}
+                       				<div class="alert alert-danger text-light" role="alert">{{ this.msg }}</div>
+                      			{{/ifErrorCheck}}
+                    		{{/each}}
+                  		{{/if}}
+						
 						<div class="form-group">
 							<div class="phone-list">
 								<div class="input-group phone-input">
-									<span class="input-group-btn">
-										<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="type-text"></span> <span class="caret"></span></button>
-										<ul class="dropdown-menu" role="menu">
-											<li><a class="changeType" href="javascript:;" data-type-value="phone">IND +91</a></li>
-											<li><a class="changeType" href="javascript:;" data-type-value="fax">USA +1</a></li>
-											<li><a class="changeType" href="javascript:;" data-type-value="mobile">ARE +971</a></li>
-										</ul>
+									<span class="input-group-btn border p-2">
+										+91
 									</span>
-									<input type="hidden" name="phone[1][type]" class="type-input" value="" />
-									<input type="text" name="phone[1][number]" class="form-control" placeholder="Phone Number" />
+									<input type="text"  class="form-control" placeholder="Phone Number" name="mobile"
+									value={{#if messages.form_value}}
+												{{#each messages.form_value }}
+													{{this.mobile}}
+												{{/each}}
+											{{/if}} >
 								</div>
 							</div>
 						</div>
+						{{#if messages.message}}
+                    		{{# each messages.message }}
+                      			{{#ifErrorCheck this "mobile"}}
+                       				<div class="alert alert-danger text-light" role="alert">{{ this.msg }}</div>
+                      			{{/ifErrorCheck}}
+                    		{{/each}}
+                  		{{/if}}
 						<div class="custom-control custom-checkbox mb-3">
-							<input type="checkbox" class="custom-control-input" id="customCheck" name="example1">
-							<label class="custom-control-label" for="customCheck">I want to receive important updates on</label>
-						</div>
-						<div class="custom-control custom-checkbox mb-3">
-							<input type="checkbox" class="custom-control-input" id="customCheck2" name="example1">
+							<input type="checkbox" class="custom-control-input" id="customCheck2"  name="agree">
 							<label class="custom-control-label" for="customCheck2">I agree to Lothal Valley</label>
 						</div>
 						<button type="submit" class="btn btn-success btn-block">Sign Up</button>
