@@ -13,7 +13,7 @@ module.exports = {
         res.render('admin/forgetPwd', { title: 'Forgot Password' });
     },
     'authentication': async (req, res) => {
-        
+
         const errors = validationResult(req);
         if(!errors.isEmpty()){
             req.flash('message', errors.errors);

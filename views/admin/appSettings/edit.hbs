@@ -1,0 +1,317 @@
+<div class='container'>
+  <form action="/admin/setting/edit/{{#if result}}{{result._id}}{{/if}}?isedit=false" method="post"  enctype="multipart/form-data" >
+   <input type="hidden" name="update_id" value="{{result._id}}">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="input-group  input-group-outline   mb-4">
+                <label class="form-label">Mobile No</label>
+                <input type="text"  name="mobile" 
+                class="form-control is-invalid form-control-part" 
+                value=  {{#if result}}
+                          {{result.phone}} 
+                        {{/if}}
+                        {{#if messages.form1}}
+                          {{#each messages.form1}}
+                            {{this.mobile}}
+                          {{/each}}
+                        {{/if}} >
+
+                        {{#if messages}}
+                            {{#each messages.setting_error }}
+                                {{#ifErrorCheck this "mobile"}}
+                                    <div class="invalid-feedback">{{ this.msg }}</div>
+                                {{/ifErrorCheck}}
+                            {{/each}}
+                        {{/if}}
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="input-group    input-group-outline mb-4">
+                <label class="form-label">Email</label>
+                <input type="text"  name="email"
+                class="form-control is-invalid form-control-part"
+                value=  {{#if result}}
+                          {{result.email}} 
+                        {{/if}}
+                        {{#if messages.form1}} 
+                            {{#each messages.form1 }}
+                                {{this.email}}
+                            {{/each}}
+                        {{/if}} >
+                    
+                        {{#if messages}}
+                            {{#each messages.setting_error }}
+                                {{#ifErrorCheck this "email"}}
+                                    <div class="invalid-feedback">{{ this.msg }}</div>
+                                {{/ifErrorCheck}}
+                            {{/each}}
+                        {{/if}}
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-md-6">
+        <div class="input-group input-group-outline mb-4">
+                <label class="form-label">Address</label>
+                <input type="text"  name="address"
+                class="form-control is-invalid form-control-part"
+                value=  {{#if result}}
+                          {{result.addres}} 
+                        {{/if}}
+                        {{#if messages.form1}} 
+                            {{#each messages.form1 }}
+                                {{this.address}}
+                            {{/each}}
+                        {{/if}} >
+                    
+                        {{#if messages}}
+                            {{#each messages.setting_error }}
+                                {{#ifErrorCheck this "address"}}
+                                    <div class="invalid-feedback">{{ this.msg }}</div>
+                                {{/ifErrorCheck}}
+                            {{/each}}
+                        {{/if}}
+            </div>
+        
+      </div>
+
+      <div class="col-md-6">
+        <select id="state_id" onchange="cities()"  name="state" class="form-control   is-invalid" aria-label="Default select example">
+          <option  value="" selected>Select State:</option>
+            {{#if data}}
+              {{#each data}}
+                <option  value="{{this._id}}">{{this.state}}</option>
+              {{/each}}
+            {{/if}}
+        </select>
+        
+          {{#if messages}}
+            {{#each messages.setting_error }}
+              {{#ifErrorCheck this "state"}}
+                <div class="invalid-feedback">{{ this.msg }}</div>
+              {{/ifErrorCheck}}
+            {{/each}}
+          {{/if}}
+      </div>
+      </div>
+    <div class="row">
+      <div class="col-md-6">
+        <select id="city_select"  name="city" class="form-control   is-invalid mt-4" aria-label="Default select example">
+          <option  value="" selected>Select City:</option>
+
+        </select>
+        
+          {{#if messages}}
+            {{#each messages.setting_error }}
+              {{#ifErrorCheck this "city"}}
+                <div class="invalid-feedback">{{ this.msg }}</div>
+              {{/ifErrorCheck}}
+            {{/each}}
+          {{/if}}
+      </div>
+      
+      
+      <div class="col-md-6">
+       <div class="input-group  input-group-outline   mb-4">
+                <label class="form-label">Pin Code</label>
+                <input type="text"  name="pin_code" 
+                class="form-control is-invalid form-control-part" 
+                value=  {{#if result}}
+                          {{result.pin_code}} 
+                        {{/if}}
+                        {{#if messages.form1}}
+                          {{#each messages.form1 }}
+                            {{this.pin_code}}
+                          {{/each}}
+                        {{/if}} >
+
+                        {{#if messages}}
+                            {{#each messages.setting_error }}
+                                {{#ifErrorCheck this "pin_code"}}
+                                    <div class="invalid-feedback">{{ this.msg }}</div>
+                                {{/ifErrorCheck}}
+                            {{/each}}
+                        {{/if}}
+            </div>
+      </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="input-group  input-group-outline   mb-4">
+                <label class="form-label">Instagram Link</label>
+                <input type="text"  name="instagram" 
+                class="form-control is-invalid form-control-part" 
+                value=  {{#if result}}
+                          {{result.lnstagram_link}} 
+                        {{/if}}
+                        {{#if messages.form1}}
+                          {{#each messages.form1 }}
+                            {{this.instagram}}
+                          {{/each}}
+                        {{/if}} >
+
+                        {{#if messages}}
+                            {{#each messages.setting_error }}
+                                {{#ifErrorCheck this "instagram"}}
+                                    <div class="invalid-feedback">{{ this.msg }}</div>
+                                {{/ifErrorCheck}}
+                            {{/each}}
+                        {{/if}}
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="input-group    input-group-outline mb-4">
+                <label class="form-label">Facebook link</label>
+                <input type="text"  name="facebook"
+                class="form-control is-invalid form-control-part"
+                value=  {{#if result}}
+                          {{result.facebook_link}} 
+                        {{/if}}
+                        {{#if messages.form1}} 
+                            {{#each messages.form1 }}
+                                {{this.facebook}}
+                            {{/each}}
+                        {{/if}} >
+                    
+                        {{#if messages}}
+                            {{#each messages.setting_error }}
+                                {{#ifErrorCheck this "facebook"}}
+                                    <div class="invalid-feedback">{{ this.msg }}</div>
+                                {{/ifErrorCheck}}
+                            {{/each}}
+                        {{/if}}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="input-group  input-group-outline   mb-4">
+                <label class="form-label">Linkedin Link</label>
+                <input type="text"  name="linkedin" 
+                class="form-control is-invalid form-control-part" 
+                value=  {{#if result}}
+                          {{result.linkedin_link}} 
+                        {{/if}}
+                        {{#if messages.form1}}
+                          {{#each messages.form1 }}
+                            {{this.linkedin}}
+                          {{/each}}
+                        {{/if}} >
+
+                        {{#if messages}}
+                            {{#each messages.setting_error }}
+                                {{#ifErrorCheck this "linkedin"}}
+                                    <div class="invalid-feedback">{{ this.msg }}</div>
+                                {{/ifErrorCheck}}
+                            {{/each}}
+                        {{/if}}
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="input-group    input-group-outline mb-4">
+                <label class="form-label">Twitter link</label>
+                <input type="text"  name="twitter"
+                class="form-control is-invalid form-control-part"
+                value=  {{#if result}}
+                          {{result.Twitter_link}} 
+                        {{/if}}
+                        {{#if messages.form1}} 
+                            {{#each messages.form1 }}
+                                {{this.twitter}}
+                            {{/each}}
+                        {{/if}} >
+                    
+                        {{#if messages}}
+                            {{#each messages.setting_error }}
+                                {{#ifErrorCheck this "twitter"}}
+                                    <div class="invalid-feedback">{{ this.msg }}</div>
+                                {{/ifErrorCheck}}
+                            {{/each}}
+                        {{/if}}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+        <div class="input-group input-group-outline mb-4">
+          <textarea name="description" placeholder="Description" class="form-control is-invalid mt-4">{{#if result}}
+                          {{result.description}} 
+                        {{/if}}</textarea>
+          {{#if messages}}
+            {{#each messages.setting_error }}
+              {{#ifErrorCheck this "description"}}
+                <div class="invalid-feedback">{{ this.msg }}</div>
+              {{/ifErrorCheck}}
+            {{/each}}
+          {{/if}}
+        </div>
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <label for="">Logo :</label>
+        <input type="file" class="custom-file-input is-invalid" id="customFile" name="logo">
+          <label class="custom-file-label" for="customFile"></label>
+         {{#if messages}}
+            {{#each messages.setting_error }}
+              {{#ifErrorCheck this "logo"}}
+                <div class="invalid-feedback">{{this.msg }}</div>
+              {{/ifErrorCheck}}
+            {{/each}}
+          {{/if}}
+      </div>
+    </div>
+    
+   
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+
+
+<script>
+  $(".custom-file-input").on("change", function() {
+  var fileName = $(this).val().split("\\").pop();
+  $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+});
+</script>
+<script>
+
+  function cities(){
+     //$(".custom-file-input").on("change", function() {
+    //  var fileName = $(this).val().split("\\").pop();
+     // $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    //});
+    //state and city....
+    var select = document.getElementById("city_select");
+    var length = select.options.length;
+
+    for (i = length-1; i >= 0; i--) {
+      select.options[i] = null;
+    }
+    
+    $('#city_select')
+          .append($("<option></option>")
+          .attr("value", "")
+          .text("Select City"))
+
+    const state_id=$('#state_id').val()
+
+    $.ajax({
+      url : "/admin/users/state_data" ,
+      type : "post",
+      data : {state_id : state_id},
+      success:function(data)
+      {
+      $.each(data,function(key,value)
+      {
+        $('#city_select')
+          .append($("<option></option>")
+          .attr("value", key)
+          .text(value)); 
+        })
+      }
+    })
+  }
+</script>

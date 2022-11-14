@@ -22,6 +22,20 @@ router.post('/add',upload.single('logo'),[
 ]
 ,appSettingsController.add);
 router.get('/edit/:id',appSettingsController.create_edit);
-router.post('/edit/:id',appSettingsController.update);
+router.post('/edit/:id',upload.single('logo'),[
+    check('mobile').not().isEmpty(),
+    check('email').not().isEmpty(),
+    check('address').not().isEmpty(),
+    check('state').not().isEmpty(),
+    check('city').not().isEmpty(),
+    check('pin_code').not().isEmpty(),
+    check('instagram').not().isEmpty(),
+    check('facebook').not().isEmpty(),
+    check('linkedin').not().isEmpty(),
+    check('twitter').not().isEmpty(),
+    check('description').not().isEmpty(),
+],appSettingsController.update);
+router.get('/status-change/:id',appSettingsController.status_change);
+router.post('/delete',appSettingsController.delete);
 
 module.exports = router;

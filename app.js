@@ -154,12 +154,12 @@ app.use('/admin/property',middelware.auth,adminPropertyRouter)
 app.use('/admin/property-type',middelware.auth,adminPropertyTypeRouter)
 app.use('/admin/user-role',middelware.auth,adminUserRoleRouter)
 app.use('/admin/users',adminUsersRouter)
-app.use('/admin/setting',appSettingsRouter);
+app.use('/admin/setting',appSettingsRouter)
 //....home.....
 app.use('/', homeRouter)
 //.......user routers.....
 app.use('/user',userLogin);
-app.use('/user/dashboard',userDashboardRouter);
+app.use('/user/dashboard',middelware.user_auth,userDashboardRouter);
 
 
 // catch 404 and forward to error handler

@@ -1,5 +1,5 @@
 module.exports = {
     "index" : (req,res)=>{
-        res.send('hallo');
+        return res.render('user/dashboard')
     }
 }

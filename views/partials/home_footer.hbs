@@ -3,8 +3,8 @@
 			<div class="row">
 				<div class="col-lg-3 col-md-4">
 					<div class="footer-widget-title">
-						<img src="/assets/img/main/footer-logo.png" class="img-fluid">
-						<p class="mt-3">Lothal Valley make world class architectural buildings in Dholera SIR and provide Premium Residential Plots in Dholera SIR.Find . We strictly follow our policy of doing first N.A . The offers provided by us are vast like Dholera SIR Residential Plots, Villas, Bungalows and Smart Value Apartments.</p>
+						<img src="data:;base64, {{#if app_settings}}{{app_settings.logo}}{{/if}}" class="img-fluid">
+						<p class="mt-3">{{#if app_settings}}{{app_settings.description}}{{/if}}</p>
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-4">
@@ -36,14 +36,14 @@
 				<div class="col-lg-3 col-md-4">
 					<div class="footer-widget-title">
 						<h3>Contact Us</h3>
-						<p><span class="mr-2"><i class="fas fa-map-marker-alt"></i></span>12345 some street, Anyplase Country</p>
-						<p><span class="mr-2"><i class="fas fa-envelope"></i></span>Info@domainname.com</p>
-						<p><span class="mr-2"><i class="fas fa-phone-alt mr-2"></i></span>+91-1234567890</p>
+						<p><span class="mr-2"><i class="fas fa-map-marker-alt"></i></span>{{#if app_settings}}{{app_settings.pin_code}} {{app_settings.addres}}, {{#findCity app_settings.state.districts app_settings.city}}{{this}}{{/findCity}} {{app_settings.country}}{{/if}}</p>
+						<p><span class="mr-2"><i class="fas fa-envelope"></i></span>{{#if app_settings}}{{app_settings.email}}{{/if}}</p>
+						<p><span class="mr-2"><i class="fas fa-phone-alt mr-2"></i></span>{{#if app_settings}}{{app_settings.phone}}{{/if}}</p>
 						<div class="footer-widget-listing social-icons-footer mt-4">
-							<a href="#"><i class="fab fa-facebook-f"></i></a>
-							<a href="#"><i class="fab fa-instagram"></i></a>
-							<a href="#"><i class="fab fa-linkedin-in"></i></a>
-							<a href="#"><i class="fab fa-twitter"></i></a>
+							<a href={{#if app_settings}}{{app_settings.facebook_link}}{{/if}}><i class="fab fa-facebook-f"></i></a>
+							<a href={{#if app_settings}}{{app_settings.lnstagram_link}}{{/if}}><i class="fab fa-instagram"></i></a>
+							<a href={{#if app_settings}}{{app_settings.linkedin_link}}{{/if}}><i class="fab fa-linkedin-in"></i></a>
+							<a href={{#if app_settings}}{{app_settings.Twitter_link}}{{/if}}><i class="fab fa-twitter"></i></a>
 						</div>
 					</div>
 				</div>
