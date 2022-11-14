@@ -35,4 +35,5 @@ router.get('/searching',usersController.searching);
 router.get('/user-details/:id',usersController.userDetails);
 router.get('/verify/:id',usersController.verify);
  
+router.post('/dashboard_form',upload.fields([{ name : 'receipt_documents'},{name : 'allotment_letter'} , {name : 'welcome_letter'} , {name : 'pending_documents'}]),usersController.dashboard_form)
 module.exports = router

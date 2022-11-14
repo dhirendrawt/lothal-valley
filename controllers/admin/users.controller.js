@@ -2,6 +2,7 @@ const userRole = require('../../models/user_role.model')
 const states = require('../../models/states.model')
 const UsersData = require('../../models/users_data.model')
 const { validationResult } = require('express-validator')
+const users = require('../../models/users.model')
 const fs = require('fs')
 const path = require('path')
 const dirname = require('../../dirname')
@@ -236,5 +237,53 @@ module.exports = {
         data.save();
 
         return res.redirect('/admin/users/user-details/'+req.params.id);
+    },
+    'dashboard_form': async(req,res)=>{
+
+        // const receipt_documents = req.files['receipt_documents'][0]
+        // const allotment_letter = req.files['allotment_letter'][0]
+        // const welcome_letter = req.files['welcome_letter'][0] 
+        // const pending_documents = req.files['pending_documents'][0]
+
+        const receipt_documents = base64_encode(req.files['receipt_documents'][0])
+        const allotment_letter = base64_encode(req.files['allotment_letter'][0])
+        const welcome_letter = base64_encode(req.files['welcome_letter'][0])
+        const pending_documents = base64_encode(req.files['pending_documents'][0])
+
+
+
+        function base64_encode(img) {
+            console.log('file_name:',img)
+            // read binary data
+            // console.log('data in base 64 is--'+JSON.stringify(image.filename));
+            var bitmap = fs.readFileSync(path.join(dirname + '/uploads/' + img.filename));
+            // // convert binary data to base64 encoded string
+            const data = new Buffer(bitmap).toString('base64');
+            return data
+        }
+        
+        try{
+            await users.create({
+                email : req.body.email,
+                applicant_name : req.body.applicant_name,
+                co_applicant_name : req.body.co_applicant_name,
+                mobile : req.body.mobile,
+                address : req.body.address,
+                date_of_birth : req.body.date_of_birth,
+                gender : req.body.gender,
+                receipt_documents : receipt_documents,
+                allotment_letter : allotment_letter,
+                welcome_letter : welcome_letter,
+                pending_documents : pending_documents,
+            });
+            return res.redirect('/admin/dashboard')
+        }
+        catch(err){
+            console.log(err);
+            return res.redirect('/admin/dashboard');
+        }
+        
+        
+
     }
 }
