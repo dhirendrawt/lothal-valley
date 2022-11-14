@@ -20,12 +20,15 @@ module.exports = {
             return res.redirect('/admin');
         }
         try {
-            const loginuser = await Users.findOne({ email: req.body.user_email });
+            const loginuser = await Users.findOne({ email: req.body.user_email }).populate('role');
+            console.log('role',loginuser);
             if (!loginuser) {
                 req.flash('message',[{"value":"","msg":"Invalid User","param":"user_email","location":"body"}]);
                  return res.redirect('/admin');
+            }else if(loginuser.role.user_role_name != 'Admin'){
+                req.flash('message',[{"value":"","msg":"You are not authorized person","param":"isUthrized","location":"body"}]);
+                return res.redirect('/admin');
             }
-
             const result = await bcrypt.compare(req.body.user_password, loginuser.password);
                
             if (!result) {

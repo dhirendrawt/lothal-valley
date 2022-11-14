@@ -33,7 +33,7 @@ module.exports = {
     },
     'create' : async (req,res)=>{
         try {
-            const user_role = await userRole.find({});
+            const user_role = await userRole.find({'status':true});
             const data = await states.find();
             res.render('admin/users/add',{title : 'Users Add Page',page_title_1:'Add Users Page' ,layout:'dashboard_layout', user_role:user_role , data:data , isUsers: true})
         } catch (error) {
