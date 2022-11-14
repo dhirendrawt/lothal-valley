@@ -498,8 +498,8 @@ footer a {
 	right: 0;
 }
 .property-search {
-	background: #fff;
-	padding: 30px 60px;
+    background: rgba(255,255,255,0.4);
+    padding: 30px 60px;
 }
 .property-search h4 {
 	color: #0d6d34;
@@ -507,9 +507,9 @@ footer a {
 	text-align: left;
 }
 .property-search p {
-	color: #7b7a7a;
-	text-align: left;
-	margin: 0;
+    color: #000;
+    text-align: left;
+    margin: 0;
 }
 .box-right .display-3 {
 	font-size: 1.8rem;

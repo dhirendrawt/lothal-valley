@@ -33,5 +33,17 @@
   },
   "engines": {
     "node": "16.17.1"
-  }
+  },
+  "main": "S3Bucket.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tarunkwebteasor/lothal-valley.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tarunkwebteasor/lothal-valley/issues"
+  },
+  "homepage": "https://github.com/tarunkwebteasor/lothal-valley#readme",
+  "description": ""
 }
