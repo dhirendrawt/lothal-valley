@@ -22,6 +22,10 @@ const AppSettingSchema = new Schema({
     facebook_link : String,
     linkedin_link : String,
     Twitter_link : String,
+    status : { 
+        type:Boolean ,
+        default: false
+    },
     logo : String,
     created_at : { type:Date , default: Date.now }
 })

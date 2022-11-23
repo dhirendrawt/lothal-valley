@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const loginController = require('../../controllers/user/login.controller');
+const User = require('../../models/users.model');
 const { check , oneOf } = require('express-validator');
 
 router.get('/',loginController.index);
